@@ -23,13 +23,13 @@ function BurgerIngredients() {
     }
 
     return (
-        <div className={`${styles.burger_ingredients} custom-scroll`}>
-            <h1 className={styles.burger_ingredients_title}>Соберите бургер</h1>
-            <div className={styles.tabs_box}>{Tabs()}</div>
+        <div className={`${styles.burger_ingredients} custom-scroll pt-5`}>
+            <h1 className={`${styles.burger_ingredients_title} text text_type_main-large pt-5 pb-5`}>Соберите бургер</h1>
+            <div className={`${styles.tabs_box} pb-5`}>{Tabs()}</div>
             <div>
-            <IngridientType type={"Булки"} data={data.filter(item => item.type === "bun")} />
-			<IngridientType type={"Соусы"} data={data.filter(item => item.type === "sauce")} />
-            <IngridientType type={"Начинка"} data={data.filter(item => item.type === "main")} />
+            <IngridientType className={'pt-5 pb-5 pb-1'} type={"Булки"} data={data.filter(item => item.type === "bun")} />
+			<IngridientType className={'pt-5 pb-5 pb-1'} type={"Соусы"} data={data.filter(item => item.type === "sauce")} />
+            <IngridientType className={'pt-5 pb-5 pb-1'} type={"Начинка"} data={data.filter(item => item.type === "main")} />
 
             </div>
         </div>

@@ -1,18 +1,18 @@
-import React from "react";
 import Ingridients from '../ingridients/ingridients.jsx';
-import data from '../../../utils/data.js';
+import style from '../ingridienttype/ingridienttype.module.css'
 
 function IngridientType({ type, data }) {
     return (
         <section>
-            <p>{type}</p>
-            <div>
+            <p className={'text text_type_main-medium'}>{type}</p>
+            <div className={style.ingridienttype_box}>
                 {data?.map((item) => (
                     <Ingridients
-                        name={item.type}
+                        name={item.name}
                         key={item._id}
                         src={item.image}
                         price={item.price}
+                        count={item.count}
                     />
                 ))}
             </div>

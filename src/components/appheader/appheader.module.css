@@ -27,7 +27,11 @@
     gap: 8px;
     text-decoration: none;
     outline: none;
-    color: white;
+    color: #8585AD;
+  }
+
+  .navigation_link_active {
+    color: #F2F2F3;
   }
 
   .header_logo {
