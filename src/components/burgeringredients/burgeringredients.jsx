@@ -23,7 +23,7 @@ function BurgerIngredients() {
     }
 
     return (
-        <div className={styles.burger_ingredients}>
+        <div className={`${styles.burger_ingredients} custom-scroll`}>
             <h1 className={styles.burger_ingredients_title}>Соберите бургер</h1>
             <div className={styles.tabs_box}>{Tabs()}</div>
             <div>
