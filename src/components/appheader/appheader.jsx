@@ -1,5 +1,4 @@
 import styles from "./appheader.module.css";
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import {
     Logo,

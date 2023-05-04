@@ -1,0 +1,20 @@
+.burger_ingredients {
+    width: 600px;
+    min-height: 912px;
+    border: 1px solid red;
+}
+
+.burger_ingredients_title {
+    margin: 0;
+    padding-top: 40px;
+    font-family: JetBrains Mono;
+    font-style: 700;
+    font-size: 36px;
+    line-height: 40px;
+    color: #F2F2F3;
+}
+
+.tabs_box {
+    margin: 0;
+    padding-top: 20px;
+}
