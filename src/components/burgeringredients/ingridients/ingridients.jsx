@@ -1,27 +1,26 @@
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from '../ingridients/ingridients.module.css';
-import { ingredientPropType } from '../../../utils/prop-types.js';
+import PropTypes from "prop-types";
 
-function Ingridients(props) {
+function Ingridients({ _id, src, name, price, count }) {
   return (
-    <li className={style.ingridients_box} key={props._id}>
-      <img className={style.ingridients_image} src={props.src} alt={props.name} />
+    <li className={style.ingridients_box} key={_id}>
+      <img className={style.ingridients_image} src={src} alt={name} />
       <div className={style.ingridients_prise_box}>
-        <p className="text text_type_digits-default">{props.price}</p>
+        <p className="text text_type_digits-default">{price}</p>
         <CurrencyIcon type="primary" />
       </div>
-      <p className='mb-1 pb-5 text text_type_main-default'>{props.name}</p>
-      <Counter count={props.count} size="default" extraClass="m-1" />
+      <p className='mb-1 pb-5 text text_type_main-default'>{name}</p>
+      <Counter count={count} size="default" extraClass="m-1" />
     </li>
   );
 }
 
 Ingridients.propTypes = {
-  name: ingredientPropType.name,
-  price: ingredientPropType.price,
-  src: ingredientPropType.src,
-  _id: ingredientPropType._id,
-  count: ingredientPropType.count
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  src: PropTypes.string.isRequired,
+  count: PropTypes.number.isRequired,
 };
 
 export default Ingridients;

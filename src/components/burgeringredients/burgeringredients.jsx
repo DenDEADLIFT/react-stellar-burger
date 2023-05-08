@@ -3,21 +3,20 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 import IngridientType from '../burgeringredients/ingridienttype/ingridienttype.jsx'
 import { data } from "../../utils/data.js";
-import { ingredientPropType } from '../../utils/prop-types.js';
 import PropTypes from 'prop-types';
 
 function BurgerIngredients() {
     const Tabs = () => {
-        const [current, setCurrent] = React.useState('one')
+        const [current, setCurrent] = React.useState('bun')
         return (
             <div style={{ display: 'flex' }}>
-                <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+                <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
                     Булки
                 </Tab>
-                <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+                <Tab value="sauce" active={current === 'sauce'} onClick={setCurrent}>
                     Соусы
                 </Tab>
-                <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+                <Tab value="main" active={current === 'main'} onClick={setCurrent}>
                     Начинки
                 </Tab>
             </div>
@@ -38,9 +37,8 @@ function BurgerIngredients() {
 }
 
 BurgerIngredients.propTypes = {
-    sauce: PropTypes.arrayOf(ingredientPropType),
-    main: PropTypes.arrayOf(ingredientPropType),
-    bun: PropTypes.arrayOf(ingredientPropType),
+    data: PropTypes.string,
+    type: PropTypes.string,
   };
 
 export default BurgerIngredients;

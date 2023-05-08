@@ -18,6 +18,7 @@ function BurgerConstructor() {
                         if (i._id === "60666c42cc7b410027a1a9b1") {
                             return (
                                 <ConstructorElement
+                                    key={i._id}
                                     type="top"
                                     isLocked={true}
                                     text="Краторная булка N-200i (верх)"
@@ -26,13 +27,14 @@ function BurgerConstructor() {
                                 />
                             )
                         }
+                        return null;
                     })}
                 </div>
                 <div className={`${styles.constructor_box} custom-scroll`}>
                     {data.map((i) => {
                         if (i.type !== 'bun') {
                             return (
-                                <div className={`${styles.items}`}>
+                                <div className={`${styles.items}`} key={i._id}>
                                     <DragIcon />
                                     <ConstructorElement
                                         text={i.name}
@@ -42,6 +44,7 @@ function BurgerConstructor() {
                                 </div>
                             )
                         }
+                        return null;
                     })}
                 </div>
                 <div className={styles.item_box}>
@@ -49,6 +52,7 @@ function BurgerConstructor() {
                         if (i._id === "60666c42cc7b410027a1a9b1") {
                             return (
                                 <ConstructorElement
+                                    key={i._id}
                                     type="bottom"
                                     isLocked={true}
                                     text="Краторная булка N-200i (низ)"
@@ -57,6 +61,7 @@ function BurgerConstructor() {
                                 />
                             )
                         }
+                        return null;
                     })}
                 </div>
             </div>
@@ -74,7 +79,7 @@ function BurgerConstructor() {
 }
 
 BurgerConstructor.propTypes = {
-    dataBurger: PropTypes.arrayOf(ingredientPropType),
-  };
+    data: PropTypes.arrayOf(ingredientPropType.isRequired),
+};
 
 export default BurgerConstructor;

@@ -23,12 +23,8 @@ function IngridientType({ type, data }) {
 }
 
 IngridientType.propTypes = {
-    data: PropTypes.arrayOf(ingredientPropType),
-    name: ingredientPropType.name,
-    key: ingredientPropType._id,
-    src: ingredientPropType.image,
-    price: ingredientPropType.price,
-    count: ingredientPropType.count,
+    data: PropTypes.arrayOf(ingredientPropType.isRequired),
+    type: PropTypes.string,
 };
 
 export default IngridientType;
