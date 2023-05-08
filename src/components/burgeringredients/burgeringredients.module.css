@@ -1,8 +1,7 @@
 .burger_ingredients {
     max-width: 600px;
     height: 912px;
-    overflow-y: auto;
-    overflow-x: hidden;
+
 }
 
 .burger_ingredients_title {
@@ -11,4 +10,10 @@
 
 .tabs_box {
     margin: 0;
+}
+
+.ingredients_box {
+    height: 756px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
