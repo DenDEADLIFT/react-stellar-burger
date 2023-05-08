@@ -1,5 +1,7 @@
 import Ingridients from '../ingridients/ingridients.jsx';
-import style from '../ingridienttype/ingridienttype.module.css'
+import style from '../ingridienttype/ingridienttype.module.css';
+import PropTypes from "prop-types";
+import { ingredientPropType } from '../../../utils/prop-types.js';
 
 function IngridientType({ type, data }) {
     return (
@@ -19,5 +21,14 @@ function IngridientType({ type, data }) {
         </section>
     );
 }
+
+IngridientType.propTypes = {
+    data: PropTypes.arrayOf(ingredientPropType),
+    name: ingredientPropType.name,
+    key: ingredientPropType._id,
+    src: ingredientPropType.image,
+    price: ingredientPropType.price,
+    count: ingredientPropType.count,
+};
 
 export default IngridientType;

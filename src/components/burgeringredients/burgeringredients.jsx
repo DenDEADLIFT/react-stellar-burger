@@ -3,6 +3,8 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 import IngridientType from '../burgeringredients/ingridienttype/ingridienttype.jsx'
 import { data } from "../../utils/data.js";
+import { ingredientPropType } from '../../utils/prop-types.js';
+import PropTypes from 'prop-types';
 
 function BurgerIngredients() {
     const Tabs = () => {
@@ -34,5 +36,11 @@ function BurgerIngredients() {
         </div>
     );
 }
+
+BurgerIngredients.propTypes = {
+    sauce: PropTypes.arrayOf(ingredientPropType),
+    main: PropTypes.arrayOf(ingredientPropType),
+    bun: PropTypes.arrayOf(ingredientPropType),
+  };
 
 export default BurgerIngredients;

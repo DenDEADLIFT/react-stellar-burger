@@ -6,6 +6,8 @@ import {
     CurrencyIcon,
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from 'prop-types';
+import { ingredientPropType } from '../../utils/prop-types.js'
 
 function BurgerConstructor() {
     return (
@@ -61,7 +63,7 @@ function BurgerConstructor() {
             <ul className={styles.constructor_bottom}>
                 <li className={styles.constructor_price}>
                     <p className="text text_type_digits-medium">610</p>
-                    <CurrencyIcon  type="primary" />
+                    <CurrencyIcon type="primary" />
                 </li>
                 <li>
                     <Button htmlType="button" type="primary" size="large">Оформить заказ</Button>
@@ -70,5 +72,9 @@ function BurgerConstructor() {
         </div>
     );
 }
+
+BurgerConstructor.propTypes = {
+    dataBurger: PropTypes.arrayOf(ingredientPropType),
+  };
 
 export default BurgerConstructor;
