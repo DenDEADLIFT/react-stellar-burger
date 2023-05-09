@@ -1,0 +1,20 @@
+.open_modal {
+    width: 720px;
+    height: 718px;
+    position: fixed;
+    z-index: 185;
+    background-color: #1C1C21;
+    border-radius: 40px;
+}
+
+.modal_position {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}

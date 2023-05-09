@@ -6,9 +6,22 @@ import {
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from 'prop-types';
-import { ingredientPropType } from '../../utils/prop-types.js'
+import { ingredientPropType } from '../../utils/prop-types.js';
+import React from 'react';
+import Modal from '../modal/modal.jsx';
 
-function BurgerConstructor({data}) {
+function BurgerConstructor({ data }) {
+
+    const [modalOpen, setModalOpen] = React.useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
     return (
         <div className={`${styles.burger_constructor}`}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -70,8 +83,13 @@ function BurgerConstructor({data}) {
                     <CurrencyIcon type="primary" />
                 </li>
                 <li>
-                    <Button htmlType="button" type="primary" size="large">Оформить заказ</Button>
+                    <Button onClick={openModal} htmlType="button" type="primary" size="large">Оформить заказ</Button>
                 </li>
+                {modalOpen &&
+                    (<Modal onClose={closeModal}>
+                        {/*<OrderDetails />*/}
+                    </Modal>)
+                }
             </ul>
         </div>
     );
