@@ -14,7 +14,7 @@ function IngridientType({ type, data }) {
                         key={item._id}
                         src={item.image}
                         price={item.price}
-                        count={item.count}
+                        count={item.__v}
                     />
                 ))}
             </div>

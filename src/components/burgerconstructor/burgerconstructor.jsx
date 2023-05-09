@@ -1,5 +1,4 @@
 import styles from "./burgerconstructor.module.css";
-import { data } from "../../utils/data.js";
 import {
     Button,
     ConstructorElement,
@@ -9,13 +8,13 @@ import {
 import PropTypes from 'prop-types';
 import { ingredientPropType } from '../../utils/prop-types.js'
 
-function BurgerConstructor() {
+function BurgerConstructor({data}) {
     return (
         <div className={`${styles.burger_constructor}`}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div className={styles.item_box}>
                     {data.map((i) => {
-                        if (i._id === "60666c42cc7b410027a1a9b1") {
+                        if (i._id === "643d69a5c3f7b9001cfa093c") {
                             return (
                                 <ConstructorElement
                                     key={i._id}
@@ -49,7 +48,7 @@ function BurgerConstructor() {
                 </div>
                 <div className={styles.item_box}>
                     {data.map((i) => {
-                        if (i._id === "60666c42cc7b410027a1a9b1") {
+                        if (i._id === "643d69a5c3f7b9001cfa093c") {
                             return (
                                 <ConstructorElement
                                     key={i._id}
