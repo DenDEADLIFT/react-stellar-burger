@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { ingredientPropType } from '../../utils/prop-types.js';
 import React from 'react';
 import Modal from '../modal/modal.jsx';
+import OrderDetails from '../orderdetails/orderfetails.jsx';
 
 function BurgerConstructor({ data }) {
 
@@ -87,7 +88,7 @@ function BurgerConstructor({ data }) {
                 </li>
                 {modalOpen &&
                     (<Modal onClose={closeModal}>
-                        {/*<OrderDetails />*/}
+                        <OrderDetails />
                     </Modal>)
                 }
             </ul>
