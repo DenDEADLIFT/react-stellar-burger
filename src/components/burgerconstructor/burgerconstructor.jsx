@@ -10,7 +10,8 @@ import { ingredientPropType } from '../../utils/prop-types.js';
 import React from 'react';
 import Modal from '../modal/modal.jsx';
 import OrderDetails from '../orderdetails/orderfetails.jsx';
-
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+ 
 function BurgerConstructor({ data }) {
 
     const [modalOpen, setModalOpen] = React.useState(false);
@@ -88,7 +89,7 @@ function BurgerConstructor({ data }) {
                 </li>
                 {modalOpen &&
                     (<Modal onClose={closeModal}>
-                        <OrderDetails />
+                        <OrderDetails>{<CloseIcon onClick={closeModal} />}</OrderDetails>
                     </Modal>)
                 }
             </ul>

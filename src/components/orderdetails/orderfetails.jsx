@@ -1,13 +1,13 @@
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from '../orderdetails/orderdetails.module.css';
 
-function OrderDetails() {
+function OrderDetails(props) {
+
     return (
         <ul className={style.orderdetails_box}>
             <li className={style.orderdetails_title_box}>
                 <p className={style.orderdetails_title}></p>
-                <CloseIcon />
+                <div>{props.children}</div>
             </li>
             <li>
                 <p className={`${style.orderdetails_number} text text_type_digits-large pb-4`}>

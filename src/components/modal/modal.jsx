@@ -5,32 +5,21 @@ import React from 'react';
 
 const modalRoot = document.getElementById("react-modals");
 
-
 function Modal ({ children, onClose }) {
 
-
     React.useEffect(() => {
-        const closeModal = () => {
-            document.removeEventListener("keydown", (e) => {
-                if (e.key === "Escape") {
-                    closeModal();
-                }
-            })
-            onClose();
-        }
-    
+
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
-                closeModal();
+                onClose();
             }
         })
     }, [onClose]); 
 
-
     return ReactDOM.createPortal(
         (
             <>
-            <div className={style.modal_position}  onClick={onClose}>
+            <div className={style.modal_position}>
             <ModalOverlay onClose={onClose} />
             <div className={style.open_modal}>
                 {children}

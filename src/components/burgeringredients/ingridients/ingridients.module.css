@@ -19,3 +19,8 @@
     align-items: center;
     gap: 9px;
 }
+
+.ingridients_container {
+    margin: 0;
+    padding: 0;
+}
