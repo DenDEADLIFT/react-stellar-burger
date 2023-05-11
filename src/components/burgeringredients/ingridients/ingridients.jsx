@@ -5,8 +5,9 @@ import React from 'react';
 import IngredientDetails from '../../ingredientdetails/ingredientdetails.jsx';
 import Modal from '../../modal/modal.jsx';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { ingredientPropType } from '../../../utils/prop-types.js';
 
-function Ingridients({ _id, src, name, price, count, calories, proteins, fat, carbohydrates, image_large }) {
+function Ingridients(data) {
 
   const [modalOpened, setModalOpened] = React.useState(false);
 
@@ -20,18 +21,18 @@ function Ingridients({ _id, src, name, price, count, calories, proteins, fat, ca
 
   return (
     <ul className={style.ingridients_container}>
-      <li className={style.ingridients_box} key={_id} onClick={openModal}>
-        <img className={style.ingridients_image} src={src} alt={name} />
+      <li className={style.ingridients_box} key={data._id} onClick={openModal}>
+        <img className={style.ingridients_image} src={data.src} alt={data.name} />
         <div className={style.ingridients_prise_box}>
-          <p className="text text_type_digits-default">{price}</p>
+          <p className="text text_type_digits-default">{data.price}</p>
           <CurrencyIcon type="primary" />
         </div>
-        <p className='mb-1 pb-5 text text_type_main-default'>{name}</p>
-        <Counter count={count} size="default" extraClass="m-1" />
+        <p className='mb-1 pb-5 text text_type_main-default'>{data.name}</p>
+        <Counter count={data.count} size="default" extraClass="m-1" />
       </li>
       {modalOpened &&
         (<Modal onClose={closeModal}>
-          <IngredientDetails data={ {name, calories, proteins, fat, carbohydrates, image_large} }>{<CloseIcon onClick={closeModal} />}</IngredientDetails>
+          <IngredientDetails data={ data }>{<CloseIcon onClick={closeModal} />}</IngredientDetails>
         </Modal>)
       }
     </ul>
@@ -39,15 +40,7 @@ function Ingridients({ _id, src, name, price, count, calories, proteins, fat, ca
 }
 
 Ingridients.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  src: PropTypes.string.isRequired,
-  count: PropTypes.number.isRequired,
-  calories: PropTypes.number.isRequired,
-  proteins: PropTypes.number.isRequired,
-  fat: PropTypes.number.isRequired,
-  carbohydrates: PropTypes.number.isRequired,
-  image_large: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(ingredientPropType.isRequired),
 };
 
 export default Ingridients; 
