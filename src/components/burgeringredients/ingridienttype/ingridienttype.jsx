@@ -34,4 +34,4 @@ IngridientType.propTypes = {
     type: PropTypes.string,
 };
 
-export default IngridientType;
+export default IngridientType; 

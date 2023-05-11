@@ -101,4 +101,4 @@ BurgerConstructor.propTypes = {
     data: PropTypes.arrayOf(ingredientPropType.isRequired),
 };
 
-export default BurgerConstructor;
+export default BurgerConstructor; 

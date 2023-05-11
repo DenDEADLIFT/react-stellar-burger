@@ -1,4 +1,5 @@
 import styles from './modaloverlay.module.css';
+import PropTypes from "prop-types";
 
 function ModalOverlay ({onClose}) {
     return (
@@ -6,4 +7,8 @@ function ModalOverlay ({onClose}) {
     )
 }
 
-export default ModalOverlay;
+ModalOverlay.propTypes = {
+    onClose: PropTypes.func.isRequired,
+};
+
+export default ModalOverlay; 

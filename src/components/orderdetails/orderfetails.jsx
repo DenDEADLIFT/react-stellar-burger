@@ -1,5 +1,7 @@
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from '../orderdetails/orderdetails.module.css';
+import PropTypes from "prop-types";
+import { ingredientPropType } from '../../utils/prop-types.js';
  
 function OrderDetails(props) {
 
@@ -36,4 +38,8 @@ function OrderDetails(props) {
     )
 }
 
-export default OrderDetails;
+OrderDetails.propTypes = {
+    props: PropTypes.arrayOf(ingredientPropType.isRequired),
+};
+
+export default OrderDetails; 

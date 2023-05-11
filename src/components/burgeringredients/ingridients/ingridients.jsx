@@ -43,6 +43,11 @@ Ingridients.propTypes = {
   price: PropTypes.number.isRequired,
   src: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
+  calories: PropTypes.number.isRequired,
+  proteins: PropTypes.number.isRequired,
+  fat: PropTypes.number.isRequired,
+  carbohydrates: PropTypes.number.isRequired,
+  image_large: PropTypes.string.isRequired,
 };
 
-export default Ingridients;
+export default Ingridients; 
