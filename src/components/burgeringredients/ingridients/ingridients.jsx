@@ -7,20 +7,20 @@ import Modal from '../../modal/modal.jsx';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function Ingridients({ _id, src, name, price, count, calories, proteins, fat, carbohydrates, image_large }) {
-  
-  const [modalOpen, setModalOpen] = React.useState(false);
 
-  const openModal = () => {
-      setModalOpen(true);
-  };
+  const [modalOpened, setModalOpened] = React.useState(false);
 
-  const closeModal = () => {
-      setModalOpen(false);
-  };
+    const openModal = () => {
+      setModalOpened(true);
+    };
+
+    const closeModal = () => {
+      setModalOpened(false);
+    };
 
   return (
-    <ul className={style.ingridients_container} onClick={openModal}>
-      <li className={style.ingridients_box} key={_id}>
+    <ul className={style.ingridients_container}>
+      <li className={style.ingridients_box} key={_id} onClick={openModal}>
         <img className={style.ingridients_image} src={src} alt={name} />
         <div className={style.ingridients_prise_box}>
           <p className="text text_type_digits-default">{price}</p>
@@ -29,9 +29,9 @@ function Ingridients({ _id, src, name, price, count, calories, proteins, fat, ca
         <p className='mb-1 pb-5 text text_type_main-default'>{name}</p>
         <Counter count={count} size="default" extraClass="m-1" />
       </li>
-      {modalOpen &&
+      {modalOpened &&
         (<Modal onClose={closeModal}>
-          <IngredientDetails data={ { name, calories, proteins, fat, carbohydrates, image_large } }>{<CloseIcon onClick={closeModal} />}</IngredientDetails>
+          <IngredientDetails data={ {name, calories, proteins, fat, carbohydrates, image_large} }>{<CloseIcon onClick={closeModal} />}</IngredientDetails>
         </Modal>)
       }
     </ul>

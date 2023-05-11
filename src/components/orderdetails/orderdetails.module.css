@@ -8,6 +8,7 @@
 }
 
 .orderdetails_number {
+    padding-top: 16px;
     width: 520px;
     height: 120px;
     padding-top: 16px;
@@ -33,6 +34,7 @@
 
 .orderdetails_text {
     color: #8585AD;
+    padding-bottom: 120px;
 }
 
 .orderdetails_icon_box {

@@ -1,6 +1,6 @@
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from '../orderdetails/orderdetails.module.css';
-
+ 
 function OrderDetails(props) {
 
     return (
@@ -25,7 +25,7 @@ function OrderDetails(props) {
 
             </li>
             <li>
-                <p className="text text_type_main-default">Ваш заказ начали готовить</p>
+                <p className="text text_type_main-default pb-2">Ваш заказ начали готовить</p>
             </li>
             <li>
                 <p className={`${style.orderdetails_text} text text_type_main-default`}>

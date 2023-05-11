@@ -6,6 +6,7 @@
     justify-items: start;
     gap: 4px;
     list-style: none;
+    cursor: pointer;
 }
 
 .ingridients_image {

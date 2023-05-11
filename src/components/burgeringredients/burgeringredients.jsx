@@ -3,7 +3,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 import IngridientType from '../burgeringredients/ingridienttype/ingridienttype.jsx'
 import PropTypes from 'prop-types';
-
+ 
 function BurgerIngredients({data}) {
     const Tabs = () => {
         const [current, setCurrent] = React.useState('bun')
