@@ -1,5 +1,4 @@
 import styles from "./burgerconstructor.module.css";
-import { data } from "../../utils/data.js";
 import {
     Button,
     ConstructorElement,
@@ -7,15 +6,30 @@ import {
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from 'prop-types';
-import { ingredientPropType } from '../../utils/prop-types.js'
+import { ingredientPropType } from '../../utils/prop-types.js';
+import React from 'react';
+import Modal from '../modal/modal.jsx';
+import OrderDetails from '../orderdetails/orderfetails.jsx';
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function BurgerConstructor() {
+function BurgerConstructor({ data }) {
+
+    const [modalOpen, setModalOpen] = React.useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
     return (
         <div className={`${styles.burger_constructor}`}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div className={styles.item_box}>
                     {data.map((i) => {
-                        if (i._id === "60666c42cc7b410027a1a9b1") {
+                        if (i._id === "643d69a5c3f7b9001cfa093c") {
                             return (
                                 <ConstructorElement
                                     key={i._id}
@@ -49,7 +63,7 @@ function BurgerConstructor() {
                 </div>
                 <div className={styles.item_box}>
                     {data.map((i) => {
-                        if (i._id === "60666c42cc7b410027a1a9b1") {
+                        if (i._id === "643d69a5c3f7b9001cfa093c") {
                             return (
                                 <ConstructorElement
                                     key={i._id}
@@ -71,8 +85,13 @@ function BurgerConstructor() {
                     <CurrencyIcon type="primary" />
                 </li>
                 <li>
-                    <Button htmlType="button" type="primary" size="large">Оформить заказ</Button>
+                    <Button onClick={openModal} htmlType="button" type="primary" size="large">Оформить заказ</Button>
                 </li>
+                {modalOpen &&
+                    (<Modal onClose={closeModal}>
+                        <OrderDetails>{<CloseIcon onClick={closeModal} />}</OrderDetails>
+                    </Modal>)
+                }
             </ul>
         </div>
     );
@@ -82,4 +101,4 @@ BurgerConstructor.propTypes = {
     data: PropTypes.arrayOf(ingredientPropType.isRequired),
 };
 
-export default BurgerConstructor;
+export default BurgerConstructor; 

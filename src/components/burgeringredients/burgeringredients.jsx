@@ -1,11 +1,11 @@
 import styles from "./burgeringredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
-import IngridientType from '../burgeringredients/ingridienttype/ingridienttype.jsx'
-import { data } from "../../utils/data.js";
+import IngridientType from '../burgeringredients/ingridienttype/ingridienttype.jsx';
+import { ingredientPropType } from '../../utils/prop-types.js';
 import PropTypes from 'prop-types';
-
-function BurgerIngredients() {
+ 
+function BurgerIngredients({data}) {
     const Tabs = () => {
         const [current, setCurrent] = React.useState('bun')
         return (
@@ -37,8 +37,7 @@ function BurgerIngredients() {
 }
 
 BurgerIngredients.propTypes = {
-    data: PropTypes.string,
-    type: PropTypes.string,
+    data: PropTypes.arrayOf(ingredientPropType.isRequired),
   };
 
-export default BurgerIngredients;
+export default BurgerIngredients; 
