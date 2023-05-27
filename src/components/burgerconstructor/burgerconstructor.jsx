@@ -11,8 +11,16 @@ import React from 'react';
 import Modal from '../modal/modal.jsx';
 import OrderDetails from '../orderdetails/orderfetails.jsx';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { BurgersContext } from '../../services/burgersContext.js';
 
-function BurgerConstructor({ data }) {
+function BurgerConstructor() {
+
+    const data = React.useContext(BurgersContext);
+
+    const buns = React.useMemo(
+        () => data.find((i) => i.type === "bun"),
+        [data]
+    );
 
     const [modalOpen, setModalOpen] = React.useState(false);
 
@@ -24,25 +32,20 @@ function BurgerConstructor({ data }) {
         setModalOpen(false);
     };
 
+    console.log(buns)
+
     return (
         <div className={`${styles.burger_constructor}`}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div className={styles.item_box}>
-                    {data.map((i) => {
-                        if (i._id === "643d69a5c3f7b9001cfa093c") {
-                            return (
-                                <ConstructorElement
-                                    key={i._id}
-                                    type="top"
-                                    isLocked={true}
-                                    text="Краторная булка N-200i (верх)"
-                                    price={i.price}
-                                    thumbnail={i.image}
-                                />
-                            )
-                        }
-                        return null;
-                    })}
+                    {/*<ConstructorElement
+                        type="top"
+                        isLocked="true"
+                        text={`${buns.name} (верх)`}
+                        price={buns.price}
+                        thumbnail={buns.image}
+                        ingridient={buns}
+    />*/}
                 </div>
                 <div className={`${styles.constructor_box} custom-scroll`}>
                     {data.map((i) => {

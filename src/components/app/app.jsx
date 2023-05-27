@@ -4,6 +4,7 @@ import BurgerIngredients from "../burgeringredients/burgeringredients";
 import BurgerConstructor from "../burgerconstructor/burgerconstructor";
 import { serverdata } from '../../utils/datafromserver.js';
 import React from "react";
+import { BurgersContext } from '../../services/burgersContext.js'
 
 function App() {
 
@@ -27,8 +28,10 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <div className={styles.content}>
+      <BurgersContext.Provider value={data}>
         <BurgerIngredients data={data}/>
         <BurgerConstructor data={data}/>
+      </BurgersContext.Provider>
       </div>
     </div>
   );

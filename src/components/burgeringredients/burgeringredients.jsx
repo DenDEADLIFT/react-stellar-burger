@@ -4,8 +4,12 @@ import React from "react";
 import IngridientType from '../burgeringredients/ingridienttype/ingridienttype.jsx';
 import { ingredientPropType } from '../../utils/prop-types.js';
 import PropTypes from 'prop-types';
+import { BurgersContext } from '../../services/burgersContext.js';
  
-function BurgerIngredients({data}) {
+function BurgerIngredients() {
+    
+    const data = React.useContext(BurgersContext);
+    
     const Tabs = () => {
         const [current, setCurrent] = React.useState('bun')
         return (
