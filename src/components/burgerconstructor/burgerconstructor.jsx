@@ -5,8 +5,8 @@ import {
     CurrencyIcon,
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
-import { ingredientPropType } from '../../utils/prop-types.js';
+//import PropTypes from 'prop-types';
+//import { ingredientPropType } from '../../utils/prop-types.js';
 import React from 'react';
 import Modal from '../modal/modal.jsx';
 import OrderDetails from '../orderdetails/orderfetails.jsx';
@@ -15,14 +15,14 @@ import { BurgersContext } from '../../services/burgersContext.js';
 
 function BurgerConstructor() {
 
+    const [modalOpen, setModalOpen] = React.useState(false);
+
     const data = React.useContext(BurgersContext);
 
-    const buns = React.useMemo(
+    const bun = React.useMemo(
         () => data.find((i) => i.type === "bun"),
         [data]
     );
-
-    const [modalOpen, setModalOpen] = React.useState(false);
 
     const openModal = () => {
         setModalOpen(true);
@@ -32,20 +32,19 @@ function BurgerConstructor() {
         setModalOpen(false);
     };
 
-    console.log(buns)
+    console.log(bun)
 
     return (
         <div className={`${styles.burger_constructor}`}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div className={styles.item_box}>
-                    {/*<ConstructorElement
+                   <ConstructorElement
                         type="top"
                         isLocked="true"
-                        text={`${buns.name} (верх)`}
-                        price={buns.price}
-                        thumbnail={buns.image}
-                        ingridient={buns}
-    />*/}
+                        text={`${bun.name} (верх)`}
+                        price={bun.price}
+                        thumbnail={bun.image}
+    />
                 </div>
                 <div className={`${styles.constructor_box} custom-scroll`}>
                     {data.map((i) => {
@@ -100,8 +99,8 @@ function BurgerConstructor() {
     );
 }
 
-BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(ingredientPropType.isRequired),
-};
+//BurgerConstructor.propTypes = {
+//    data: PropTypes.arrayOf(ingredientPropType.isRequired),
+//};
 
 export default BurgerConstructor; 

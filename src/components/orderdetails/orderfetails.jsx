@@ -4,7 +4,7 @@ import style from '../orderdetails/orderdetails.module.css';
 import PropTypes from "prop-types";
 import { ingredientPropType } from '../../utils/prop-types.js';
 import { BurgersContext } from '../../services/burgersContext.js';
-import { orderdata } from '../../utils/datafromserver.js';
+import { Orderdata } from '../../utils/datafromserver.js';
  
 function OrderDetails(props) {
 
@@ -16,11 +16,10 @@ function OrderDetails(props) {
         () => data.map((i) => i._id),
         [data]
       );
-      //console.log(ingridientsId)
 
     React.useEffect(() => {
         const getData = async () => {
-          await orderdata(ingridientsId)
+          await Orderdata(ingridientsId)
           .then((resolve) => {
             setOrder(resolve.order.number)
           })
@@ -30,8 +29,6 @@ function OrderDetails(props) {
         }
         getData();
       }, [])
-
-      
 
     return (
         <ul className={style.orderdetails_box}>
