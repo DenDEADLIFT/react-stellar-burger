@@ -5,8 +5,8 @@ import {
     CurrencyIcon,
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-//import PropTypes from 'prop-types';
-//import { ingredientPropType } from '../../utils/prop-types.js';
+import PropTypes from 'prop-types';
+import { ingredientPropType } from '../../utils/prop-types.js';
 import React from 'react';
 import Modal from '../modal/modal.jsx';
 import OrderDetails from '../orderdetails/orderfetails.jsx';
@@ -15,14 +15,20 @@ import { BurgersContext } from '../../services/burgersContext.js';
 
 function BurgerConstructor() {
 
-    const [modalOpen, setModalOpen] = React.useState(false);
-
     const data = React.useContext(BurgersContext);
 
-    const bun = React.useMemo(
-        () => data.find((i) => i.type === "bun"),
-        [data]
-    );
+    const bun = data.find((i) => i.type === "bun");
+
+    const filling = data.filter(item => item.type !== 'bun');
+
+    const [modalOpen, setModalOpen] = React.useState(false);
+
+    const price = React.useMemo(() => {
+        const fillingPrice = filling.reduce((sum, item) => {
+            return sum + item.price;
+        }, 0);
+        return fillingPrice + bun.price * 2;
+    }, [bun, filling]);
 
     const openModal = () => {
         setModalOpen(true);
@@ -32,22 +38,21 @@ function BurgerConstructor() {
         setModalOpen(false);
     };
 
-    console.log(bun)
-
     return (
         <div className={`${styles.burger_constructor}`}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div className={styles.item_box}>
-                   <ConstructorElement
+                    <ConstructorElement
+                        key={bun._id}
                         type="top"
                         isLocked="true"
                         text={`${bun.name} (верх)`}
                         price={bun.price}
                         thumbnail={bun.image}
-    />
+                    />
                 </div>
                 <div className={`${styles.constructor_box} custom-scroll`}>
-                    {data.map((i) => {
+                    {filling.map((i) => {
                         if (i.type !== 'bun') {
                             return (
                                 <div className={`${styles.items}`} key={i._id}>
@@ -68,12 +73,12 @@ function BurgerConstructor() {
                         if (i._id === "643d69a5c3f7b9001cfa093c") {
                             return (
                                 <ConstructorElement
-                                    key={i._id}
+                                    key={bun._id}
                                     type="bottom"
                                     isLocked={true}
-                                    text="Краторная булка N-200i (низ)"
-                                    price={i.price}
-                                    thumbnail={i.image}
+                                    text={`${bun.name} (низ)`}
+                                    price={bun.price}
+                                    thumbnail={bun.image}
                                 />
                             )
                         }
@@ -83,7 +88,7 @@ function BurgerConstructor() {
             </div>
             <ul className={styles.constructor_bottom}>
                 <li className={styles.constructor_price}>
-                    <p className="text text_type_digits-medium">610</p>
+                    <p className="text text_type_digits-medium">{price}</p>
                     <CurrencyIcon type="primary" />
                 </li>
                 <li>
@@ -99,8 +104,8 @@ function BurgerConstructor() {
     );
 }
 
-//BurgerConstructor.propTypes = {
-//    data: PropTypes.arrayOf(ingredientPropType.isRequired),
-//};
+BurgerConstructor.propTypes = {
+    data: PropTypes.arrayOf(ingredientPropType.isRequired),
+};
 
 export default BurgerConstructor; 

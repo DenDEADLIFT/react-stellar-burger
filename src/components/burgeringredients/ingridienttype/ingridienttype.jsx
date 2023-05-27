@@ -10,7 +10,6 @@ function IngridientType( { type, data } ) {
             <p className={'text text_type_main-medium'}>{type}</p>
             <div className={style.ingridienttype_box}>
                 {data?.map((item) =>  (
-                    
                     <Ingridients
                         name={item.name}
                         key={item._id}

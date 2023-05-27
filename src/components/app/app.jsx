@@ -24,16 +24,14 @@ function App() {
     getData();
   }, [])
 
-  //console.log(data)
-
   return (
     <div className={styles.app}>
       <AppHeader />
       <div className={styles.content}>
-      <BurgersContext.Provider value={data}>
+      {data.length && <BurgersContext.Provider value={data}>
         <BurgerIngredients />
         <BurgerConstructor />
-      </BurgersContext.Provider>
+      </BurgersContext.Provider>}
       </div>
     </div>
   );
