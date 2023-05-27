@@ -1,7 +1,7 @@
 import styles from "./app.module.css";
-import AppHeader from "../appheader/appheader";
-import BurgerIngredients from "../burgeringredients/burgeringredients";
-import BurgerConstructor from "../burgerconstructor/burgerconstructor";
+import AppHeader from "../appheader/appheader.jsx";
+import BurgerIngredients from "../burgeringredients/burgerIngredients.jsx";
+import BurgerConstructor from "../burgerconstructor/burgerConstructor.jsx";
 import { Serverdata } from '../../utils/datafromserver.js';
 import React from "react";
 import { BurgersContext } from '../../services/burgersContext.js'

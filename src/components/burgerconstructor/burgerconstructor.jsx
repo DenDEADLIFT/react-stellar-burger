@@ -17,9 +17,12 @@ function BurgerConstructor() {
 
     const data = React.useContext(BurgersContext);
 
-    const bun = data.find((i) => i.type === "bun");
+    const bulka = "bun";
 
-    const filling = data.filter(item => item.type !== 'bun');
+    const bun = data.find((i) => i.type === bulka);
+
+
+    const filling = data.filter(item => item.type !== bulka);
 
     const [modalOpen, setModalOpen] = React.useState(false);
 
@@ -45,7 +48,6 @@ function BurgerConstructor() {
                     <ConstructorElement
                         key={bun._id}
                         type="top"
-                        isLocked="true"
                         text={`${bun.name} (верх)`}
                         price={bun.price}
                         thumbnail={bun.image}
@@ -75,7 +77,6 @@ function BurgerConstructor() {
                                 <ConstructorElement
                                     key={bun._id}
                                     type="bottom"
-                                    isLocked={true}
                                     text={`${bun.name} (низ)`}
                                     price={bun.price}
                                     thumbnail={bun.image}
