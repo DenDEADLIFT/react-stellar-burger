@@ -26,7 +26,6 @@ function BurgerIngredients() {
             </div>
         )
     }
-    //console.log(data)
 
     return (
         <div className={`${styles.burger_ingredients} pt-5`}>
