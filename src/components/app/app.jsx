@@ -1,5 +1,5 @@
 import styles from "./app.module.css";
-import AppHeader from "../appheader/appheader.jsx";
+import AppHeader from "../appheader/appHeader.jsx";
 import BurgerIngredients from "../burgeringredients/burgerIngredients.jsx";
 import BurgerConstructor from "../burgerconstructor/burgerConstructor.jsx";
 import { Serverdata } from '../../utils/datafromserver.js';
