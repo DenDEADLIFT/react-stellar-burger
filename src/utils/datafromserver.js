@@ -1,7 +1,7 @@
 const link = "https://norma.nomoreparties.space/api/ingredients";
 const linkorder = 'https://norma.nomoreparties.space/api/orders';
 
-export const serverdata = () => {
+export const Serverdata = () => {
    return fetch(link, {
       method: 'GET',
       headers: {
@@ -16,12 +16,9 @@ export const serverdata = () => {
             return Promise.reject(`Ошибка ${resolve.status}`);
          }
       })
-      .catch((reject) => {
-         console.log(`Ошибка ${reject.status}`);
-      });
 }
 
-export const orderdata = (items) => {
+export const Orderdata = (items) => {
    return fetch(linkorder, {
       method: 'POST',
       headers: {
@@ -29,19 +26,14 @@ export const orderdata = (items) => {
       },
       body: JSON.stringify({
          'ingredients': items,
-       })
+      })
    })
       .then(resolve => {
          if (resolve.ok) {
-            //console.log(resolve)
             return (
                resolve = resolve.json())
-               
          } else {
             return Promise.reject(`Ошибка ${resolve.status}`);
          }
       })
-      .catch((reject) => {
-         console.log(`Ошибка ${reject.status}`);
-      });
 }
