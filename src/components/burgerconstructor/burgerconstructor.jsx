@@ -19,10 +19,14 @@ function BurgerConstructor() {
 
     const bulka = "bun";
 
-    const bun = data.find((i) => i.type === bulka);
+    const bun = React.useMemo(
+        () => data.find((i) => i.type === bulka),
+        [data])
 
 
-    const filling = data.filter(item => item.type !== bulka);
+    const filling = React.useMemo(
+        () => data.filter(item => item.type !== bulka),
+        [data])
 
     const [modalOpen, setModalOpen] = React.useState(false);
 
