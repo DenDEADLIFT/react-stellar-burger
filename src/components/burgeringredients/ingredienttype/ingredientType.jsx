@@ -1,5 +1,5 @@
-import Ingridients from '../ingridients/ingridients.jsx';
-import style from '../ingridienttype/ingridienttype.module.css';
+import Ingridients from '../ingredients/ingredients.jsx';
+import style from '../ingredienttype/ingredienttype.module.css';
 import PropTypes from "prop-types";
 import { ingredientPropType } from '../../../utils/prop-types.js';
  
