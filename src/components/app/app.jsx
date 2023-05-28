@@ -10,16 +10,19 @@ function App() {
 
   const [data, setData] = React.useState([]);
 
+  const [errApp, setErrApp] = React.useState(false)
+
   React.useEffect(() => {
-    
+
     const getData = async () => {
       await Serverdata()
-      .then((resolve) => {
-        setData(resolve.data)
-      })
-      .catch((reject) => {
-        console.log(`Ошбика ${reject.status}`)
-      })
+        .then((resolve) => {
+          setData(resolve.data)
+        })
+        .catch((reject) => {
+          console.log(`Ошбика ${reject}`)
+          setErrApp(true)
+        })
     }
     getData();
   }, [])
@@ -28,10 +31,11 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <div className={styles.content}>
-      {data.length && <BurgersContext.Provider value={data}>
-        <BurgerIngredients />
-        <BurgerConstructor />
-      </BurgersContext.Provider>}
+        {errApp && 'Ошибка'}
+        {data.length && <BurgersContext.Provider value={data}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </BurgersContext.Provider>}
       </div>
     </div>
   );

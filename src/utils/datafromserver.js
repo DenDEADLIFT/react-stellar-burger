@@ -16,9 +16,6 @@ export const Serverdata = () => {
             return Promise.reject(`Ошибка ${resolve.status}`);
          }
       })
-      .catch((reject) => {
-         console.log(`Ошибка ${reject.status}`);
-      });
 }
 
 export const Orderdata = (items) => {
@@ -29,7 +26,7 @@ export const Orderdata = (items) => {
       },
       body: JSON.stringify({
          'ingredients': items,
-       })
+      })
    })
       .then(resolve => {
          if (resolve.ok) {
@@ -39,7 +36,4 @@ export const Orderdata = (items) => {
             return Promise.reject(`Ошибка ${resolve.status}`);
          }
       })
-      .catch((reject) => {
-         console.log(`Ошибка ${reject.status}`);
-      });
 }

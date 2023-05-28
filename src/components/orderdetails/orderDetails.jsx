@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { ingredientPropType } from '../../utils/prop-types.js';
 import { BurgersContext } from '../../services/burgersContext.js';
 import { Orderdata } from '../../utils/datafromserver.js';
- 
+
 function OrderDetails(props) {
 
     const data = React.useContext(BurgersContext);
@@ -15,22 +15,26 @@ function OrderDetails(props) {
     const ingridientsId = React.useMemo(
         () => data.map((i) => i._id),
         [data]
-      );
+    );
+
+    const [err, setErr] = React.useState(false);
 
     React.useEffect(() => {
         const getData = async () => {
-          await Orderdata(ingridientsId)
-          .then((resolve) => {
-            setOrder(resolve.order.number)
-          })
-          .catch((reject) => {
-            console.log(`Ошбика ${reject.status}`)
-          })
+            await Orderdata(ingridientsId)
+                .then((resolve) => {
+                    setOrder(resolve.order.number)
+                })
+                .catch((reject) => {
+                    console.log(`Ошбика ${reject}`)
+                    setErr(true)
+                })
         }
         getData();
-      }, [])
+    }, [ingridientsId])
 
     return (
+
         <ul className={style.orderdetails_box}>
             <li className={style.orderdetails_title_box}>
                 <p className={style.orderdetails_title}></p>
@@ -38,16 +42,16 @@ function OrderDetails(props) {
             </li>
             <li>
                 <p className={`${style.orderdetails_number} text text_type_digits-large pb-4`}>
-                {orderNum}
+                    {!err ? orderNum : 'Ошибка'}
                 </p>
             </li>
             <p className="text text_type_main-medium pt-4">идентификатор заказа</p>
             <li className={style.orderdetails_icon_box}>
                 <div className={style.orderdetails_icon_shadow_out}>
                     <div className={style.orderdetails_icon_shadow_in}>
-                    <CheckMarkIcon type="primary" />
+                        <CheckMarkIcon type="primary" />
                     </div>
-                    
+
                 </div>
 
             </li>
