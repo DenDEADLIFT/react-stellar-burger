@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { ingredientPropType } from '../../utils/prop-types.js';
 import React from 'react';
 import Modal from '../modal/modal.jsx';
-import OrderDetails from '../orderdetails/orderfetails.jsx';
+import OrderDetails from '../orderdetails/orderDetails.jsx';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgersContext } from '../../services/burgersContext.js';
 
