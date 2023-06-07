@@ -1,15 +1,13 @@
 import Ingridients from '../ingredients/ingredients.jsx';
 import style from '../ingredienttype/ingredienttype.module.css';
-import PropTypes from "prop-types";
-import { ingredientPropType } from '../../../utils/prop-types.js';
- 
-function IngridientType( { type, data } ) {
 
+function IngridientType({ type, data }) {
+    
     return (
         <section>
             <p className={'text text_type_main-medium'}>{type}</p>
             <div className={style.ingridienttype_box}>
-                {data?.map((item) =>  (
+                {data?.map((item) => (
                     <Ingridients
                         name={item.name}
                         key={item._id}
@@ -27,10 +25,5 @@ function IngridientType( { type, data } ) {
         </section>
     );
 }
-
-IngridientType.propTypes = {
-    data: PropTypes.arrayOf(ingredientPropType.isRequired),
-    type: PropTypes.string,
-};
 
 export default IngridientType; 

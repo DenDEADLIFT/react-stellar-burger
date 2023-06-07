@@ -1,38 +1,27 @@
 import React from "react";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from '../orderdetails/orderdetails.module.css';
-import PropTypes from "prop-types";
-import { ingredientPropType } from '../../utils/prop-types.js';
-import { BurgersContext } from '../../services/burgersContext.js';
-import { Orderdata } from '../../utils/datafromserver.js';
+import { useSelector, useDispatch } from "react-redux";
+import { getOrderdata } from '../../services/actions/actions'
 
 function OrderDetails(props) {
 
-    const data = React.useContext(BurgersContext);
+    const { bun, ingredients } = useSelector(state => state.burgerConstructor);
 
-    const [orderNum, setOrder] = React.useState([]);
+    const { actual } = useSelector(state => state.order);
+    
+    const dispatch = useDispatch();
 
     const ingridientsId = React.useMemo(
-        () => data.map((i) => i._id),
-        [data]
+        () => ingredients.map((i) => i._id),
+        [ingredients]
     );
 
-    const [err, setErr] = React.useState(false);
-
     React.useEffect(() => {
-        const getData = async () => {
-            await Orderdata(ingridientsId)
-                .then((resolve) => {
-                    setOrder(resolve.order.number)
-                })
-                .catch((reject) => {
-                    console.log(`Ошбика ${reject}`)
-                    setErr(true)
-                })
-        }
-        getData();
-    }, [ingridientsId])
-
+        const items = [...ingridientsId, bun._id];
+        dispatch(getOrderdata(items));
+    }, [ingridientsId, bun, dispatch])
+    
     return (
 
         <ul className={style.orderdetails_box}>
@@ -42,7 +31,7 @@ function OrderDetails(props) {
             </li>
             <li>
                 <p className={`${style.orderdetails_number} text text_type_digits-large pb-4`}>
-                    {!err ? orderNum : 'Ошибка'}
+                    {actual && actual.order.number}
                 </p>
             </li>
             <p className="text text_type_main-medium pt-4">идентификатор заказа</p>
@@ -51,9 +40,7 @@ function OrderDetails(props) {
                     <div className={style.orderdetails_icon_shadow_in}>
                         <CheckMarkIcon type="primary" />
                     </div>
-
                 </div>
-
             </li>
             <li>
                 <p className="text text_type_main-default pb-2">Ваш заказ начали готовить</p>
@@ -66,9 +53,5 @@ function OrderDetails(props) {
         </ul>
     )
 }
-
-OrderDetails.propTypes = {
-    props: PropTypes.arrayOf(ingredientPropType.isRequired),
-};
 
 export default OrderDetails; 

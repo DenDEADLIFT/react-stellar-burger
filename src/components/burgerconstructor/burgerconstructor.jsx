@@ -5,37 +5,35 @@ import {
     CurrencyIcon,
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
-import { ingredientPropType } from '../../utils/prop-types.js';
 import React from 'react';
 import Modal from '../modal/modal.jsx';
 import OrderDetails from '../orderdetails/orderDetails.jsx';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgersContext } from '../../services/burgersContext.js';
+import { useSelector } from "react-redux";
+
 
 function BurgerConstructor() {
 
-    const data = React.useContext(BurgersContext);
+    const { bun, ingredients } = useSelector(state => state.burgerConstructor);
 
     const bulka = "bun";
 
-    const bun = React.useMemo(
-        () => data.find((i) => i.type === bulka),
-        [data])
-
-
     const filling = React.useMemo(
-        () => data.filter(item => item.type !== bulka),
-        [data])
+        () => ingredients.filter(item => item.type !== bulka),
+        [ingredients])
 
-    const [modalOpen, setModalOpen] = React.useState(false);
+    const bun1 = React.useMemo(
+        () => ingredients.find((i) => i.type === bulka),
+        [ingredients])
 
     const price = React.useMemo(() => {
         const fillingPrice = filling.reduce((sum, item) => {
             return sum + item.price;
         }, 0);
-        return fillingPrice + bun.price * 2;
-    }, [bun, filling]);
+        return bun1 ? fillingPrice + bun1.price * 2 : 0;
+    }, [bun1, filling]);
+
+    const [modalOpen, setModalOpen] = React.useState(false);
 
     const openModal = () => {
         setModalOpen(true);
@@ -49,13 +47,13 @@ function BurgerConstructor() {
         <div className={`${styles.burger_constructor}`}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div className={styles.item_box}>
-                    <ConstructorElement
-                        key={bun._id}
+                    {bun.length && <ConstructorElement
+                        key={bun1._id}
                         type="top"
-                        text={`${bun.name} (верх)`}
-                        price={bun.price}
-                        thumbnail={bun.image}
-                    />
+                        text={`${bun1.name} (верх)`}
+                        price={bun1.price}
+                        thumbnail={bun1.image}
+                    />}
                 </div>
                 <div className={`${styles.constructor_box} custom-scroll`}>
                     {filling.map((i) => {
@@ -63,11 +61,11 @@ function BurgerConstructor() {
                             return (
                                 <div className={`${styles.items}`} key={i._id}>
                                     <DragIcon />
-                                    <ConstructorElement
+                                    {bun.length && <ConstructorElement
                                         text={i.name}
                                         price={i.price}
                                         thumbnail={i.image}
-                                    />
+                                    />}
                                 </div>
                             )
                         }
@@ -75,20 +73,13 @@ function BurgerConstructor() {
                     })}
                 </div>
                 <div className={styles.item_box}>
-                    {data.map((i) => {
-                        if (i._id === "643d69a5c3f7b9001cfa093c") {
-                            return (
-                                <ConstructorElement
-                                    key={bun._id}
-                                    type="bottom"
-                                    text={`${bun.name} (низ)`}
-                                    price={bun.price}
-                                    thumbnail={bun.image}
-                                />
-                            )
-                        }
-                        return null;
-                    })}
+                    {bun.length && <ConstructorElement
+                        key={bun1._id}
+                        type="top"
+                        text={`${bun1.name} (низ)`}
+                        price={bun1.price}
+                        thumbnail={bun1.image}
+                    />}
                 </div>
             </div>
             <ul className={styles.constructor_bottom}>
@@ -108,9 +99,5 @@ function BurgerConstructor() {
         </div>
     );
 }
-
-BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(ingredientPropType.isRequired),
-};
 
 export default BurgerConstructor; 
