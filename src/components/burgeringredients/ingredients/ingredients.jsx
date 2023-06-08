@@ -6,22 +6,33 @@ import IngredientDetails from '../../ingredientdetails/ingredientDetails.jsx';
 import Modal from '../../modal/modal.jsx';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ingredientPropType } from '../../../utils/prop-types.js';
+import { useDrag } from "react-dnd";
 
 function Ingridients(data) {
 
+  const [{ isDragging }, drag] = useDrag({
+    type: "ingredient",
+    item: data,
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const opacity = isDragging ? 0.5 : 1;
+
   const [modalOpened, setModalOpened] = React.useState(false);
 
-    const openModal = () => {
-      setModalOpened(true);
-    };
+  const openModal = () => {
+    setModalOpened(true);
+  };
 
-    const closeModal = () => {
-      setModalOpened(false);
-    };
+  const closeModal = () => {
+    setModalOpened(false);
+  };
 
   return (
     <ul className={style.ingridients_container}>
-      <li className={style.ingridients_box} key={data._id} onClick={openModal}>
+      <li className={style.ingridients_box} key={data._id} onClick={openModal} ref={drag} style={{ opacity }}>
         <img className={style.ingridients_image} src={data.src} alt={data.name} />
         <div className={style.ingridients_prise_box}>
           <p className="text text_type_digits-default">{data.price}</p>
@@ -32,7 +43,7 @@ function Ingridients(data) {
       </li>
       {modalOpened &&
         (<Modal onClose={closeModal}>
-          <IngredientDetails data={ data }>{<CloseIcon onClick={closeModal} />}</IngredientDetails>
+          <IngredientDetails data={data}>{<CloseIcon onClick={closeModal} />}</IngredientDetails>
         </Modal>)
       }
     </ul>

@@ -10,6 +10,7 @@ function IngridientType({ type, data }) {
                 {data?.map((item) => (
                     <Ingridients
                         name={item.name}
+                        _id={item._id}
                         key={item._id}
                         src={item.image}
                         price={item.price}
@@ -19,6 +20,8 @@ function IngridientType({ type, data }) {
                         fat={item.fat}
                         carbohydrates={item.carbohydrates}
                         image_large={item.image_large}
+                        type={item.type}
+                        image={item.image}
                     />
                 ))}
             </div>
