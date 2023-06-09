@@ -2,7 +2,7 @@ import Ingridients from '../ingredients/ingredients.jsx';
 import style from '../ingredienttype/ingredienttype.module.css';
 
 function IngridientType({ type, data }) {
-    
+
     return (
         <section>
             <p className={'text text_type_main-medium'}>{type}</p>

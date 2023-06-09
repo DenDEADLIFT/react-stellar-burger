@@ -9,7 +9,7 @@ function OrderDetails(props) {
     const { bun, ingredients } = useSelector(state => state.burgerConstructor);
 
     const { actual } = useSelector(state => state.order);
-    
+
     const dispatch = useDispatch();
 
     const ingridientsId = React.useMemo(
@@ -21,7 +21,7 @@ function OrderDetails(props) {
         const items = [...ingridientsId, bun._id];
         dispatch(getOrderdata(items));
     }, [ingridientsId, bun, dispatch])
-    
+
     return (
 
         <ul className={style.orderdetails_box}>

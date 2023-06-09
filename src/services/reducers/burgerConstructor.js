@@ -1,18 +1,18 @@
 import {
-    SAUCE_TO_CONSTRUCTOR,
-    BUN_TO_CONSTRUCTOR,
-    REMOVE_INGREDIENTS_FROM_CONSTRUCTOR,
-    REMOVE_INGREDIENTS,
-    REMOVE_BUN,
+  SAUCE_TO_CONSTRUCTOR,
+  BUN_TO_CONSTRUCTOR,
+  REMOVE_INGREDIENTS_FROM_CONSTRUCTOR,
+  REMOVE_INGREDIENTS,
+  REMOVE_BUN,
 } from '../actions/actions'
 
 const initialState = {
-    ingredients: [],
-    bun: null
+  ingredients: [],
+  bun: null
 }
 
 export const constructorReducer = (state = initialState, action) => {
-  //console.log(action.bun)
+
   switch (action.type) {
     case SAUCE_TO_CONSTRUCTOR: {
       return {
@@ -29,7 +29,7 @@ export const constructorReducer = (state = initialState, action) => {
     case REMOVE_INGREDIENTS_FROM_CONSTRUCTOR: {
       return {
         ...state,
-        ingredients: [...state.ingredients].filter((item) => item.id !== action.id)
+        ingredients: [...state.ingredients].filter(item => item._id !== action.key),
       }
     }
     case REMOVE_INGREDIENTS: {
@@ -41,12 +41,12 @@ export const constructorReducer = (state = initialState, action) => {
     case REMOVE_BUN: {
       return {
         ...state,
-        bun: [],
+        bun: null,
       }
     }
     default: {
-        return state;
+      return state;
     }
-}
+  }
 }
 

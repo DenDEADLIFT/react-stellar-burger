@@ -9,6 +9,7 @@ import {
     REMOVE_INGREDIENTS_FROM_CONSTRUCTOR,
     SAUCE_TO_CONSTRUCTOR,
     BUN_TO_CONSTRUCTOR,
+    REMOVE_BUN,
 } from '../../services/actions/actions'
 import React from 'react';
 import Modal from '../modal/modal.jsx';
@@ -16,11 +17,10 @@ import OrderDetails from '../orderdetails/orderDetails.jsx';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
+import { v4 as uuidv4 } from 'uuid';
 
 
 function BurgerConstructor() {
-
-    const newId = new Date();
 
     const dispatch = useDispatch();
 
@@ -37,9 +37,9 @@ function BurgerConstructor() {
         const fillingPrice = filling.reduce((sum, item) => {
             return sum + item.price;
         }, 0);
-        return bun ? fillingPrice + bun.price * 2 
-        : fillingPrice ? fillingPrice 
-        : 0
+        return bun ? fillingPrice + bun.price * 2
+            : fillingPrice ? fillingPrice
+                : 0
     }, [bun, filling]);
 
     const [modalOpen, setModalOpen] = React.useState(false);
@@ -53,26 +53,30 @@ function BurgerConstructor() {
     };
 
     const itemDelete = (i) => {
-        return dispatch({
-            type: REMOVE_INGREDIENTS_FROM_CONSTRUCTOR,
-            id: i._id
-        })
+        console.log(i)
+        if (i.type !== bulka) {
+            return dispatch({
+                type: REMOVE_INGREDIENTS_FROM_CONSTRUCTOR,
+                key: i._id
+            })
+        } else {
+            return dispatch({
+                type: REMOVE_BUN,
+            })
+        }
     }
 
     function onDropHandler(item) {
-
         if (item.type === bulka) {
-
             return dispatch({
                 type: BUN_TO_CONSTRUCTOR,
                 bun: item,
-                key: newId,
             });
         } else if (item.type !== bulka) {
             return dispatch({
                 type: SAUCE_TO_CONSTRUCTOR,
                 ingredients: item,
-                key: newId,
+                key: uuidv4(),
             });
         }
     }
@@ -88,17 +92,17 @@ function BurgerConstructor() {
                 <div className={styles.item_box}>
                     {isActive && "123"}
                     {bun && <ConstructorElement
-                        key={bun._id}
                         type="top"
                         text={`${bun.name} (верх)`}
                         price={bun.price}
                         thumbnail={bun.image}
+                        handleClose={() => itemDelete(bun)}
                     />}
                 </div>
                 <div className={`${styles.constructor_box} custom-scroll`}>
-                    {filling.length && filling.map((i) => {
+                    {filling && filling.map((i, key) => {
                         return (
-                            <div className={`${styles.items}`} key={i._id}>
+                            <div className={`${styles.items}`} key={key}>
                                 <DragIcon />
                                 {filling.length && <ConstructorElement
                                     text={i.name}
@@ -108,16 +112,16 @@ function BurgerConstructor() {
                                 />}
                             </div>
                         )
-                        return null;
+
                     })}
                 </div>
                 <div className={styles.item_box}>
                     {bun && <ConstructorElement
-                        key={bun._id}
                         type="bottom"
                         text={`${bun.name} (низ)`}
                         price={bun.price}
                         thumbnail={bun.image}
+                        handleClose={() => itemDelete(bun)}
                     />}
                 </div>
             </div>
