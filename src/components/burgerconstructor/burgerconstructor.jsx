@@ -25,15 +25,13 @@ import { v4 as uuidv4 } from 'uuid';
 function BurgerConstructor() {
 
     const dispatch = useDispatch();
-
     const { bun, ingredients } = useSelector(state => state.burgerConstructor);
-
+    const [modalOpen, setModalOpen] = React.useState(false);
     const bulka = "bun";
 
     const filling = React.useMemo(
         () => ingredients.filter(item => item.type !== bulka),
         [ingredients])
-
 
     const price = React.useMemo(() => {
         const fillingPrice = filling.reduce((sum, item) => {
@@ -44,11 +42,7 @@ function BurgerConstructor() {
                 : 0
     }, [bun, filling]);
 
-    const [modalOpen, setModalOpen] = React.useState(false);
-
-    const openModal = () => {
-        setModalOpen(true);
-    };
+    const openModal = () => {setModalOpen(true)};
 
     const closeModal = () => {
         setModalOpen(false);
