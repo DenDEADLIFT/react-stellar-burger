@@ -56,7 +56,7 @@ function BurgerConstructor() {
         if (i.type !== bulka) {
             return dispatch({
                 type: REMOVE_INGREDIENT_FROM_CONSTRUCTOR,
-                key: i._id
+                key: i.key
             })
         } else {
             return dispatch({
@@ -66,16 +66,18 @@ function BurgerConstructor() {
     }
 
     function onDropHandler(item) {
-        if (item.type === bulka) {
+        const copiedItem = structuredClone(item)
+        copiedItem.key = uuidv4()
+        if (copiedItem.type === bulka) {
             return dispatch({
                 type: BUN_TO_CONSTRUCTOR,
-                bun: item,
+                bun: copiedItem,
             });
-        } else if (item.type !== bulka) {
+        } else if (copiedItem.type !== bulka) {
+
             return dispatch({
                 type: SAUCE_TO_CONSTRUCTOR,
-                ingredients: item,
-                key: uuidv4(),
+                ingredients: copiedItem,
             });
         }
     }

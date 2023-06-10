@@ -11,6 +11,7 @@ import { SELECTED_INGREDIENT, REMOVE_SELECTED_INGREDIENT } from '../../../servic
 import { useDispatch, useSelector } from 'react-redux';
 
 function Ingridients(data) {
+  
   const { bun, ingredients } = useSelector(state => state.burgerConstructor);
 
   const dispatch = useDispatch();
@@ -41,7 +42,6 @@ function Ingridients(data) {
     if (bun !== null && data._id === bun._id) {
       return 2;
     } else if (ingredients !== []) {
-      
       return itemToConstructor.length
     }
   }, [bun, data._id, ingredients]);

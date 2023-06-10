@@ -12,7 +12,7 @@ const initialState = {
 }
 
 export const constructorReducer = (state = initialState, action) => {
-
+  console.log(action)
   switch (action.type) {
     case SAUCE_TO_CONSTRUCTOR: {
       return {
@@ -29,7 +29,7 @@ export const constructorReducer = (state = initialState, action) => {
     case REMOVE_INGREDIENT_FROM_CONSTRUCTOR: {
       return {
         ...state,
-        ingredients: [...state.ingredients].filter(item => item._id !== action.key),
+        ingredients: [...state.ingredients].filter(item => item.key !== action.key),
       }
     }
     case REMOVE_INGREDIENTS: {
