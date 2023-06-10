@@ -2,8 +2,8 @@ import {
     ORDERDATA_REQUEST,
     ORDERDATA_SUCCESS,
     ORDERDATA_FAILED,
-    //OPEN_MODAL,
-    //CLOSE_MODAL,
+    ADD_ORDER,
+    DELETE_ORDER,
 } from '../actions/actions'
 
 const initialState = {
@@ -11,10 +11,11 @@ const initialState = {
     request: false,
     failed: false,
     modal: false,
+    orderItems: null,
 }
 
 export const orderReducer = (state = initialState, action) => {
-    
+    console.log(state)
     switch (action.type) {
         case ORDERDATA_REQUEST: {
             return {
@@ -35,6 +36,18 @@ export const orderReducer = (state = initialState, action) => {
                 ...state,
                 failed: true,
                 request: false
+            };
+        }
+        case ADD_ORDER: {
+            return {
+                ...state,
+                orderItems: action.orderItems,
+            };
+        }
+        case DELETE_ORDER: {
+            return {
+                ...state,
+                orderItems: null,
             };
         }
         default: {

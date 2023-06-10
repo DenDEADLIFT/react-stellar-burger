@@ -16,6 +16,9 @@ export const REMOVE_BUN = 'REMOVE_BUN';
 export const SELECTED_INGREDIENT = 'SELECTED_INGREDIENT';
 export const REMOVE_SELECTED_INGREDIENT = 'REMOVE_SELECTED_INGREDIENT';
 
+export const ADD_ORDER = 'ADD_ORDER';
+export const DELETE_ORDER = 'ADD_ORDER';
+
 export function getServerdata() {
     return function (dispatch) {
         dispatch({type: SERVERDATA_REQUEST})

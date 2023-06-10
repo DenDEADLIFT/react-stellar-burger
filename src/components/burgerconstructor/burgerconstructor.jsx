@@ -10,6 +10,7 @@ import {
     SAUCE_TO_CONSTRUCTOR,
     BUN_TO_CONSTRUCTOR,
     REMOVE_BUN,
+    DELETE_ORDER,
 } from '../../services/actions/actions'
 import React from 'react';
 import Modal from '../modal/modal.jsx';
@@ -50,6 +51,7 @@ function BurgerConstructor() {
 
     const closeModal = () => {
         setModalOpen(false);
+        dispatch({ type: DELETE_ORDER });
     };
 
     const itemDelete = (i) => {
@@ -131,7 +133,11 @@ function BurgerConstructor() {
                     <CurrencyIcon type="primary" />
                 </li>
                 <li>
-                    <Button onClick={openModal} htmlType="button" type="primary" size="large">Оформить заказ</Button>
+                    {
+                    (ingredients.length || bun) 
+                    ? <Button onClick={openModal} htmlType="button" type="primary" size="large">Оформить заказ</Button>
+                    : <Button onClick={openModal} htmlType="button" type="primary" disabled size="large">Оформить заказ</Button>
+                    }
                 </li>
                 {modalOpen &&
                     (<Modal onClose={closeModal}>
