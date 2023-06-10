@@ -6,13 +6,19 @@ import {
   REMOVE_BUN,
 } from '../actions/actions'
 
+import image from '../../images/done.svg'
+
 const initialState = {
   ingredients: [],
-  bun: null
+  bun: {
+    image: image,
+  name: "Добавьте булку",
+  price: 0,
+  }
 }
 
 export const constructorReducer = (state = initialState, action) => {
-  console.log(action)
+  console.log(state)
   switch (action.type) {
     case SAUCE_TO_CONSTRUCTOR: {
       return {
@@ -41,7 +47,7 @@ export const constructorReducer = (state = initialState, action) => {
     case REMOVE_BUN: {
       return {
         ...state,
-        bun: null,
+        bun: initialState.bun,
       }
     }
     default: {
@@ -49,4 +55,3 @@ export const constructorReducer = (state = initialState, action) => {
     }
   }
 }
-

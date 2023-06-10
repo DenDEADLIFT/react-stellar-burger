@@ -24,7 +24,7 @@ function OrderDetails(props) {
         ingredientsToOrder.push(bun)
         dispatch(getOrderdata(items));
         dispatch({ type: ADD_ORDER, orderItems: ingredientsToOrder, });
-    }, [ingridientsId, bun, dispatch])
+    }, [ingridientsId, ingredients, bun, dispatch])
 
     return (
 

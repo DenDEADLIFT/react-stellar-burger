@@ -11,10 +11,12 @@ import { SELECTED_INGREDIENT, REMOVE_SELECTED_INGREDIENT } from '../../../servic
 import { useDispatch, useSelector } from 'react-redux';
 
 function Ingridients(data) {
-  
+
   const { bun, ingredients } = useSelector(state => state.burgerConstructor);
 
   const dispatch = useDispatch();
+
+  const itemToConstructor = ingredients.filter((item) => item._id === data._id)
 
   const [{ isDragging }, drag] = useDrag({
     type: "ingredient",
@@ -23,7 +25,7 @@ function Ingridients(data) {
       isDragging: monitor.isDragging(),
     }),
   });
-
+  
   const opacity = isDragging ? 0.5 : 1;
 
   const [modalOpened, setModalOpened] = React.useState(false);
@@ -37,15 +39,15 @@ function Ingridients(data) {
     setModalOpened(false);
     dispatch({ type: REMOVE_SELECTED_INGREDIENT });
   };
-  const itemToConstructor = ingredients.filter((item) => item._id === data._id)
+
   const ingredientCounter = React.useMemo(() => {
     if (bun !== null && data._id === bun._id) {
       return 2;
     } else if (ingredients !== []) {
       return itemToConstructor.length
     }
-  }, [bun, data._id, ingredients]);
-  
+  }, [bun, data._id, ingredients, itemToConstructor]);
+
   return (
     <ul className={style.ingridients_container}>
       <li className={style.ingridients_box} key={data._id} onClick={openModal} ref={drag} style={{ opacity }}>
@@ -55,7 +57,7 @@ function Ingridients(data) {
           <CurrencyIcon type="primary" />
         </div>
         <p className='mb-1 pb-5 text text_type_main-default'>{data.name}</p>
-        {(bun && data._id === bun._id || ingredients.length !== []) && <Counter count={ingredientCounter} size="default" extraClass="m-1" />}
+        {((bun && data._id === bun._id) || (itemToConstructor.length !== 0)) && <Counter count={ingredientCounter} size="default" extraClass="m-1" />}
       </li>
       {modalOpened &&
         (<Modal onClose={closeModal}>
