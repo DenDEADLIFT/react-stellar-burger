@@ -4,30 +4,56 @@ import React from "react";
 import IngridientType from './ingredienttype/ingredientType.jsx';
 import { useSelector, useDispatch } from "react-redux";
 import { getServerdata } from '../../services/actions/actions'
+import { useInView } from 'react-intersection-observer';
 
 function BurgerIngredients() {
 
-    const {
-        ingredients,
-    } = useSelector((state) => state.ingredients);
-
+    const { ingredients } = useSelector((state) => state.ingredients);
     const dispatch = useDispatch();
+    const [bunRef, bunHighlight] = useInView({ threshold: 0.2 });
+    const [sauceRef, sauceHighlight] = useInView({ threshold: 0.2 });
+    const [maineRef, mainHighlight] = useInView({ threshold: 0.2 });
+    const [current, setCurrent] = React.useState('bun');
+    const bun = "bun";
+    const sauce = "sauce";
+    const main = "main";
+
+    const itemsToScroll = {
+        bun: document.querySelector("#bun"),
+        sauce: document.querySelector("#sauce"),
+        main: document.querySelector("#main")
+    }
+
+    const scrollIngredients = () => {
+        bunHighlight ? setCurrent(bun)
+            : sauceHighlight ? setCurrent(sauce)
+                : setCurrent(main)
+    }
+
+    const selectTabs = (tab) => {
+        setCurrent(tab);
+        tab && itemsToScroll[tab].scrollIntoView({ behavior: "smooth" });
+    }
+
+    React.useEffect(() => {
+        scrollIngredients();
+    }, [bunHighlight, sauceHighlight, mainHighlight]);
 
     React.useEffect(() => {
         dispatch(getServerdata());
     }, [dispatch]);
-    
+
     const Tabs = () => {
-        const [current, setCurrent] = React.useState('bun')
+
         return (
             <div style={{ display: 'flex' }}>
-                <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
+                <Tab value="bun" active={current === bun} onClick={selectTabs}>
                     Булки
                 </Tab>
-                <Tab value="sauce" active={current === 'sauce'} onClick={setCurrent}>
+                <Tab value="sauce" active={current === sauce} onClick={selectTabs}>
                     Соусы
                 </Tab>
-                <Tab value="main" active={current === 'main'} onClick={setCurrent}>
+                <Tab value="main" active={current === main} onClick={selectTabs}>
                     Начинки
                 </Tab>
             </div>
@@ -39,9 +65,9 @@ function BurgerIngredients() {
             <h1 className={`${styles.burger_ingredients_title} text text_type_main-large pt-5 pb-5`}>Соберите бургер</h1>
             <div className={`${styles.tabs_box} pb-5`}>{Tabs()}</div>
             <div className={`${styles.ingredients_box} custom-scroll`}>
-            <IngridientType className={'pt-5 pb-5 pb-1'} type={"Булки"} data={ingredients.filter(item => item.type === "bun")} />
-			<IngridientType className={'pt-5 pb-5 pb-1'} type={"Соусы"} data={ingredients.filter(item => item.type === "sauce")} />
-            <IngridientType className={'pt-5 pb-5 pb-1'} type={"Начинка"} data={ingredients.filter(item => item.type === "main")} />
+                <div ref={bunRef} id="bun" ><IngridientType className={'pt-5 pb-5 pb-1'} type={"Булки"} data={ingredients.filter(item => item.type === bun)} /></div>
+                <div ref={sauceRef} id="sauce" ><IngridientType className={'pt-5 pb-5 pb-1'} type={"Соусы"} data={ingredients.filter(item => item.type === sauce)} /></div>
+                <div ref={maineRef} id="main" ><IngridientType className={'pt-5 pb-5 pb-1'} type={"Начинки"} data={ingredients.filter(item => item.type === main)} /></div>
             </div>
         </div>
     );
