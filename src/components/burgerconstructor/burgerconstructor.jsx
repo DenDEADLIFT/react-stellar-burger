@@ -6,11 +6,12 @@ import {
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import {
-    REMOVE_INGREDIENTS_FROM_CONSTRUCTOR,
+    REMOVE_INGREDIENT_FROM_CONSTRUCTOR,
     SAUCE_TO_CONSTRUCTOR,
     BUN_TO_CONSTRUCTOR,
     REMOVE_BUN,
     DELETE_ORDER,
+    REMOVE_INGREDIENTS,
 } from '../../services/actions/actions'
 import React from 'react';
 import Modal from '../modal/modal.jsx';
@@ -52,13 +53,15 @@ function BurgerConstructor() {
     const closeModal = () => {
         setModalOpen(false);
         dispatch({ type: DELETE_ORDER });
+        dispatch({ type: REMOVE_BUN });
+        dispatch({ type: REMOVE_INGREDIENTS });
     };
 
     const itemDelete = (i) => {
         
         if (i.type !== bulka) {
             return dispatch({
-                type: REMOVE_INGREDIENTS_FROM_CONSTRUCTOR,
+                type: REMOVE_INGREDIENT_FROM_CONSTRUCTOR,
                 key: i._id
             })
         } else {

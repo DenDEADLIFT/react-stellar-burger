@@ -1,7 +1,7 @@
 import {
   SAUCE_TO_CONSTRUCTOR,
   BUN_TO_CONSTRUCTOR,
-  REMOVE_INGREDIENTS_FROM_CONSTRUCTOR,
+  REMOVE_INGREDIENT_FROM_CONSTRUCTOR,
   REMOVE_INGREDIENTS,
   REMOVE_BUN,
 } from '../actions/actions'
@@ -26,7 +26,7 @@ export const constructorReducer = (state = initialState, action) => {
         bun: action.bun
       };
     }
-    case REMOVE_INGREDIENTS_FROM_CONSTRUCTOR: {
+    case REMOVE_INGREDIENT_FROM_CONSTRUCTOR: {
       return {
         ...state,
         ingredients: [...state.ingredients].filter(item => item._id !== action.key),

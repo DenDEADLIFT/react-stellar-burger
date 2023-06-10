@@ -15,7 +15,7 @@ const initialState = {
 }
 
 export const orderReducer = (state = initialState, action) => {
-    console.log(state)
+
     switch (action.type) {
         case ORDERDATA_REQUEST: {
             return {
