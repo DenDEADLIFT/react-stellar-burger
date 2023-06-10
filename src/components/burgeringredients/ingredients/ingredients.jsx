@@ -8,12 +8,13 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ingredientPropType } from '../../../utils/prop-types.js';
 import { useDrag } from "react-dnd";
 import { SELECTED_INGREDIENT, REMOVE_SELECTED_INGREDIENT } from '../../../services/actions/actions'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Ingridients(data) {
+  const { bun, ingredients } = useSelector(state => state.burgerConstructor);
 
   const dispatch = useDispatch();
-  
+
   const [{ isDragging }, drag] = useDrag({
     type: "ingredient",
     item: data,
@@ -28,14 +29,23 @@ function Ingridients(data) {
 
   const openModal = () => {
     setModalOpened(true);
-    dispatch({type: SELECTED_INGREDIENT, data: data});
+    dispatch({ type: SELECTED_INGREDIENT, data: data });
   };
 
   const closeModal = () => {
     setModalOpened(false);
-    dispatch({type: REMOVE_SELECTED_INGREDIENT});
+    dispatch({ type: REMOVE_SELECTED_INGREDIENT });
   };
-
+  const itemToConstructor = ingredients.filter((item) => item._id === data._id)
+  const ingredientCounter = React.useMemo(() => {
+    if (bun !== null && data._id === bun._id) {
+      return 2;
+    } else if (ingredients !== []) {
+      
+      return itemToConstructor.length
+    }
+  }, [bun, data._id, ingredients]);
+  
   return (
     <ul className={style.ingridients_container}>
       <li className={style.ingridients_box} key={data._id} onClick={openModal} ref={drag} style={{ opacity }}>
@@ -45,7 +55,7 @@ function Ingridients(data) {
           <CurrencyIcon type="primary" />
         </div>
         <p className='mb-1 pb-5 text text_type_main-default'>{data.name}</p>
-        <Counter count={data.count} size="default" extraClass="m-1" />
+        {(bun && data._id === bun._id || ingredients.length !== []) && <Counter count={ingredientCounter} size="default" extraClass="m-1" />}
       </li>
       {modalOpened &&
         (<Modal onClose={closeModal}>
