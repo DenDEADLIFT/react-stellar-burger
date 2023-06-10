@@ -13,6 +13,9 @@ export const REMOVE_INGREDIENTS_FROM_CONSTRUCTOR = 'REMOVE_INGREDIENTS_FROM_CONS
 export const REMOVE_INGREDIENTS = 'REMOVE_INGREDIENTS';
 export const REMOVE_BUN = 'REMOVE_BUN';
 
+export const SELECTED_INGREDIENT = 'SELECTED_INGREDIENT';
+export const REMOVE_SELECTED_INGREDIENT = 'REMOVE_SELECTED_INGREDIENT';
+
 export function getServerdata() {
     return function (dispatch) {
         dispatch({type: SERVERDATA_REQUEST})

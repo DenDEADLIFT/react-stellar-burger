@@ -53,7 +53,7 @@ function BurgerConstructor() {
     };
 
     const itemDelete = (i) => {
-        console.log(i)
+        
         if (i.type !== bulka) {
             return dispatch({
                 type: REMOVE_INGREDIENTS_FROM_CONSTRUCTOR,

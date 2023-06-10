@@ -7,9 +7,13 @@ import Modal from '../../modal/modal.jsx';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ingredientPropType } from '../../../utils/prop-types.js';
 import { useDrag } from "react-dnd";
+import { SELECTED_INGREDIENT, REMOVE_SELECTED_INGREDIENT } from '../../../services/actions/actions'
+import { useDispatch } from 'react-redux';
 
 function Ingridients(data) {
 
+  const dispatch = useDispatch();
+  
   const [{ isDragging }, drag] = useDrag({
     type: "ingredient",
     item: data,
@@ -24,10 +28,12 @@ function Ingridients(data) {
 
   const openModal = () => {
     setModalOpened(true);
+    dispatch({type: SELECTED_INGREDIENT, data: data});
   };
 
   const closeModal = () => {
     setModalOpened(false);
+    dispatch({type: REMOVE_SELECTED_INGREDIENT});
   };
 
   return (
