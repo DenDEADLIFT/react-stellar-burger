@@ -10,7 +10,6 @@ const initialState = {
     actual: null,
     request: false,
     failed: false,
-    modal: false,
     orderItems: null,
 }
 

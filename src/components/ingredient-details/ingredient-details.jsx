@@ -1,8 +1,8 @@
-import style from '../ingredientdetails/ingredientdetails.module.css';
+import style from '../ingredient-details/ingredient-details.module.css';
 import PropTypes from "prop-types";
 
 function IngredientDetails({ children, data }) {
- 
+
     return (
         <div className={style.ingridientdetails_container}>
             <div className={style.ingridientdetails_header_container}>
@@ -11,8 +11,8 @@ function IngredientDetails({ children, data }) {
                 </h2>
                 <div>{children}</div>
             </div>
-                <img src={data.image_large} alt="ингридиент"/>
-                <p className={`${style.ingridientdetails_name} text text_type_main-medium pt-4`}>{data.name}</p>
+            <img src={data.image_large} alt="ингридиент" />
+            <p className={`${style.ingridientdetails_name} text text_type_main-medium pt-4`}>{data.name}</p>
             <ul className={style.ingridientdetails_details}>
                 <li className={style.ingridientdetails_detail}>
                     <p className='text text_type_main-default'>Калории, ккал</p>

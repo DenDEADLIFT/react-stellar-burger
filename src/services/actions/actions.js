@@ -19,6 +19,8 @@ export const REMOVE_SELECTED_INGREDIENT = 'REMOVE_SELECTED_INGREDIENT';
 export const ADD_ORDER = 'ADD_ORDER';
 export const DELETE_ORDER = 'ADD_ORDER';
 
+export const SORTING_INGREDIENTS = 'SORTING_INGREDIENTS';
+
 export function getServerdata() {
     return function (dispatch) {
         dispatch({type: SERVERDATA_REQUEST})

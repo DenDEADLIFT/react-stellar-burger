@@ -11,7 +11,8 @@ const initialState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
-  ingredientItem: []
+  ingredientItem: [],
+  modalOpened: false,
 }
 
 export const ingredientsReducer = (state = initialState, action) => {
