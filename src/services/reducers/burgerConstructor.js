@@ -15,11 +15,12 @@ const initialState = {
     image: image,
     name: "Добавьте булку",
     price: 0,
+    type: 'initial',
   },
 };
 
 export const constructorReducer = (state = initialState, action) => {
-
+console.log(state)
   switch (action.type) {
     case SAUCE_TO_CONSTRUCTOR: {
       return {
