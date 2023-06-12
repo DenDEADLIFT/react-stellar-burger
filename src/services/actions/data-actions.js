@@ -6,7 +6,7 @@ export const SERVERDATA_FAILED = 'SERVERDATA_FAILED';
 
 export function getServerdata() {
     return function (dispatch) {
-        dispatch({type: SERVERDATA_REQUEST})
+        dispatch({ type: SERVERDATA_REQUEST })
         Serverdata()
             .then(res => {
                 if (res && res.success) {
@@ -15,8 +15,13 @@ export function getServerdata() {
                         data: res.data,
                     })
                 } else {
-                    dispatch({type: SERVERDATA_FAILED})
+                    dispatch({ type: SERVERDATA_FAILED })
                 }
+            })
+            .catch(err => {
+                dispatch({
+                    type: SERVERDATA_FAILED
+                })
             })
     }
 }

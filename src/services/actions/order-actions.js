@@ -8,7 +8,7 @@ export const ORDERDATA_FAILED = 'ORDERDATA_FAILED';
 
 export function getOrderdata(arr) {
     return function (dispatch) {
-        dispatch({type: ORDERDATA_REQUEST})
+        dispatch({ type: ORDERDATA_REQUEST })
         Orderdata(arr)
             .then(res => {
                 if (res && res.success) {
@@ -17,8 +17,14 @@ export function getOrderdata(arr) {
                         order: res,
                     })
                 } else {
-                    dispatch({type: ORDERDATA_FAILED})
+                    dispatch({ type: ORDERDATA_FAILED })
                 }
             })
+            .catch(err => {
+                dispatch({
+                    type: ORDERDATA_FAILED
+                })
+            })
+
     }
 }

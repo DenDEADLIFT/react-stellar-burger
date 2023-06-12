@@ -34,7 +34,9 @@ export const orderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 failed: true,
-                request: false
+                request: false,
+                orderItems: null,
+                actual: null,
             };
         }
         case ADD_ORDER: {

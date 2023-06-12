@@ -42,6 +42,7 @@ export const ingredientsReducer = (state = initialState, action) => {
         ...state,
         ingredientsFailed: true,
         ingredientsRequest: false,
+        ingredientItem: [],
       };
     }
     case SELECTED_INGREDIENT: {
