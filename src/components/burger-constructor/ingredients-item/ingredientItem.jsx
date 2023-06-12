@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 import React from "react";
-import { SORTING_INGREDIENTS, SELECTED_INGREDIENT, REMOVE_SELECTED_INGREDIENT } from "../../../services/actions/actions";
+import { SORTING_INGREDIENTS } from "../../../services/actions/constructor-actions";
+import { SELECTED_INGREDIENT, REMOVE_SELECTED_INGREDIENT } from "../../../services/actions/ingredients-actions";
 
 const IngredientItem = ({ item, index, handleClose }) => {
 

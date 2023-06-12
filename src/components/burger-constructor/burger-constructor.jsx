@@ -9,9 +9,11 @@ import {
   SAUCE_TO_CONSTRUCTOR,
   BUN_TO_CONSTRUCTOR,
   REMOVE_BUN,
-  DELETE_ORDER,
   REMOVE_INGREDIENTS,
-} from "../../services/actions/actions";
+} from "../../services/actions/constructor-actions";
+import {
+  DELETE_ORDER,
+} from "../../services/actions/order-actions";
 import React from "react";
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";

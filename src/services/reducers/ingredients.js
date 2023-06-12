@@ -2,9 +2,12 @@ import {
   SERVERDATA_REQUEST,
   SERVERDATA_SUCCESS,
   SERVERDATA_FAILED,
+} from '../actions/data-actions'
+
+import {
   SELECTED_INGREDIENT,
   REMOVE_SELECTED_INGREDIENT,
-} from '../actions/actions'
+} from '../actions/ingredients-actions'
 
 
 const initialState = {

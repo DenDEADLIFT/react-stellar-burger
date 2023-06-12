@@ -2,8 +2,8 @@ import React from "react";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from '../order-details/order-details.module.css';
 import { useSelector, useDispatch } from "react-redux";
-import { getOrderdata } from '../../services/actions/actions';
-import { ADD_ORDER } from '../../services/actions/actions';
+import { getOrderdata } from '../../services/actions/order-actions';
+import { ADD_ORDER } from '../../services/actions/order-actions';
 import PropTypes from "prop-types";
 
 function OrderDetails({children}) {

@@ -4,7 +4,7 @@ import {
     ORDERDATA_FAILED,
     ADD_ORDER,
     DELETE_ORDER,
-} from '../actions/actions'
+} from '../actions/order-actions'
 
 const initialState = {
     actual: null,

@@ -8,7 +8,6 @@ import React from "react";
 import IngredientDetails from "../../ingredient-details/ingredient-details";
 import Modal from "../../modal/modal";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { ingredientPropType } from "../../../utils/prop-types.js";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 

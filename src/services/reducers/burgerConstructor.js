@@ -5,7 +5,7 @@ import {
   REMOVE_INGREDIENTS,
   REMOVE_BUN,
   SORTING_INGREDIENTS,
-} from "../actions/actions";
+} from "../actions/constructor-actions";
 
 import image from "../../images/done.svg";
 
@@ -52,7 +52,6 @@ export const constructorReducer = (state = initialState, action) => {
       };
     }
     case SORTING_INGREDIENTS: {
-      console.log(action);
       return {
         ...state,
         ingredients: action.ingredients,

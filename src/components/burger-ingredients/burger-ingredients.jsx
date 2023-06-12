@@ -3,7 +3,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 import IngridientType from "./ingredient-type/ingredient-type.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import { getServerdata } from "../../services/actions/actions";
+import { getServerdata } from "../../services/actions/data-actions";
 import { useInView } from "react-intersection-observer";
 
 function BurgerIngredients() {
