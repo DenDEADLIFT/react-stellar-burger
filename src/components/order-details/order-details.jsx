@@ -3,10 +3,11 @@ import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-component
 import style from '../order-details/order-details.module.css';
 import { useSelector, useDispatch } from "react-redux";
 import { getOrderdata } from '../../services/actions/actions';
-import { ADD_ORDER } from '../../services/actions/actions'
+import { ADD_ORDER } from '../../services/actions/actions';
+import PropTypes from "prop-types";
 
-function OrderDetails(props) {
-
+function OrderDetails({children}) {
+    
     const { bun, ingredients } = useSelector(state => state.burgerConstructor);
 
     const { actual } = useSelector(state => state.order);
@@ -31,7 +32,7 @@ function OrderDetails(props) {
         <ul className={style.orderdetails_box}>
             <li className={style.orderdetails_title_box}>
                 <p className={style.orderdetails_title}></p>
-                <div>{props.children}</div>
+                <div>{children}</div>
             </li>
             <li>
                 <p className={`${style.orderdetails_number} text text_type_digits-large pb-4`}>
@@ -57,5 +58,9 @@ function OrderDetails(props) {
         </ul>
     )
 }
+
+OrderDetails.propTypes = {
+    children: PropTypes.element.isRequired,
+};
 
 export default OrderDetails; 

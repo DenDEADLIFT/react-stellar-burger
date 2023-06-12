@@ -73,6 +73,7 @@ const IngredientItem = ({ item, index, handleClose }) => {
 IngredientItem.propTypes = {
   item: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default IngredientItem;

@@ -13,6 +13,7 @@ import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 
 function Ingridients({ item }) {
+  
   const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
 
   const itemToConstructor = React.useMemo(() => {
@@ -77,7 +78,7 @@ function Ingridients({ item }) {
 }
 
 Ingridients.propTypes = {
-  props: PropTypes.arrayOf(ingredientPropType.isRequired),
+  item: PropTypes.object.isRequired,
 };
 
 export default Ingridients;
