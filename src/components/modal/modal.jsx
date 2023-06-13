@@ -1,25 +1,25 @@
 import ReactDOM from "react-dom";
 import style from '../modal/modal.module.css';
-import ModalOverlay from '../modaloverlay/modalOverlay.jsx';
+import ModalOverlay from '../modal-overlay/modal-overlay.jsx';
 import React from 'react';
 import PropTypes from "prop-types";
 
 const modalRoot = document.getElementById("react-modals");
 
-function Modal ({ children, onClose }) {
+function Modal({ children, onClose }) {
 
     React.useEffect(() => {
 
-            const handleESCclose = (e) => {
-                if (e.key === "Escape") {
-                    onClose();
-                }
-            } 
-            document.addEventListener("keydown", handleESCclose); 
+        const handleESCclose = (e) => {
+            if (e.key === "Escape") {
+                onClose();
+            }
+        }
+        document.addEventListener("keydown", handleESCclose);
 
-            return () => document.removeEventListener("keydown", handleESCclose)  
+        return () => document.removeEventListener("keydown", handleESCclose)
 
-    }, [onClose]); 
+    }, [onClose]);
 
     return ReactDOM.createPortal(
         (
@@ -39,4 +39,4 @@ Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
 };
 
-  export default Modal; 
+export default Modal; 
