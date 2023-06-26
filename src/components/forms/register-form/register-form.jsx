@@ -58,7 +58,6 @@ const RegisterForm = () => {
                 <Button
                     type="primary"
                     value="Войти"
-                    htmlType={"submit"}
                 >
                     Зарегистрироваться
                 </Button>
