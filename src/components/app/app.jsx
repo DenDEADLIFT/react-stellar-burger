@@ -1,22 +1,21 @@
-import styles from "./app.module.css";
-import AppHeader from "../app-header/app-header.jsx";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients.jsx";
-import BurgerConstructor from "../burger-constructor/burger-constructor.jsx";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { Routes, Route } from 'react-router-dom';
+import Layout from '../../pages/layout/layout'
+import Main from '../../pages/maim/maim'
+import Feed from '../../pages/feed/feed'
+import Profile from '../../pages/profile/profile'
+import NotFound404 from '../../pages/not-found/not-found'
 
 function App() {
 
   return (
-    <div className={styles.app}>
-      <AppHeader />
-      <div className={styles.content}>
-        <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients />
-          <BurgerConstructor />
-        </DndProvider>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Main />} />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<NotFound404 />} />
+      </Route>
+    </Routes>
   );
 }
 
