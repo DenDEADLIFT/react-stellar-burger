@@ -32,6 +32,7 @@ const ForgotPasswordForm = () => {
                     type="primary"
                     size="large"
                     extraClass={`mb-20`}
+                    htmlType="button"
                 >
                     Восстановить
                 </Button>

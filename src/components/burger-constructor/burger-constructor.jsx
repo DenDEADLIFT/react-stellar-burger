@@ -129,8 +129,8 @@ function BurgerConstructor() {
           <CurrencyIcon type="primary" />
         </li>
         <li>
-          {(ingredients.length && bun.type !== 'initial') ? (<Button onClick={openModal} type="primary" size="large">Оформить заказ</Button>)
-            : (<Button onClick={openModal} type="primary" disabled size="large">Оформить заказ</Button>)}
+          {(ingredients.length && bun.type !== 'initial') ? (<Button onClick={openModal} type="primary" htmlType="button" size="large">Оформить заказ</Button>)
+            : (<Button onClick={openModal} type="primary" disabled htmlType="button" size="large">Оформить заказ</Button>)}
         </li>
         {modalOpen && (
           <Modal onClose={closeModal}>

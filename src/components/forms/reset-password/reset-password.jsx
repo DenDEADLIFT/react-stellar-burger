@@ -45,6 +45,7 @@ const ResetPasswordForm = () => {
                     type="primary"
                     size="large"
                     extraClass={`mb-20`}
+                    htmlType="button"
                 >
                     Сохранить
                 </Button>

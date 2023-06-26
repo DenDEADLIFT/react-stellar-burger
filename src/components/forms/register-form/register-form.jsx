@@ -9,10 +9,6 @@ const RegisterForm = () => {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
 
-
-
-    // console.log(value.name)
-
     const inputRef = React.useRef(null)
     const onIconClick = () => {
         setTimeout(() => inputRef.current.focus(), 0)
@@ -57,7 +53,9 @@ const RegisterForm = () => {
                 />
                 <Button
                     type="primary"
-                    value="Войти"
+                    size="large"
+                    extraClass={`mb-20`}
+                    htmlType="button"
                 >
                     Зарегистрироваться
                 </Button>
