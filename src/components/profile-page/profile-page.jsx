@@ -1,7 +1,7 @@
 import styles from './profile-page.module.css'
 import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const setActiveLink = ({ isActive }) => isActive ? `${styles.link} text_color_primary` : `${styles.link} text_color_inactive`;
 
@@ -13,11 +13,6 @@ const ProfilePage = () => {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
 
-    const inputRef = React.useRef(null)
-    const onIconClick = () => {
-        setTimeout(() => inputRef.current.focus(), 0)
-        alert('Icon Click Callback')
-    }
     return (
         <div className={styles.content_box}>
             <div className={`text text_color_primary text_type_main-medium ${styles.links_box}`}>
@@ -59,12 +54,11 @@ const ProfilePage = () => {
                     value={email}
                     name={'email'}
                     type={'email'}
-                    placeholder={'E-mail'}
+                    placeholder={'Логин'}
                     icon="EditIcon"
                 />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <PasswordInput
-                        onClick={e => setPassword('')}
                         onChange={e => setPassword(e.target.value)}
                         value={password}
                         name={'password'}
