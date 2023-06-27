@@ -1,5 +1,5 @@
 import styles from './login-form.module.css'
-import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
 import { Link } from 'react-router-dom';
 
@@ -30,18 +30,16 @@ const LoginForm = () => {
                     onIconClick={onIconClick}
                     placeholder={'E-mail'}
                 />
-                <Input
-                    onClick={e => setPassword('')}
-                    size={'default'}
-                    extraClass="ml-1"
-                    onChange={e => setPassword(e.target.value)}
-                    value={password}
-                    name={'password'}
-                    type={'password'}
-                    icon={'CurrencyIcon'}
-                    onIconClick={onIconClick}
-                    placeholder={'Пароль'}
-                />
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <PasswordInput
+                        onClick={e => setPassword('')}
+                        onChange={e => setPassword(e.target.value)}
+                        value={password}
+                        name={'password'}
+                        placeholder={'Пароль'}
+                        extraClass="mb-2"
+                    />
+                </div>
                 <Button
                     type="primary"
                     size="large"

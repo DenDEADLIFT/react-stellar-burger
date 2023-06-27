@@ -1,9 +1,13 @@
-import styles from './register-form.module.css'
-import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import styles from './profile-page.module.css'
+import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
-const RegisterForm = () => {
+const setActiveLink = ({ isActive }) => isActive ? `${styles.link} text_color_primary` : `${styles.link} text_color_inactive`;
+
+const ProfilePage = () => {
+
+    const location = useLocation()
 
     const [name, setName] = React.useState('')
     const [email, setEmail] = React.useState('')
@@ -15,11 +19,29 @@ const RegisterForm = () => {
         alert('Icon Click Callback')
     }
     return (
-        <div>
+        <div className={styles.content_box}>
+            <div className={`text text_color_primary text_type_main-medium ${styles.links_box}`}>
+                <NavLink
+                    className={location.pathname === '/profile' ? setActiveLink : styles.link}
+                    to="/profile"
+                    replace={true}
+                >Профиль</NavLink>
+                <NavLink
+                    className={location.pathname === '/profile/orders' ? setActiveLink : styles.link}
+                    to="/profile/orders"
+                    replace={true}
+                >История заказов</NavLink>
+                <NavLink
+                    className={styles.link}
+                    to="/"
+                >Выход</NavLink>
+                <p className={`text text_type_main-default text_color_inactive ${styles.text}`}>
+                    В этом разделе вы можетеизменить свои персональные данные
+                </p>
+            </div>
             <form
                 className={styles.form}
             >
-                <h2 className={'text text_type_main-medium'}>Регистрация</h2>
                 <Input
                     size={'default'}
                     extraClass="ml-1"
@@ -27,8 +49,8 @@ const RegisterForm = () => {
                     value={name}
                     name={'name'}
                     type={'text'}
-                    onIconClick={onIconClick}
                     placeholder={'Имя'}
+                    icon="EditIcon"
                 />
                 <Input
                     size={'default'}
@@ -37,8 +59,8 @@ const RegisterForm = () => {
                     value={email}
                     name={'email'}
                     type={'email'}
-                    onIconClick={onIconClick}
                     placeholder={'E-mail'}
+                    icon="EditIcon"
                 />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <PasswordInput
@@ -48,22 +70,12 @@ const RegisterForm = () => {
                         name={'password'}
                         placeholder={'Пароль'}
                         extraClass="mb-2"
+                        icon="EditIcon"
                     />
                 </div>
-                <Button
-                    type="primary"
-                    size="large"
-                    extraClass={`mb-20`}
-                    htmlType="button"
-                >
-                    Зарегистрироваться
-                </Button>
-                <p className={`text text_type_main-default text_color_inactive ${styles.text}`}>Уже зарегистрированы?
-                    <Link className={styles.link} to="/login">&nbsp;Войти</Link>
-                </p>
             </form>
         </div>
     )
 }
 
-export default RegisterForm
+export default ProfilePage
