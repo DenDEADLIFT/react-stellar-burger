@@ -1,0 +1,49 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: 10px;
+    border-radius: 40px;
+    background: #1C1C21;
+    max-width: 844px;
+    max-height: 246px;
+    cursor: pointer;
+  }
+  
+  .order_id {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .info {
+    width: 796px;
+    height: 62px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+  }
+
+  .ingridients_box {
+    width: 796px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .ingridients {
+    width: 696px;
+    height: 64px;
+  }
+
+  .ingridients_prise_box {
+    width: 76px;
+    height: 64px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 9px;
+}
