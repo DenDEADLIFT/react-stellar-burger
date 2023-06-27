@@ -1,4 +1,4 @@
-import styles from './'
+import styles from './profile_page_form.module.css'
 import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
 

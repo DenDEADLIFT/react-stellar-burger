@@ -1,0 +1,9 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 844px;
+    height: 916px;
+    background: rgba(0, 217, 255, 0.05);
+    overflow-y: scroll;
+    gap: 16px;
+  }

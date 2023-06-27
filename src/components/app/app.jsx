@@ -8,6 +8,7 @@ import Login from '../../pages/login/login'
 import Register from '../../pages/register/register'
 import ForgotPassword from '../../pages/forgot-password/forgot-password'
 import ResetPassword from '../../pages/reset-password/reset-password'
+import Orders from '../../pages/orders/orders'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/feed" element={<Feed />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/orders" element={<Orders />} />
         <Route path="*" element={<NotFound404 />} />
       </Route>
     </Routes>
