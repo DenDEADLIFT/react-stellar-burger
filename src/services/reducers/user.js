@@ -29,7 +29,7 @@ const initialState = {
 }
 
 export const userReducer = (state = initialState, action) => {
-    console.log(state)
+    //console.log(state)
     switch (action.type) {
         case SET_AUTH_CHECKED: {
             return {
@@ -126,6 +126,7 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 logoutRequest: false,
                 logoutFailed: true,
+                isAuth: false,
             };
         }
         case LOGOUT_REQUEST: {

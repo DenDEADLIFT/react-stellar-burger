@@ -17,34 +17,34 @@ export const LOGOUT_ERROR = 'LOGOUT_ERROR';
 
 export const isAuth = () => {
     return function (dispatch) {
-      if (localStorage.getItem("accessToken")) {
-        userData()
-        .then((res) => {
+        if (localStorage.getItem("accessToken")) {
+            userData()
+                .then((res) => {
+                    dispatch({
+                        type: SET_USER,
+                        payload: res.user,
+                    })
+                })
+                .catch(() => {
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("refreshToken");
+                    dispatch({
+                        type: SET_USER,
+                        payload: null,
+                    });
+                })
+                .finally(() => dispatch({
+                    type: SET_AUTH_CHECKED,
+                    payload: true,
+                }));
+        } else {
             dispatch({
-                type: SET_USER,
-                payload: res.user,
-            })
-        })
-          .catch(() => {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-            dispatch({
-                type: SET_USER,
-                payload: null,
+                type: SET_AUTH_CHECKED,
+                payload: true,
             });
-          })
-          .finally(() => dispatch({
-            type: SET_AUTH_CHECKED,
-            payload: true,
-          }));
-      } else {
-        dispatch({
-            type: SET_AUTH_CHECKED,
-            payload: true,
-          });
-      }
+        }
     };
-  };
+};
 
 export function onRegister({ email, password, name }) {
     return function (dispatch) {
@@ -113,7 +113,8 @@ export const onLogout = () => {
         })
         logout()
             .then((res) => {
-                if (res && res.success) {
+                
+                if (res) {
                     localStorage.removeItem("accessToken");
                     localStorage.removeItem("refreshToken");
                     dispatch({
@@ -135,26 +136,26 @@ export const onLogout = () => {
 
 export const userUpdate = ({ email, name, password }) => {
     return function (dispatch) {
-      dispatch({
-        type: LOGIN_REQUEST
-      })
-      updateUser({ email, name, password })
-        .then((res) => {
-          if (res && res.success) {
-            dispatch({
-              type: UPDATE_USER,
-              user: res
-            })
-            dispatch({
-                type: SET_USER,
-                payload: res.user,
-            })
-          }
-        }).catch(err => {
-          dispatch({
-            type: UPDATE_USER_ERROR
-          })
-  
-        });
+        dispatch({
+            type: LOGIN_REQUEST
+        })
+        updateUser({ email, name, password })
+            .then((res) => {
+                if (res && res.success) {
+                    dispatch({
+                        type: UPDATE_USER,
+                        user: res
+                    })
+                    dispatch({
+                        type: SET_USER,
+                        payload: res.user,
+                    })
+                }
+            }).catch(err => {
+                dispatch({
+                    type: UPDATE_USER_ERROR
+                })
+
+            });
     }
-  };
+};

@@ -11,8 +11,6 @@ const ForgotPasswordForm = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const inputRef = React.useRef(null)
-
     const [email, setEmail] = React.useState('')
 
     const forgotPassword = (e) => {
@@ -36,7 +34,6 @@ const ForgotPasswordForm = () => {
                     size={'default'}
                     extraClass="ml-1"
                     placeholder={'Укажите e-mail'}
-                    ref={inputRef}
                 />
                 <Button
                     type="primary"

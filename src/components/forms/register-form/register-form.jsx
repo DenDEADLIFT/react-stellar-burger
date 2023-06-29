@@ -9,7 +9,6 @@ import { onRegister } from '../../../services/actions/user-actions'
 const RegisterForm = () => {
 
     const navigate = useNavigate();
-    const inputRef = useRef(null);
     const dispatch = useDispatch();
 
     const [name, setName] = useState('')
@@ -36,7 +35,6 @@ const RegisterForm = () => {
                     name={'name'}
                     type={'text'}
                     placeholder={'Имя'}
-                    ref={inputRef}
                 />
                 <EmailInput
                     size={'default'}

@@ -1,7 +1,7 @@
 import styles from './profile_page_form.module.css'
 import { PasswordInput, Input, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { userUpdate } from '../../../services/actions/user-actions'
@@ -10,9 +10,9 @@ const ProfilePageForm = () => {
 
     const dispatch = useDispatch();
 
-    const [name, setName] = React.useState('')
-    const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState()
+    const [name, setName] = React.useState()
+    const [email, setEmail] = React.useState()
+    const [password, setPassword] = React.useState('')
 
     const userSave = (e) => {
         e.preventDefault();
@@ -25,10 +25,10 @@ const ProfilePageForm = () => {
         setEmail('')
     }
 
-    const isChanged = 
-    name !== '' ||
-    email !== '' ||
-    password;
+    const isChanged =
+        name !== '' ||
+        email !== '' ||
+        password;
 
     return (
         <div className={styles.form_container}>
@@ -62,6 +62,7 @@ const ProfilePageForm = () => {
                         name={'password'}
                         placeholder={'Пароль'}
                         extraClass="mb-2"
+                        type={'password'}
                     />
                 </div>
             </form>
@@ -71,7 +72,7 @@ const ProfilePageForm = () => {
                     className={`text text_type_main-default ${styles.link}`}
                     type="secondary"
                     size="medium"
-                onClick={Cancel}
+                    onClick={Cancel}
                 >
                     Отмена
                 </NavLink>
@@ -79,7 +80,7 @@ const ProfilePageForm = () => {
                     htmlType="button"
                     type="primary"
                     size="medium"
-                onClick={userSave}
+                    onClick={userSave}
                 >
                     Сохранить
                 </Button>

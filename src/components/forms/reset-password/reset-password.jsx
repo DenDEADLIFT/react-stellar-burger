@@ -14,8 +14,6 @@ const ResetPasswordForm = () => {
     const [token, setToken] = React.useState('')
     const [password, setPassword] = React.useState('')
 
-    const inputRef = React.useRef(null)
-
     const resetPassword = (e) => {
         e.preventDefault();
         dispatch(passwordReset({ password, token }))
@@ -36,7 +34,6 @@ const ResetPasswordForm = () => {
                     name={'password'}
                     placeholder={'Пароль'}
                     extraClass="mb-2"
-                    ref={inputRef}
                 />
                 <Input
                     size={'default'}
@@ -46,7 +43,6 @@ const ResetPasswordForm = () => {
                     name={'code'}
                     type={'text'}
                     placeholder={'Введите код из письма'}
-                    ref={inputRef}
                 />
                 <Button
                     type="primary"

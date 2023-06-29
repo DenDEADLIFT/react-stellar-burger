@@ -6,7 +6,7 @@ export const RESET_PASSWORD_ERROR = 'RESET_PASSWORD_ERROR';
 export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
 export const FORGOT_PASSWORD_CONFIRMED = 'FORGOT_PASSWORD_CONFIRMED';
 export const FORGOT_PASSWORD_ERROR = 'FORGOT_PASSWORD_ERROR';
-
+ 
 export const passwordFoggot = (email) => {
     return function (dispatch) {
         dispatch({
@@ -14,10 +14,10 @@ export const passwordFoggot = (email) => {
         })
         forgotPassword(email)
             .then((res) => {
-                if (res && res.success) {
+                if (res) {
                     dispatch({
                         type: FORGOT_PASSWORD_CONFIRMED,
-                        passwordForgot: res.success,
+                        payload: res.ok,
                     })
                 }
             })

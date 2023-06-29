@@ -10,7 +10,6 @@ const LoginForm = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const inputRef = React.useRef(null)
 
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
@@ -36,7 +35,6 @@ const LoginForm = () => {
                     name={'email'}
                     type={'email'}
                     placeholder={'E-mail'}
-                    ref={inputRef}
                 />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <PasswordInput

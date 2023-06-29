@@ -17,7 +17,7 @@ const initialState = {
 }
 
 export const passwordReducer = (state = initialState, action) => {
-    console.log(state)
+
     switch (action.type) {
         case RESET_PASSWORD_REQUEST: {
             return {
@@ -46,7 +46,7 @@ export const passwordReducer = (state = initialState, action) => {
         case FORGOT_PASSWORD_CONFIRMED: {
             return {
                 ...state,
-                passwordForgot: true,
+                passwordForgot: action.payload,
             };
         }
         case FORGOT_PASSWORD_ERROR: {
