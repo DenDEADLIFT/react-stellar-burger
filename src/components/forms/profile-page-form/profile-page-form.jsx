@@ -1,14 +1,37 @@
 import styles from './profile_page_form.module.css'
-import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
+import { PasswordInput, Input, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { userUpdate } from '../../../services/actions/user-actions'
 
 const ProfilePageForm = () => {
 
+    const dispatch = useDispatch();
+
     const [name, setName] = React.useState('')
     const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState('')
+    const [password, setPassword] = React.useState()
+
+    const userSave = (e) => {
+        e.preventDefault();
+        dispatch(userUpdate({ email, name, password }))
+    }
+
+    const Cancel = (e) => {
+        e.preventDefault();
+        setName('')
+        setEmail('')
+    }
+
+    const isChanged = 
+    name !== '' ||
+    email !== '' ||
+    password;
 
     return (
+        <div className={styles.form_container}>
             <form
                 className={styles.form}
             >
@@ -22,7 +45,7 @@ const ProfilePageForm = () => {
                     placeholder={'Имя'}
                     icon="EditIcon"
                 />
-                <Input
+                <EmailInput
                     size={'default'}
                     extraClass="ml-1"
                     onChange={e => setEmail(e.target.value)}
@@ -39,10 +62,29 @@ const ProfilePageForm = () => {
                         name={'password'}
                         placeholder={'Пароль'}
                         extraClass="mb-2"
-                        icon="EditIcon"
                     />
                 </div>
             </form>
+            {isChanged && <div className={styles.buttons_container}>
+                <NavLink
+                    to='/register'
+                    className={`text text_type_main-default ${styles.link}`}
+                    type="secondary"
+                    size="medium"
+                onClick={Cancel}
+                >
+                    Отмена
+                </NavLink>
+                <Button
+                    htmlType="button"
+                    type="primary"
+                    size="medium"
+                onClick={userSave}
+                >
+                    Сохранить
+                </Button>
+            </div>}
+        </div>
     )
 }
 

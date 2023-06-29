@@ -1,18 +1,26 @@
 import styles from './login-form.module.css'
-import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button, PasswordInput, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { onLogin } from '../../../services/actions/user-actions'
 
 const LoginForm = () => {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const inputRef = React.useRef(null)
 
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
 
-    const inputRef = React.useRef(null)
-    const onIconClick = () => {
-        setTimeout(() => inputRef.current.focus(), 0)
-        alert('Icon Click Callback')
+    const login = (e) => {
+        e.preventDefault();
+        dispatch(onLogin({ email, password }))
+        navigate('/', { replace: true });
     }
+
     return (
         <div>
             <form
@@ -20,15 +28,15 @@ const LoginForm = () => {
                 className={`${styles.form}`}
             >
                 <h3 className={`mb-6 text text_type_main-medium ${styles.text}`} >Вход</h3>
-                <Input
+                <EmailInput
                     size={'default'}
                     extraClass="ml-1"
                     onChange={e => setEmail(e.target.value)}
                     value={email}
                     name={'email'}
                     type={'email'}
-                    onIconClick={onIconClick}
                     placeholder={'E-mail'}
+                    ref={inputRef}
                 />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <PasswordInput
@@ -41,6 +49,7 @@ const LoginForm = () => {
                     />
                 </div>
                 <Button
+                    onClick={login}
                     type="primary"
                     size="large"
                     extraClass={`mb-20`}
