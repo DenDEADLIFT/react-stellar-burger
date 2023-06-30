@@ -1,5 +1,8 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import Modal from '../modal/modal'
+import IngredientDetails from '../ingredient-details/ingredient-details'
 import Layout from '../../pages/layout/layout'
 import Main from '../../pages/maim/maim'
 import Feed from '../../pages/feed/feed'
@@ -15,32 +18,59 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { isAuth } from '../../services/actions/user-actions'
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
+import { getServerdata } from "../../services/actions/data-actions";
 
 function App() {
 
   const isForgot = useSelector((store) => store.password.passwordForgot);
-
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const background = location.state && location.state.background;
+  const { ingredients } = useSelector(state => state.ingredients)
+
+  const handleModalClose = () => {
+    navigate(-1);
+  };
 
   useEffect(() => {
+    dispatch(getServerdata());
     dispatch(isAuth());
   }, []);
 
-  return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Main />} />
-        <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
-        <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
-        <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
-        <Route path="/reset-password" element={<OnlyUnAuth component={isForgot ? <ResetPassword /> : !isForgot && <Login />} />} />
-        <Route path="/feed" element={<OnlyAuth component={<Feed />} />} />
-        <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
-        <Route path="/ingredients/:id" element={<IngredientPage />} />
-        <Route path="/profile/orders" element={<Orders />} />
-        <Route path="*" element={<NotFound404 />} />
-      </Route>
-    </Routes>
+  return (ingredients.length !== 0 &&
+    <>
+      <Routes location={background && location}>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Main />} />
+          <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
+          <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
+          <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
+          <Route path="/reset-password" element={<OnlyUnAuth component={isForgot ? <ResetPassword /> : !isForgot && <Login />} />} />
+          <Route path="/feed" element={<OnlyAuth component={<Feed />} />} />
+          <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
+          <Route path="/ingredients/:id" element={<IngredientPage data={ingredients} />} />
+          <Route path="/profile/orders" element={<Orders />} />
+          <Route path="*" element={<NotFound404 />} />
+        </Route>
+      </Routes>
+      {ingredients.length !== 0 &&
+        background && (
+          <Routes>
+            <Route
+              path='/ingredients/:id'
+              element={
+                <Modal onClose={handleModalClose}>
+                  <IngredientDetails data={ingredients}>
+                    {<CloseIcon onClick={handleModalClose} />}
+                  </IngredientDetails>
+                </Modal>
+              }
+            />
+          </Routes>
+        )
+      }
+    </>
   );
 }
 

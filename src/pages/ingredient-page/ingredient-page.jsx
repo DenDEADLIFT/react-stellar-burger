@@ -4,20 +4,18 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getServerdata } from "../../services/actions/data-actions";
 
-function IngredientPage() {
+function IngredientPage({ data }) {
 
     const dispatch = useDispatch();
     const { id } = useParams()
-
-    const { ingredients } = useSelector(state => state.ingredients)
-    const ingredient = ingredients.find((i) => i._id === id)
+    const ingredient = data.find((i) => i._id === id)
 
     useEffect(() => {
         dispatch(getServerdata());
     }, [dispatch]);
 
     return (
-        ingredients.length !== 0 &&
+        ingredient &&
         <div className={style.ingridientdetails_container}>
             <div className={style.ingridientdetails_header_container}>
                 <h2 className={`${style.ingridientdetails_header} text text_type_main-large`}>
