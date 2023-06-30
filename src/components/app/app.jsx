@@ -22,7 +22,6 @@ import { getServerdata } from "../../services/actions/data-actions";
 
 function App() {
 
-  const isForgot = useSelector((store) => store.password.passwordForgot);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -36,7 +35,7 @@ function App() {
   useEffect(() => {
     dispatch(getServerdata());
     dispatch(isAuth());
-  }, []);
+  }, [dispatch]);
 
   return (ingredients.length !== 0 &&
     <>
@@ -46,7 +45,7 @@ function App() {
           <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
           <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
           <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
-          <Route path="/reset-password" element={<OnlyUnAuth component={isForgot ? <ResetPassword /> : !isForgot && <Login />} />} />
+          <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
           <Route path="/feed" element={<OnlyAuth component={<Feed />} />} />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
           <Route path="/ingredients/:id" element={<IngredientPage data={ingredients} />} />

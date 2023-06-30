@@ -24,6 +24,7 @@ const RegisterForm = () => {
     return (
         <div>
             <form
+                onSubmit={register}
                 className={styles.form}
             >
                 <h2 className={'text text_type_main-medium'}>Регистрация</h2>
@@ -55,11 +56,10 @@ const RegisterForm = () => {
                 />
 
                 <Button
-                    onClick={register}
                     type="primary"
                     size="large"
                     extraClass={`mb-20`}
-                    htmlType="button"
+                    htmlType="submit"
                 >
                     Зарегистрироваться
                 </Button>

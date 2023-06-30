@@ -23,6 +23,7 @@ const LoginForm = () => {
     return (
         <div>
             <form
+                onSubmit={login}
                 name='login'
                 className={`${styles.form}`}
             >
@@ -47,11 +48,10 @@ const LoginForm = () => {
                     />
                 </div>
                 <Button
-                    onClick={login}
                     type="primary"
                     size="large"
                     extraClass={`mb-20`}
-                    htmlType="button"
+                    htmlType="submit"
                 >
                     Войти
                 </Button>

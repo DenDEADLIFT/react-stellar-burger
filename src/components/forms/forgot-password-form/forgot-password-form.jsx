@@ -15,7 +15,7 @@ const ForgotPasswordForm = () => {
 
     const forgotPassword = (e) => {
         e.preventDefault();
-        navigate('/reset-password', { replace: true });
+        navigate('/reset-password', { state: 'forgot' });
         dispatch(passwordFoggot(email))
     }
 
@@ -23,6 +23,7 @@ const ForgotPasswordForm = () => {
         <div
         >
             <form
+                onSubmit={forgotPassword}
                 className={styles.form}
             >
                 <h2 className={'text text_type_main-medium'}>Восстановление пароля</h2>
@@ -39,8 +40,7 @@ const ForgotPasswordForm = () => {
                     type="primary"
                     size="large"
                     extraClass={`mb-20`}
-                    htmlType="button"
-                    onClick={forgotPassword}
+                    htmlType="submit"
                 >
                     Восстановить
                 </Button>

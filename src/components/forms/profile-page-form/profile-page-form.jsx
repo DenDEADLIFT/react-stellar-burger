@@ -32,6 +32,7 @@ const ProfilePageForm = () => {
     return (
         <div className={styles.form_container}>
             <form
+            onSubmit={userSave}
                 className={styles.form}
             >
                 <Input
@@ -74,10 +75,9 @@ const ProfilePageForm = () => {
                     Отмена
                 </NavLink>
                 <Button
-                    htmlType="button"
+                    htmlType="submit"
                     type="primary"
                     size="medium"
-                    onClick={userSave}
                 >
                     Сохранить
                 </Button>

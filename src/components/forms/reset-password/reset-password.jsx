@@ -23,6 +23,7 @@ const ResetPasswordForm = () => {
     return (
         <div>
             <form
+                onSubmit={resetPassword}
                 name='login'
                 className={`${styles.form}`}
             >
@@ -48,8 +49,7 @@ const ResetPasswordForm = () => {
                     type="primary"
                     size="large"
                     extraClass={`mb-20`}
-                    htmlType="button"
-                    onClick={resetPassword}
+                    htmlType="submit"
                 >
                     Сохранить
                 </Button>
