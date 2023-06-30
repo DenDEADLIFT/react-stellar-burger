@@ -1,7 +1,6 @@
 import styles from './profile_page_form.module.css'
 import { PasswordInput, Input, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
-import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { userUpdate } from '../../../services/actions/user-actions'
@@ -55,14 +54,14 @@ const ProfilePageForm = () => {
                     placeholder={'Логин'}
                     icon="EditIcon"
                 />
-                    <PasswordInput
-                        onChange={e => setPassword(e.target.value)}
-                        value={password}
-                        name={'password'}
-                        placeholder={'Пароль'}
-                        extraClass="mb-2"
-                        type={'password'}
-                    />
+                <PasswordInput
+                    onChange={e => setPassword(e.target.value)}
+                    value={password}
+                    name={'password'}
+                    placeholder={'Пароль'}
+                    extraClass="mb-2"
+                    type={'password'}
+                />
             </form>
             {isChanged && <div className={styles.buttons_container}>
                 <NavLink

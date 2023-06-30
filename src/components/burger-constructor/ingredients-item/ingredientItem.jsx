@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 import React from "react";
 import { SORTING_INGREDIENTS } from "../../../services/actions/constructor-actions";
-import { SELECTED_INGREDIENT, REMOVE_SELECTED_INGREDIENT } from "../../../services/actions/ingredients-actions";
 
 const IngredientItem = ({ item, index, handleClose }) => {
 
@@ -39,21 +38,8 @@ const IngredientItem = ({ item, index, handleClose }) => {
   dragRef(dndRef);
   dropRef(dndRef);
 
-  const [modalOpened, setModalOpened] = React.useState(false);
-
-  const openModal = () => {
-
-    setModalOpened(true);
-    dispatch({ type: SELECTED_INGREDIENT, data: item });
-  };
-
-  const closeModal = () => {
-    setModalOpened(false);
-    dispatch({ type: REMOVE_SELECTED_INGREDIENT });
-  };
-
   return (
-    <li ref={dndRef} className={Style.item} onClick={openModal}>
+    <li ref={dndRef} className={Style.item}>
       <div className={Style.drag}>
         <DragIcon type="primary" />
       </div>

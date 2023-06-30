@@ -16,7 +16,7 @@
 
 .item_box {
     padding-left: 32px;
-    
+
 }
 
 .constructor_box {
@@ -28,7 +28,7 @@
 }
 
 .constructor_bottom {
-    list-style:none;
+    list-style: none;
     padding: 0;
     margin-top: 40px;
     display: flex;

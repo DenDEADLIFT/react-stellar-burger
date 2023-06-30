@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {passwordReset} from '../../../services/actions/password-actions'
+import { passwordReset } from '../../../services/actions/password-actions'
 
 const ResetPasswordForm = () => {
 
