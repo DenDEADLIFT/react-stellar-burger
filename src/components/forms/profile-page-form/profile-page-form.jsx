@@ -47,7 +47,7 @@ const ProfilePageForm = () => {
                 <Input
                     size={'default'}
                     extraClass="ml-1"
-                    onChange={e => { setUserName(e.target.value) }}
+                    onChange={e => setUserName(e.target.value)}
                     value={userName}
                     name={'name'}
                     type={'text'}

@@ -2,8 +2,7 @@ export const BASE_URL = `https://norma.nomoreparties.space/api`;
 
 export const checkResponse = (resolve) => {
     if (resolve.ok) {
-        return (
-            resolve = resolve.json())
+        return resolve.json()
     } else {
         return Promise.reject(`Ошибка ${resolve.status}`);
     }
@@ -65,7 +64,7 @@ export const onRefreshToken = async (url, options) => {
         if (error.message === "jwt expired") {
             const refreshData = await refreshToken();
             if (!refreshData.success) {
-                Promise.reject(refreshData);
+                return Promise.reject(refreshData);
             }
             localStorage.setItem("refreshToken", refreshData.refreshToken);
             localStorage.setItem("accessToken", refreshData.accessToken);
@@ -112,6 +111,7 @@ export const logout = () => {
             token: localStorage.getItem("refreshToken"),
         }),
     })
+        .then(checkResponse)
 }
 
 export const forgotPassword = (email) => {
@@ -124,7 +124,7 @@ export const forgotPassword = (email) => {
             email,
         }),
     })
-    .then(checkResponse)
+        .then(checkResponse)
 }
 
 export const resetPasswordRequest = ({ password, token }) => {
@@ -137,7 +137,7 @@ export const resetPasswordRequest = ({ password, token }) => {
             password, token,
         }),
     })
-    .then(checkResponse)
+        .then(checkResponse)
 }
 
 export const updateUser = async ({ email, name, password }) => {
@@ -154,5 +154,5 @@ export const updateUser = async ({ email, name, password }) => {
             password: password
         }),
     })
-    .then(checkResponse)
+        .then(checkResponse)
 }
