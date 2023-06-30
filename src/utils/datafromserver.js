@@ -124,6 +124,7 @@ export const forgotPassword = (email) => {
             email,
         }),
     })
+    .then(checkResponse)
 }
 
 export const resetPasswordRequest = ({ password, token }) => {
@@ -136,6 +137,7 @@ export const resetPasswordRequest = ({ password, token }) => {
             password, token,
         }),
     })
+    .then(checkResponse)
 }
 
 export const updateUser = async ({ email, name, password }) => {
@@ -152,4 +154,5 @@ export const updateUser = async ({ email, name, password }) => {
             password: password
         }),
     })
+    .then(checkResponse)
 }
