@@ -10,8 +10,8 @@ const ProfilePageForm = () => {
 
     const dispatch = useDispatch();
 
-    const [name, setName] = React.useState()
-    const [email, setEmail] = React.useState()
+    const [name, setName] = React.useState('')
+    const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
 
     const userSave = (e) => {
@@ -55,7 +55,6 @@ const ProfilePageForm = () => {
                     placeholder={'Логин'}
                     icon="EditIcon"
                 />
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <PasswordInput
                         onChange={e => setPassword(e.target.value)}
                         value={password}
@@ -64,7 +63,6 @@ const ProfilePageForm = () => {
                         extraClass="mb-2"
                         type={'password'}
                     />
-                </div>
             </form>
             {isChanged && <div className={styles.buttons_container}>
                 <NavLink

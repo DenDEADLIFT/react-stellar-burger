@@ -4,7 +4,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "../ingredients/ingredients.module.css";
 import PropTypes from "prop-types";
-import React from "react";
+import { useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
 import IngredientDetails from "../../ingredient-details/ingredient-details";
 import Modal from "../../modal/modal";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -14,12 +15,13 @@ import { useSelector } from "react-redux";
 function Ingridients({ item }) {
   
   const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
+  const { id } = useParams()
 
-  const itemToConstructor = React.useMemo(() => {
+  const itemToConstructor = useMemo(() => {
     return ingredients.filter((i) => i._id === item._id);
   }, [ingredients]);
 
-  const ingredientCounter = React.useMemo(() => {
+  const ingredientCounter = useMemo(() => {
     if (bun !== null && item._id === bun._id) {
       return 2;
     } else if (ingredients !== []) {
@@ -35,7 +37,7 @@ function Ingridients({ item }) {
     }),
   });
 
-  const [modalState, setModalState] = React.useState(false);
+  const [modalState, setModalState] = useState(false);
 
   const open = () => {
     setModalState(true);

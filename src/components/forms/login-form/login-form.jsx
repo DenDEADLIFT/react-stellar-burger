@@ -17,7 +17,7 @@ const LoginForm = () => {
     const login = (e) => {
         e.preventDefault();
         dispatch(onLogin({ email, password }))
-        navigate('/', { replace: true });
+        navigate(-1);
     }
 
     return (
