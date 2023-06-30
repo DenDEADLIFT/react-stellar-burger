@@ -2,6 +2,7 @@ import { userData, registerUser, login, logout, updateUser } from '../../utils/d
 
 export const SET_AUTH_CHECKED = 'SET_AUTH_CHECKED';
 export const SET_USER = 'SET_USER';
+export const SET_USER_FILED = 'SET_USER_FILED';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
 export const UPDATE_USER_ERROR = 'UPDATE_USER_ERROR';
@@ -134,14 +135,15 @@ export const onLogout = () => {
     };
 };
 
-export const userUpdate = ({ email, name, password }) => {
+export const userUpdate = (userData) => {
     return function (dispatch) {
         dispatch({
             type: LOGIN_REQUEST
         })
-        updateUser({ email, name, password })
+        updateUser(userData)
             .then((res) => {
-                if (res && res.success) {
+                if (res) {
+                    console.log(res)
                     dispatch({
                         type: UPDATE_USER,
                         user: res

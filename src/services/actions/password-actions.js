@@ -7,7 +7,7 @@ export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
 export const FORGOT_PASSWORD_CONFIRMED = 'FORGOT_PASSWORD_CONFIRMED';
 export const FORGOT_PASSWORD_ERROR = 'FORGOT_PASSWORD_ERROR';
  
-export const passwordFoggot = (email) => {
+export const passwordForgot = (email) => {
     return function (dispatch) {
         dispatch({
             type: FORGOT_PASSWORD_REQUEST,

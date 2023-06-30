@@ -37,7 +37,6 @@ const LoginForm = () => {
                     type={'email'}
                     placeholder={'E-mail'}
                 />
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <PasswordInput
                         onClick={e => setPassword('')}
                         onChange={e => setPassword(e.target.value)}
@@ -46,7 +45,6 @@ const LoginForm = () => {
                         placeholder={'Пароль'}
                         extraClass="mb-2"
                     />
-                </div>
                 <Button
                     type="primary"
                     size="large"

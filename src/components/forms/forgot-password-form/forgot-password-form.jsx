@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { passwordFoggot } from '../../../services/actions/password-actions'
+import { passwordForgot } from '../../../services/actions/password-actions'
 
 const ForgotPasswordForm = () => {
 
@@ -16,7 +16,7 @@ const ForgotPasswordForm = () => {
     const forgotPassword = (e) => {
         e.preventDefault();
         navigate('/reset-password', { state: 'forgot' });
-        dispatch(passwordFoggot(email))
+        dispatch(passwordForgot(email))
     }
 
     return (
