@@ -65,6 +65,8 @@ export function onRegister({ email, password, name }) {
                         type: SET_USER,
                         payload: res.user,
                     })
+                } else {
+                    dispatch({ type: REGISTER_ERROR })
                 }
             })
             .catch((err) => {
@@ -97,6 +99,8 @@ export const onLogin = ({ email, password }) => {
                         type: SET_AUTH_CHECKED,
                         payload: true,
                     });
+                } else {
+                    dispatch({ type: LOGIN_ERROR })
                 }
             })
             .catch(err => {
@@ -114,7 +118,6 @@ export const onLogout = () => {
         })
         logout()
             .then((res) => {
-                
                 if (res) {
                     localStorage.removeItem("accessToken");
                     localStorage.removeItem("refreshToken");
@@ -125,6 +128,8 @@ export const onLogout = () => {
                         type: SET_USER,
                         payload: null,
                     })
+                } else {
+                    dispatch({ type: LOGOUT_ERROR })
                 }
             })
             .catch((err) => {
@@ -152,6 +157,8 @@ export const userUpdate = (userData) => {
                         type: SET_USER,
                         payload: res.user,
                     })
+                } else {
+                    dispatch({ type: UPDATE_USER_ERROR })
                 }
             }).catch(err => {
                 dispatch({

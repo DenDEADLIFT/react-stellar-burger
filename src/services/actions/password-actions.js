@@ -19,6 +19,8 @@ export const passwordForgot = (email) => {
                         type: FORGOT_PASSWORD_CONFIRMED,
                         payload: res.ok,
                     })
+                } else {
+                    dispatch({ type: FORGOT_PASSWORD_ERROR })
                 }
             })
             .catch((err) => {
@@ -49,6 +51,8 @@ export const passwordReset = ({ password, token }) => {
                         type: RESET_PASSWORD_CONFIRMED,
                         resetPasswordConfirmed: res.success,
                      })
+                } else {
+                    dispatch({ type: RESET_PASSWORD_ERROR })
                 }
             })
             .catch((err) => {
