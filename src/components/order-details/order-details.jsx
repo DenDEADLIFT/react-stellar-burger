@@ -6,8 +6,8 @@ import { getOrderdata } from '../../services/actions/order-actions';
 import { ADD_ORDER } from '../../services/actions/order-actions';
 import PropTypes from "prop-types";
 
-function OrderDetails({children}) {
-    
+function OrderDetails({ children }) {
+
     const { bun, ingredients } = useSelector(state => state.burgerConstructor);
 
     const { actual } = useSelector(state => state.order);

@@ -1,13 +1,13 @@
-import { Serverdata } from '../../utils/datafromserver';
+import { serverdata } from '../../utils/datafromserver';
 
 export const SERVERDATA_REQUEST = 'SERVERDATA_REQUEST';
 export const SERVERDATA_SUCCESS = 'SERVERDATA_SUCCESS';
 export const SERVERDATA_FAILED = 'SERVERDATA_FAILED';
-
+ 
 export function getServerdata() {
     return function (dispatch) {
         dispatch({ type: SERVERDATA_REQUEST })
-        Serverdata()
+        serverdata()
             .then(res => {
                 if (res && res.success) {
                     dispatch({

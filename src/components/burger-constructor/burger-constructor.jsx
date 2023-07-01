@@ -14,6 +14,9 @@ import {
 import {
   DELETE_ORDER,
 } from "../../services/actions/order-actions";
+import {
+  SET_USER,
+} from "../../services/actions/user-actions";
 import React from "react";
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";
@@ -48,6 +51,7 @@ function BurgerConstructor() {
 
   const closeModal = () => {
     setModalOpen(false);
+    dispatch({ type: SET_USER });
     dispatch({ type: DELETE_ORDER });
     dispatch({ type: REMOVE_BUN });
     dispatch({ type: REMOVE_INGREDIENTS });
@@ -129,8 +133,8 @@ function BurgerConstructor() {
           <CurrencyIcon type="primary" />
         </li>
         <li>
-          {(ingredients.length && bun.type !== 'initial') ? (<Button onClick={openModal} htmlType="button" type="primary" size="large">Оформить заказ</Button>)
-            : (<Button onClick={openModal} htmlType="button" type="primary" disabled size="large">Оформить заказ</Button>)}
+          {(ingredients.length && bun.type !== 'initial') ? (<Button onClick={openModal} type="primary" htmlType="button" size="large">Оформить заказ</Button>)
+            : (<Button onClick={openModal} type="primary" disabled htmlType="button" size="large">Оформить заказ</Button>)}
         </li>
         {modalOpen && (
           <Modal onClose={closeModal}>
