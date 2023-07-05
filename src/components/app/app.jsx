@@ -14,6 +14,8 @@ import ForgotPassword from '../../pages/forgot-password/forgot-password'
 import ResetPassword from '../../pages/reset-password/reset-password'
 import Orders from '../../pages/orders/orders'
 import IngredientPage from '../../pages/ingredient-page/ingredient-page'
+import OrderInfo from '../order-info/order-info'
+import OrderInfoPage from '../../pages/order-info-page/order-info-page'
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { isAuth } from '../../services/actions/user-actions'
@@ -49,7 +51,8 @@ function App() {
           <Route path="/feed" element={<OnlyAuth component={<Feed />} />} />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
           <Route path="/ingredients/:id" element={<IngredientPage data={ingredients} />} />
-          <Route path="/profile/orders" element={<Orders />} />
+          <Route path="/profile/orders" element={<Orders data={ingredients} />} />
+          <Route path="/profile/orders/:id" element={<OrderInfoPage />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>
       </Routes>
@@ -63,6 +66,22 @@ function App() {
                   <IngredientDetails data={ingredients}>
                     {<CloseIcon onClick={handleModalClose} />}
                   </IngredientDetails>
+                </Modal>
+              }
+            />
+          </Routes>
+        )
+      }
+      {ingredients.length !== 0 &&
+        background && (
+          <Routes>
+            <Route
+              path='/profile/orders/:id'
+              element={
+                <Modal onClose={handleModalClose}>
+                  <OrderInfo data={ingredients}>
+                    {<CloseIcon onClick={handleModalClose} />}
+                  </OrderInfo>
                 </Modal>
               }
             />

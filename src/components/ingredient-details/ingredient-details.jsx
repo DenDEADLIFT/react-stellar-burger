@@ -6,7 +6,7 @@ function IngredientDetails({ children, data }) {
 
     const { id } = useParams()
     const ingredient = data.find((i) => i._id === id)
-
+    
     return (
         <div className={style.ingridientdetails_container}>
             <div className={style.ingridientdetails_header_container}>

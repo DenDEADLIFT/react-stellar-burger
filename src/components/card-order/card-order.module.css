@@ -1,49 +1,83 @@
 .content {
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
-    gap: 10px;
-    border-radius: 40px;
-    background: #1C1C21;
-    max-width: 844px;
-    max-height: 246px;
-    cursor: pointer;
-  }
-  
-  .order_id {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 10px;
+  border-radius: 40px;
+  background: #1C1C21;
+  max-width: 844px;
+  max-height: 246px;
+  cursor: pointer;
+}
 
-  .info {
-    width: 796px;
-    height: 62px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
+.order_id {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-  .ingridients_box {
-    width: 796px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-  }
+.info {
+  width: 796px;
+  height: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
 
-  .ingridients {
-    width: 696px;
-    height: 64px;
-  }
+.ingridients_box {
+  width: 796px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
 
-  .ingridients_prise_box {
-    width: 76px;
-    height: 64px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 9px;
+.ingridients {
+  width: 696px;
+  height: 64px;
+}
+
+.ingridients_prise_box {
+  width: 76px;
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+}
+
+.ingredients {
+  display: flex;
+  flex-direction: row;
+}
+
+.ingredient_item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 64px;
+  height: 64px;
+  margin-left: -12px;
+  border: solid 2px transparent;
+  background-image: linear-gradient(#131316, #131316), linear-gradient( #801ab3, #4c4cff);
+  border-radius: 50%;
+  background-clip: content-box, border-box;
+  z-index: 0;
+}
+
+
+
+.ingredient_item_image {
+  height: 50px;
+  z-index: 88;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--color-text);
+  background: var(--color-primary);
 }
