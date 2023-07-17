@@ -1,17 +1,17 @@
 import styles from './orders-form.module.css'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CardOrder from '../card-order/card-order'
+import { useLocation } from 'react-router-dom';
 
-const OrdersForm = () => {
 
-  const { ordersAll } = useSelector((state) => state.rootReducer.ordersAll);
+const OrdersForm = ({data}) => {
 
-  return (ordersAll.length !== 0 &&
+  return (data.length !== 0 &&
     <div className={`${styles.content} custom-scroll`}>
-      {ordersAll.map((i, key) => <CardOrder data={i} key={key} />)
+      {data.map((i, key) => <CardOrder data={i} key={key} />)
       }
     </div>
   )
-}
+} 
 
 export default OrdersForm

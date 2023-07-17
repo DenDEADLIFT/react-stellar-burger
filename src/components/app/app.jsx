@@ -20,10 +20,9 @@ import { useEffect } from "react";
 import { isAuth } from '../../services/actions/user-actions'
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { getServerdata } from "../../services/actions/data-actions";
-import { connect as connectOrdersAll, disconnect as disconnectOrdersAll } from "../../services/actions/orders-all";
-import { connect as connectOrders, disconnect as disconnectOrders } from "../../services/actions/orders";
 
-export const WSS_URL = `wss://norma.nomoreparties.space/`;
+
+
 
 function App() {
 
@@ -31,26 +30,7 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;
-  const store = useSelector(state => state);
-  console.log(store)
   const { ingredients } = useSelector(state => state.rootReducer.ingredients);
-  const { ordersAll } = useSelector(state => state.rootReducer.ordersAll);
-  const accessToken = localStorage.getItem('accessToken');
-  const accessTokenWithoutBearer = accessToken ? accessToken.replace("Bearer ", "") : "";
-  const  state  = useSelector(state => state);
-  
-
-  useEffect(() => {
-    if (location.pathname.startsWith('/feed')) {
-      dispatch(connectOrdersAll(`${WSS_URL}orders/all`))
-    } else if (location.pathname.startsWith('/profile/orders')) {
-      dispatch(connectOrders(`${WSS_URL}orders?token=${accessTokenWithoutBearer}`))
-    } else {
-      dispatch(disconnectOrdersAll())
-      dispatch(disconnectOrders())
-    }
-  }, [dispatch, location]);
-
   const handleModalClose = () => {
     navigate(-1);
   };
@@ -74,7 +54,7 @@ function App() {
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
           <Route path="/ingredients/:id" element={<IngredientPage data={ingredients} />} />
           <Route path="/profile/orders" element={<Orders />} />
-          <Route path="/profile/orders/:id" element={<OrderInfo data={ordersAll} />} />
+          <Route path="/profile/orders/:id" element={<OrderInfo />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>
       </Routes>
@@ -110,7 +90,7 @@ function App() {
           </Routes>
         )
       }
-      {ordersAll.length !== 0 &&
+      {
         background && (
           <Routes>
             <Route

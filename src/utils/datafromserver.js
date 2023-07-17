@@ -142,7 +142,6 @@ export const resetPasswordRequest = ({ password, token }) => {
 }
 
 export const updateUser = async ({ email, name, password }) => {
-    console.log(name)
     return fetch(`${BASE_URL}/auth/user`, {
         method: 'PATCH',
         headers: {

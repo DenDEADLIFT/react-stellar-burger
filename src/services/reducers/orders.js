@@ -1,4 +1,4 @@
-import {WebsocketStatus} from "../../utils/live-table";
+import { WebsocketStatus } from "../../utils/live-table";
 import {
     ORDERS_WS_CLOSE,
     ORDERS_WS_CONNECTING,
@@ -14,9 +14,8 @@ const initialState = {
 };
 
 export const ordersReducer = (state = initialState, action) => {
-    //console.log(action)
-    switch (action.type)
-    {
+
+    switch (action.type) {
         case ORDERS_WS_CONNECTING:
             return {
                 ...state,

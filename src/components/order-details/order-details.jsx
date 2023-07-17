@@ -12,18 +12,14 @@ function OrderDetails({ children }) {
     const { bun, ingredients } = useSelector(state => state.rootReducer.burgerConstructor);
     const { actual } = useSelector(state => state.rootReducer.order);
     const dispatch = useDispatch();
-
-    //const { failed, request, orderItems } = useSelector(state => state.order);
-    //console.log(order)
     const ingridientsId = React.useMemo(
         () => ingredients.map((i) => i._id),
         [ingredients]
     );
 
     React.useEffect(() => {
-        const items = [...ingridientsId, bun._id];
+        const items = [bun._id, ...ingridientsId, bun._id];
         const ingredientsToOrder = [...ingredients, bun];
-        
         dispatch(getOrderdata(items));
         dispatch({ type: ADD_ORDER, orderItems: ingredientsToOrder });
     }, [ingridientsId, ingredients, bun, dispatch])
@@ -36,7 +32,10 @@ function OrderDetails({ children }) {
             </li>
             <li>
                 <p className={`${style.orderdetails_number} text text_type_digits-large pb-4`}>
-                    {actual && actual.order.number}
+                    {
+                        actual
+                        &&
+                        actual.order.number}
                 </p>
             </li>
             <p className="text text_type_main-medium pt-4">идентификатор заказа</p>

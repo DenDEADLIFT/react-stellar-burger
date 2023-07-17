@@ -1,14 +1,16 @@
 import styles from './order-info.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 const OrderInfo = ({ children }) => {
 
+    const location = useLocation();
     const { id } = useParams();
     const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
     const { ordersAll } = useSelector((state) => state.rootReducer.ordersAll);
-    const order = ordersAll.find((i) => i._id === id);
+    const { orders } = useSelector((state) => state.rootReducer.orders.data);
+    const order = (location.pathname.startsWith('/feed') ? ordersAll : orders).find((i) => i._id === id);
 
     // Объект-счетчик для подсчета количества повторяющихся ингредиентов
     const countMap = order?.ingredients.reduce((acc, curr) => {
@@ -24,7 +26,7 @@ const OrderInfo = ({ children }) => {
         return sum + count * price;
     }, 0);
 
-    return (ordersAll.length !== 0 &&
+    return (order.length !== 0 &&
         <>
             <div className={styles.close_icon}>{children}</div>
             <div className={styles.container}>
