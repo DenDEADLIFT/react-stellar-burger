@@ -5,15 +5,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { getOrderdata } from '../../services/actions/order-actions';
 import { ADD_ORDER } from '../../services/actions/order-actions';
 import PropTypes from "prop-types";
+import { Spinner } from '../../pages/spinner/spinner'
 
 function OrderDetails({ children }) {
 
     const { bun, ingredients } = useSelector(state => state.burgerConstructor);
-
     const { actual } = useSelector(state => state.order);
-
     const dispatch = useDispatch();
 
+    //const { failed, request, orderItems } = useSelector(state => state.order);
+    //console.log(order)
     const ingridientsId = React.useMemo(
         () => ingredients.map((i) => i._id),
         [ingredients]
@@ -28,7 +29,6 @@ function OrderDetails({ children }) {
     }, [ingridientsId, ingredients, bun, dispatch])
 
     return (
-
         <ul className={style.orderdetails_box}>
             <li className={style.orderdetails_title_box}>
                 <p className={style.orderdetails_title}></p>

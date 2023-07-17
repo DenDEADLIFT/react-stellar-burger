@@ -15,12 +15,15 @@ import ResetPassword from '../../pages/reset-password/reset-password'
 import Orders from '../../pages/orders/orders'
 import IngredientPage from '../../pages/ingredient-page/ingredient-page'
 import OrderInfo from '../order-info/order-info'
-import OrderInfoPage from '../../pages/order-info-page/order-info-page'
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { isAuth } from '../../services/actions/user-actions'
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { getServerdata } from "../../services/actions/data-actions";
+import { connect as connectOrdersAll, disconnect as disconnectOrdersAll } from "../../services/actions/orders-all";
+import { connect as connectOrders, disconnect as disconnectOrders } from "../../services/actions/orders";
+
+export const WSS_URL = `wss://norma.nomoreparties.space/`;
 
 function App() {
 
@@ -28,7 +31,24 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;
-  const { ingredients } = useSelector(state => state.ingredients)
+  const { ingredients } = useSelector(state => state.ingredients);
+  const { ordersAll } = useSelector(state => state.ordersAll);
+  const { orders } = useSelector(state => state.ordersAll);
+  const accessToken = localStorage.getItem('accessToken');
+  const accessTokenWithoutBearer = accessToken ? accessToken.replace("Bearer ", "") : "";
+  const  state  = useSelector(state => state);
+  
+
+  useEffect(() => {
+    if (location.pathname.startsWith('/feed')) {
+      dispatch(connectOrdersAll(`${WSS_URL}orders/all`))
+    } else if (location.pathname.startsWith('/profile/orders')) {
+      dispatch(connectOrders(`${WSS_URL}orders?token=${accessTokenWithoutBearer}`))
+    } else {
+      dispatch(disconnectOrdersAll())
+      dispatch(disconnectOrders())
+    }
+  }, [dispatch, location]);
 
   const handleModalClose = () => {
     navigate(-1);
@@ -48,11 +68,12 @@ function App() {
           <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
           <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
           <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
-          <Route path="/feed" element={<OnlyAuth component={<Feed />} />} />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/feed/:id" element={<OrderInfo />} />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
           <Route path="/ingredients/:id" element={<IngredientPage data={ingredients} />} />
-          <Route path="/profile/orders" element={<Orders data={ingredients} />} />
-          <Route path="/profile/orders/:id" element={<OrderInfoPage />} />
+          <Route path="/profile/orders" element={<Orders />} />
+          <Route path="/profile/orders/:id" element={<OrderInfo data={ordersAll} />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>
       </Routes>
@@ -79,7 +100,23 @@ function App() {
               path='/profile/orders/:id'
               element={
                 <Modal onClose={handleModalClose}>
-                  <OrderInfo data={ingredients}>
+                  <OrderInfo >
+                    {<CloseIcon onClick={handleModalClose} />}
+                  </OrderInfo>
+                </Modal>
+              }
+            />
+          </Routes>
+        )
+      }
+      {ordersAll.length !== 0 &&
+        background && (
+          <Routes>
+            <Route
+              path='/feed/:id'
+              element={
+                <Modal onClose={handleModalClose}>
+                  <OrderInfo >
                     {<CloseIcon onClick={handleModalClose} />}
                   </OrderInfo>
                 </Modal>

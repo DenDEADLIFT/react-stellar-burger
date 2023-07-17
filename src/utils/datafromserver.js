@@ -1,5 +1,4 @@
 export const BASE_URL = `https://norma.nomoreparties.space/api`;
-export const WSS_URL = `wss://norma.nomoreparties.space/`;
 
 export const checkResponse = (resolve) => {
     if (resolve.ok) {
@@ -23,7 +22,8 @@ export const orderdata = (items) => {
     return fetch(`${BASE_URL}/orders`, {
         method: 'POST',
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            authorization: localStorage.getItem('accessToken'),
         },
         body: JSON.stringify({
             'ingredients': items,
