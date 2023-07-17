@@ -31,9 +31,10 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;
-  const { ingredients } = useSelector(state => state.ingredients);
-  const { ordersAll } = useSelector(state => state.ordersAll);
-  const { orders } = useSelector(state => state.ordersAll);
+  const store = useSelector(state => state);
+  console.log(store)
+  const { ingredients } = useSelector(state => state.rootReducer.ingredients);
+  const { ordersAll } = useSelector(state => state.rootReducer.ordersAll);
   const accessToken = localStorage.getItem('accessToken');
   const accessTokenWithoutBearer = accessToken ? accessToken.replace("Bearer ", "") : "";
   const  state  = useSelector(state => state);

@@ -7,7 +7,7 @@ const CardOrder = ({ data }) => {
 
     const location = useLocation();
 
-    const { ingredients } = useSelector((state) => state.ingredients);
+    const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
     const toLocation = location.pathname === '/profile/orders' ? `/profile/orders/${data._id}` : `/feed/${data._id}`;
     return (
         <Link

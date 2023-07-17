@@ -29,7 +29,7 @@ import IngredientItem from "./ingredients-item/ingredientItem";
 function BurgerConstructor() {
   const dispatch = useDispatch();
 
-  const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
+  const { bun, ingredients } = useSelector((state) => state.rootReducer.burgerConstructor);
   const [modalOpen, setModalOpen] = React.useState(false);
   const bulka = "bun";
 

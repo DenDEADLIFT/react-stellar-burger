@@ -7,6 +7,7 @@ import { passwordReducer } from './password';
 import { ordersAllReducer } from './orders-all';
 import { ordersReducer } from './orders';
 import {socketMiddleware} from "../middleware/socket-middleware";
+import { combineReducers } from 'redux';
 import {
     ORDERS_ALL_CONNECT,
     ORDERS_ALL_DISCONNECT, ORDERS_ALL_WS_CLOSE,
@@ -40,15 +41,19 @@ const OrdersMiddleware = socketMiddleware({
     onMessage: ORDERS_WS_MESSAGE
 });
 
+export const rootReducer = combineReducers({
+    ingredients: ingredientsReducer,
+    burgerConstructor: constructorReducer,
+    order: orderReducer,
+    user: userReducer,
+    password: passwordReducer,
+    ordersAll: ordersAllReducer,
+    orders: ordersReducer,
+})
+
 export const store = configureStore({
     reducer: {
-        ingredients: ingredientsReducer,
-        burgerConstructor: constructorReducer,
-        order: orderReducer,
-        user: userReducer,
-        password: passwordReducer,
-        ordersAll: ordersAllReducer,
-        orders: ordersReducer,
+        rootReducer: rootReducer,
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat(OrdersAllMiddleware, OrdersMiddleware)

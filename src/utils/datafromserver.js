@@ -23,7 +23,7 @@ export const orderdata = (items) => {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            authorization: localStorage.getItem('accessToken'),
+            Authorization: localStorage.getItem('accessToken'),
         },
         body: JSON.stringify({
             'ingredients': items,

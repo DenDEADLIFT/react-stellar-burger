@@ -3,7 +3,7 @@ import styles from './orders-status.module.css'
 
 function OrdersStatus({ total, totalToday }) {
 
-    const { ordersAll } = useSelector((state) => state.ordersAll);
+    const { ordersAll } = useSelector((state) => state.rootReducer.ordersAll);
     const doneStatus = ordersAll.filter((i) => i.status === "done")
     const pendingStatus = ordersAll.filter((i) => i.status === "pending")
 

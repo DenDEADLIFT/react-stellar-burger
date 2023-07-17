@@ -7,7 +7,7 @@ import { getServerdata } from "../../services/actions/data-actions";
 import { useInView } from "react-intersection-observer";
 
 function BurgerIngredients() {
-  const { ingredients } = useSelector((state) => state.ingredients);
+  const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
   const dispatch = useDispatch();
   const [bunRef, bunHighlight] = useInView({ threshold: 0.2 });
   const [sauceRef, sauceHighlight] = useInView({ threshold: 0.2 });

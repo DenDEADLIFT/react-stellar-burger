@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 
 function Feed() {
 
-    const { total, totalToday } = useSelector(state => state.ordersAll.data);
-    const { ordersAll } = useSelector((state) => state.ordersAll);
+    const { total, totalToday } = useSelector(state => state.rootReducer.ordersAll.data);
+    const { ordersAll } = useSelector((state) => state.rootReducer.ordersAll);
 
     return (ordersAll.length !== 0 &&
         <div className={styles.box}>

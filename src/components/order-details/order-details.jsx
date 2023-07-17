@@ -9,8 +9,8 @@ import { Spinner } from '../../pages/spinner/spinner'
 
 function OrderDetails({ children }) {
 
-    const { bun, ingredients } = useSelector(state => state.burgerConstructor);
-    const { actual } = useSelector(state => state.order);
+    const { bun, ingredients } = useSelector(state => state.rootReducer.burgerConstructor);
+    const { actual } = useSelector(state => state.rootReducer.order);
     const dispatch = useDispatch();
 
     //const { failed, request, orderItems } = useSelector(state => state.order);
@@ -22,10 +22,10 @@ function OrderDetails({ children }) {
 
     React.useEffect(() => {
         const items = [...ingridientsId, bun._id];
-        const ingredientsToOrder = ingredients;
-        ingredientsToOrder.push(bun)
+        const ingredientsToOrder = [...ingredients, bun];
+        
         dispatch(getOrderdata(items));
-        dispatch({ type: ADD_ORDER, orderItems: ingredientsToOrder, });
+        dispatch({ type: ADD_ORDER, orderItems: ingredientsToOrder });
     }, [ingridientsId, ingredients, bun, dispatch])
 
     return (

@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom';
 const OrderInfo = ({ children }) => {
 
     const { id } = useParams();
-    const { ingredients } = useSelector((state) => state.ingredients);
-    const { ordersAll } = useSelector((state) => state.ordersAll);
+    const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
+    const { ordersAll } = useSelector((state) => state.rootReducer.ordersAll);
     const order = ordersAll.find((i) => i._id === id);
 
     // Объект-счетчик для подсчета количества повторяющихся ингредиентов
