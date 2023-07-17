@@ -1,10 +1,8 @@
 import styles from './orders-form.module.css'
-import { useSelector, useDispatch } from "react-redux";
 import CardOrder from '../card-order/card-order'
-import { useLocation } from 'react-router-dom';
 
 
-const OrdersForm = ({data}) => {
+const OrdersForm = ({ data }) => {
 
   return (data.length !== 0 &&
     <div className={`${styles.content} custom-scroll`}>
@@ -12,6 +10,6 @@ const OrdersForm = ({data}) => {
       }
     </div>
   )
-} 
+}
 
 export default OrdersForm

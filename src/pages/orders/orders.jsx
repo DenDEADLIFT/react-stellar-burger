@@ -22,7 +22,7 @@ function Orders() {
         } else {
             dispatch(disconnectOrders())
         }
-    }, [dispatch, location]);
+    }, [dispatch, location, accessTokenWithoutBearer]);
 
     return (
         <div className={styles.content_box}>

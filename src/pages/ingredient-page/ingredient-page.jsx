@@ -1,7 +1,7 @@
 import style from './ingredient-page.module.css';
 import { useEffect } from 'react'
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getServerdata } from "../../services/actions/data-actions";
 
 function IngredientPage({ data }) {
