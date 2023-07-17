@@ -1,5 +1,5 @@
 import styles from './card-order.module.css'
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from "react-redux";
 import { useLocation, Link } from 'react-router-dom';
 
@@ -19,7 +19,10 @@ const CardOrder = ({ data }) => {
             <div className={location.pathname === '/profile/orders' ? styles.content : styles.content_mini}>
                 <div className={styles.order_id}>
                     <p className={`text text_type_digits-default`}>{`#${data.number}`}</p>
-                    <p className={`text text_type_main-default text_color_inactive`}>{data.createdAt}</p>
+                    <FormattedDate
+                        date={new Date(data.updatedAt)}
+                        className="text text_type_main-default text_color_inactive"
+                    />
                 </div>
                 <div className={styles.info}>
                     <p className={`text text_type_main-medium ${styles.title}`}>{data.name}</p>

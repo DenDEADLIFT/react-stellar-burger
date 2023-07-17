@@ -1,5 +1,5 @@
 import styles from './order-info.module.css';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ const OrderInfo = ({ children }) => {
         const price = ingredient ? ingredient.price : 0;
         return sum + count * price;
     }, 0);
-
+    console.log(order)
     return (order.length !== 0 &&
         <>
             <div className={styles.close_icon}>{children}</div>
@@ -69,7 +69,10 @@ const OrderInfo = ({ children }) => {
                         })}
                 </div>
                 <div className={`${styles.info} mt-10`}>
-                    <p className="text text_type_main-small text_color_inactive">Вчера, 13:50 i-GMT+3</p>
+                    <FormattedDate
+                        date={new Date(order.updatedAt)}
+                        className="text text_type_main-default text_color_inactive"
+                    />
                     <div className={styles.price}>
                         <p className="text text_type_digits-default text_color_primary">{totalPrice}</p>
                         <CurrencyIcon type="primary" />
