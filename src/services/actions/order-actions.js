@@ -38,7 +38,6 @@ export function getOrders(orderNum) {
         getOrder(orderNum)
             .then(res => {
                 if (res && res.success) {
-                    //console.log(orderNum)
                     dispatch({
                         type: GET_ORDER_SUCCESS,
                         getOrders: res,

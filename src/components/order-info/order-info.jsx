@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from "react";
 import { useParams, useLocation } from 'react-router-dom';
 import { getOrders } from '../../services/actions/order-actions'
+import PropTypes from "prop-types";
 
 const OrderInfo = ({ children }) => {
 
@@ -93,6 +94,10 @@ const OrderInfo = ({ children }) => {
             </div>
         </div>
     );
+};
+
+OrderInfo.propTypes = {
+    children: PropTypes.element,
 };
 
 export default OrderInfo;

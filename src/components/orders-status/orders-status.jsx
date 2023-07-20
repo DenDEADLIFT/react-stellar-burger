@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import styles from './orders-status.module.css'
+import PropTypes from "prop-types";
 
 function OrdersStatus({ total, totalToday }) {
 
     const { ordersAll } = useSelector((state) => state.rootReducer.ordersAll);
-    const doneStatus = ordersAll.filter((i) => i.status === "done")
-    const pendingStatus = ordersAll.filter((i) => i.status === "pending")
+    const doneStatus = ordersAll.filter((i) => i.status === "done").slice(0, 20);
+    const pendingStatus = ordersAll.filter((i) => i.status === "pending").slice(0, 20);
 
     return (ordersAll.length !== 0 &&
         <div className={styles.box}>
@@ -34,5 +35,10 @@ function OrdersStatus({ total, totalToday }) {
         </div>
     );
 }
+
+OrdersStatus.propTypes = {
+    total: PropTypes.number.isRequired,
+    totalToday: PropTypes.number.isRequired,
+  };
 
 export default OrdersStatus;

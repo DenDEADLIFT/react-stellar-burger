@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getServerdata } from "../../services/actions/data-actions";
+import PropTypes from "prop-types";
 
 function IngredientPage({ data }) {
 
@@ -46,4 +47,9 @@ function IngredientPage({ data }) {
     )
 
 }
+
+IngredientPage.propTypes = {
+    data: PropTypes.array.isRequired,
+  };
+
 export default IngredientPage;

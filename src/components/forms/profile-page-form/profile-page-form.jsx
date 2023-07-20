@@ -37,7 +37,7 @@ const ProfilePageForm = () => {
         setUserName('')
         setUserEmail('')
     }
-    console.log(userName)
+
     return (
         <div className={styles.form_container}>
             <form

@@ -2,13 +2,14 @@ import styles from './card-order.module.css'
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from "react-redux";
 import { useLocation, Link } from 'react-router-dom';
+import PropTypes from "prop-types";
 
 const CardOrder = ({ data }) => {
 
     const location = useLocation();
     const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
     const toLocation = location.pathname === '/profile/orders' ? `/profile/orders/${data.number}` : `/feed/${data.number}`;
-    console.log(data)
+
     return (
         <Link
             key={data._id}
@@ -54,5 +55,9 @@ const CardOrder = ({ data }) => {
         </Link>
     )
 }
+
+CardOrder.propTypes = {
+    data: PropTypes.object.isRequired,
+  };
 
 export default CardOrder
