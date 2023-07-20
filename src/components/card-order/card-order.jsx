@@ -7,8 +7,8 @@ const CardOrder = ({ data }) => {
 
     const location = useLocation();
     const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
-    const toLocation = location.pathname === '/profile/orders' ? `/profile/orders/${data._id}` : `/feed/${data._id}`;
-
+    const toLocation = location.pathname === '/profile/orders' ? `/profile/orders/${data.number}` : `/feed/${data.number}`;
+    console.log(data)
     return (
         <Link
             key={data._id}
@@ -20,7 +20,7 @@ const CardOrder = ({ data }) => {
                 <div className={styles.order_id}>
                     <p className={`text text_type_digits-default`}>{`#${data.number}`}</p>
                     <FormattedDate
-                        date={new Date(data.updatedAt)}
+                        date={new Date(data.createdAt)}
                         className="text text_type_main-default text_color_inactive"
                     />
                 </div>

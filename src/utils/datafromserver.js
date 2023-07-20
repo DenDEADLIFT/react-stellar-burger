@@ -32,6 +32,16 @@ export const orderdata = (items) => {
         .then(checkResponse)
 }
 
+export const getOrder = async (orderNum) => {
+    return fetch(`${BASE_URL}/orders/${orderNum}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse)
+}
+
 export const registerUser = ({ email, password, name }) => {
     return fetch(`${BASE_URL}/auth/register`, {
         method: 'POST',

@@ -14,7 +14,7 @@ const initialState = {
 };
 
 export const ordersReducer = (state = initialState, action) => {
-
+    //console.log(state)
     switch (action.type) {
         case ORDERS_WS_CONNECTING:
             return {
@@ -41,7 +41,6 @@ export const ordersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 data: action.payload,
-                //data: action.payload,
             }
         default:
             return state;

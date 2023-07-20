@@ -13,7 +13,7 @@ function Orders() {
     const location = useLocation();
     const dispatch = useDispatch();
     const accessToken = localStorage.getItem('accessToken');
-    const accessTokenWithoutBearer = accessToken ? accessToken.replace("Bearer ", "") : "";
+    const accessTokenWithoutBearer = accessToken.replace("Bearer ", "");
     const orders = useSelector((state) => state.rootReducer.orders.data.orders);
 
     useEffect(() => {

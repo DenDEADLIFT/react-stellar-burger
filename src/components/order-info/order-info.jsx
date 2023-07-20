@@ -1,16 +1,27 @@
 import styles from './order-info.module.css';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from "react";
 import { useParams, useLocation } from 'react-router-dom';
+import { getOrders } from '../../services/actions/order-actions'
 
 const OrderInfo = ({ children }) => {
 
     const location = useLocation();
+    const dispatch = useDispatch();
     const { id } = useParams();
     const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
-    const { ordersAll } = useSelector((state) => state.rootReducer.ordersAll);
-    const { orders } = useSelector((state) => state.rootReducer.orders.data);
-    const order = (location.pathname.startsWith('/feed') ? ordersAll : orders).find((i) => i._id === id);
+
+    useEffect(() => {
+        if (location.pathname.startsWith('/profile')) {
+            dispatch(getOrders(id))
+        } else if ((location.pathname.startsWith('/feed'))) {
+            dispatch(getOrders(id))
+        }
+    }, [location.pathname]);
+
+    const orders = useSelector((state) => state.rootReducer.order.getOrders.orders);
+    const order = orders && orders.length > 0 ? orders[0] : null;
 
     // Объект-счетчик для подсчета количества повторяющихся ингредиентов
     const countMap = order?.ingredients.reduce((acc, curr) => {
@@ -25,9 +36,10 @@ const OrderInfo = ({ children }) => {
         const price = ingredient ? ingredient.price : 0;
         return sum + count * price;
     }, 0);
-    console.log(order)
-    return (order.length !== 0 &&
-        <>
+
+    return (
+        order &&
+        <div>
             <div className={styles.close_icon}>{children}</div>
             <div className={styles.container}>
                 <p className={`text text_type_main-default text_color_primary ${styles.order_id}`}>
@@ -41,7 +53,7 @@ const OrderInfo = ({ children }) => {
                 </p>
                 <p className={`text text_type_main-medium text_color_primary mt-15 ${styles.order_text}`}>Состав:</p>
                 <div className={`${styles.ingredients} mt-6 pr-4 custom-scroll`}>
-                    {order &&
+                    {order && order.length !== 0 &&
                         order.ingredients.filter((ingredientId, index, arr) => {
                             return arr.indexOf(ingredientId) === index;
                         }).map((ingredientId, key) => {
@@ -78,8 +90,8 @@ const OrderInfo = ({ children }) => {
                         <CurrencyIcon type="primary" />
                     </div>
                 </div>
-            </div >
-        </>
+            </div>
+        </div>
     );
 };
 

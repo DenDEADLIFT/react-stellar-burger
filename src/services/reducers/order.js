@@ -4,6 +4,9 @@ import {
     ORDERDATA_FAILED,
     ADD_ORDER,
     DELETE_ORDER,
+    GET_ORDER_REQUEST,
+    GET_ORDER_SUCCESS,
+    GET_ORDER_FAILED,
 } from '../actions/order-actions'
 
 const initialState = {
@@ -11,10 +14,11 @@ const initialState = {
     request: false,
     failed: false,
     orderItems: null,
+    getOrders: [],
 }
 
 export const orderReducer = (state = initialState, action) => {
-    
+    //console.log(action)
     switch (action.type) {
         case ORDERDATA_REQUEST: {
             return {
@@ -49,6 +53,24 @@ export const orderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 orderItems: null,
+            };
+        }
+        case GET_ORDER_REQUEST: {
+            return {
+                ...state,
+                request: true,
+            };
+        }
+        case GET_ORDER_SUCCESS: {
+            return {
+                ...state,
+                getOrders: action.getOrders,
+            };
+        }
+        case GET_ORDER_FAILED: {
+            return {
+                ...state,
+                failed: true,
             };
         }
         default: {
