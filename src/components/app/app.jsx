@@ -64,10 +64,8 @@ function App() {
             <Route
               path='/ingredients/:id'
               element={
-                <Modal onClose={handleModalClose}>
-                  <IngredientDetails data={ingredients}>
-                    {<CloseIcon onClick={handleModalClose} />}
-                  </IngredientDetails>
+                <Modal onClose={handleModalClose} closeButton={handleModalClose}>
+                  <IngredientDetails data={ingredients} />
                 </Modal>
               }
             />
@@ -80,10 +78,8 @@ function App() {
             <Route
               path='/profile/orders/:id'
               element={
-                <Modal onClose={handleModalClose}>
-                  <OrderInfo >
-                    {<CloseIcon onClick={handleModalClose} />}
-                  </OrderInfo>
+                <Modal onClose={handleModalClose} closeButton={handleModalClose}>
+                  <OrderInfo />
                 </Modal>
               }
             />
@@ -96,10 +92,8 @@ function App() {
             <Route
               path='/feed/:id'
               element={
-                <Modal onClose={handleModalClose}>
-                  <OrderInfo >
-                    {<CloseIcon onClick={handleModalClose} />}
-                  </OrderInfo>
+                <Modal onClose={handleModalClose} closeButton={handleModalClose}>
+                  <OrderInfo />
                 </Modal>
               }
             />

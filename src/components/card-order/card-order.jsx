@@ -33,20 +33,21 @@ const CardOrder = ({ data }) => {
                 </div>
                 <div className={styles.ingridients_box}>
                     <div className={styles.ingredients}>
-                        {data && data.ingredients.map((i, key) =>
-                            <div className={styles.ingredient_item}
-                                key={key}
-                            >
-                                <img
-                                    src={ingredients.find((item) => item._id === i).image}
-                                    className={styles.ingredient_item_image} alt={"ингредиент"}
-                                /></div>
-                        )
-                        }
+                        {data && data.ingredients && data.ingredients.map((i, key) => {
+                            const ingredient = ingredients.find((item) => item._id === i);
+                            return (
+                                <div className={styles.ingredient_item} key={key}>
+                                    {ingredient && <img src={ingredient.image} className={styles.ingredient_item_image} alt={"ингредиент"} />}
+                                </div>
+                            );
+                        })}
                     </div>
                     <div className={styles.ingridients_prise_box}>
                         <p className="text text_type_digits-default">{
-                            data && data.ingredients.map((i) => (ingredients.find((item) => item._id === i).price)).reduce((partialSum, a) => partialSum + a, 0)
+                            data && data.ingredients && data.ingredients.map((i) => {
+                                const ingredient = ingredients.find((item) => item._id === i);
+                                return ingredient ? ingredient.price : 0;
+                            }).reduce((partialSum, a) => partialSum + a, 0)
                         }</p>
                         <CurrencyIcon type="primary" />
                     </div>
@@ -58,6 +59,6 @@ const CardOrder = ({ data }) => {
 
 CardOrder.propTypes = {
     data: PropTypes.object.isRequired,
-  };
+};
 
 export default CardOrder

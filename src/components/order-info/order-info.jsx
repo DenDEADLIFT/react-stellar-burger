@@ -4,9 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from "react";
 import { useParams, useLocation } from 'react-router-dom';
 import { getOrders } from '../../services/actions/order-actions'
-import PropTypes from "prop-types";
 
-const OrderInfo = ({ children }) => {
+const OrderInfo = () => {
 
     const location = useLocation();
     const dispatch = useDispatch();
@@ -41,7 +40,6 @@ const OrderInfo = ({ children }) => {
     return (
         order &&
         <div>
-            <div className={styles.close_icon}>{children}</div>
             <div className={styles.container}>
                 <p className={`text text_type_main-default text_color_primary ${styles.order_id}`}>
                     #{order.number}
@@ -94,10 +92,6 @@ const OrderInfo = ({ children }) => {
             </div>
         </div>
     );
-};
-
-OrderInfo.propTypes = {
-    children: PropTypes.element,
 };
 
 export default OrderInfo;

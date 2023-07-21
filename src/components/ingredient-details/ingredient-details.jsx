@@ -2,7 +2,7 @@ import style from '../ingredient-details/ingredient-details.module.css';
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 
-function IngredientDetails({ children, data }) {
+function IngredientDetails({ data }) {
 
     const { id } = useParams()
     const ingredient = data.find((i) => i._id === id)
@@ -13,7 +13,6 @@ function IngredientDetails({ children, data }) {
                 <h2 className={`${style.ingridientdetails_header} text text_type_main-large`}>
                     Детали ингридиента
                 </h2>
-                <div>{children}</div>
             </div>
             <img src={ingredient.image_large} alt="ингридиент" />
             <p className={`${style.ingridientdetails_name} text text_type_main-medium pt-4`}>{ingredient.name}</p>
@@ -42,7 +41,6 @@ function IngredientDetails({ children, data }) {
 
 IngredientDetails.propTypes = {
     data: PropTypes.array.isRequired,
-    children: PropTypes.element.isRequired,
 };
 
 export default IngredientDetails; 
