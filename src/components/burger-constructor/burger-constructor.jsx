@@ -77,9 +77,7 @@ function BurgerConstructor() {
     }),
     drop({ item }) {
       const element = { ...item };
-
       element.key = uuidv4();
-
       item.type !== "bun"
         ? dispatch({ type: SAUCE_TO_CONSTRUCTOR, ingredients: element })
         : dispatch({ type: BUN_TO_CONSTRUCTOR, bun: element });
@@ -107,7 +105,7 @@ function BurgerConstructor() {
           {ingredients.map((item, index) => {
             return (
               <IngredientItem
-                key={uuidv4()}
+                key={item.key}
                 item={item}
                 index={index}
                 handleClose={() => itemDelete(item)}

@@ -6,7 +6,7 @@ import { getServerdata } from "../../services/actions/data-actions";
 import { useEffect } from 'react'
 
 function IngredientDetails({ data }) {
-    console.log(data)
+
     const dispatch = useDispatch();
     const { id } = useParams()
     const ingredient = data.find((i) => i._id === id)
