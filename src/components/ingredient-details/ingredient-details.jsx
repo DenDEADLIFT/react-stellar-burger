@@ -1,11 +1,19 @@
 import style from '../ingredient-details/ingredient-details.module.css';
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getServerdata } from "../../services/actions/data-actions";
+import { useEffect } from 'react'
 
 function IngredientDetails({ data }) {
-
+    console.log(data)
+    const dispatch = useDispatch();
     const { id } = useParams()
     const ingredient = data.find((i) => i._id === id)
+
+    useEffect(() => {
+        dispatch(getServerdata());
+    }, [dispatch]);
     
     return (
         <div className={style.ingridientdetails_container}>
