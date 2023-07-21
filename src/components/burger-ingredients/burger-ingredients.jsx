@@ -40,7 +40,7 @@ function BurgerIngredients() {
 
   const Tabs = () => {
     return (
-      <div style={{ display: "flex" }}>
+      <div  className={styles.burger_ingredients_menu}>
         <Tab value="bun" active={current === bun} onClick={selectTabs}>
           Булки
         </Tab>

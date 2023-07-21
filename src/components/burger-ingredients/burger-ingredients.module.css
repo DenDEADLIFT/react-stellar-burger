@@ -1,6 +1,10 @@
 .burger_ingredients {
     max-width: 600px;
     height: 912px;
+}
+
+.burger_ingredients_menu {
+    display: flex;
 
 }
 

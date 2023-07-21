@@ -92,7 +92,7 @@ function BurgerConstructor() {
   return (
     <div className={`${styles.burger_constructor}`}>
       <div
-        style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+        className={styles.burger_constructor_container}
         ref={dropRef}
       >
         <div className={styles.item_box}>
