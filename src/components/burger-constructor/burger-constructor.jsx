@@ -23,16 +23,19 @@ import OrderDetails from "../order-details/order-details.jsx";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import IngredientItem from "./ingredients-item/ingredientItem";
 
 function BurgerConstructor() {
-  const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isAuth } = useSelector((state) => state.rootReducer.user);
   const { bun, ingredients } = useSelector((state) => state.rootReducer.burgerConstructor);
   const [modalOpen, setModalOpen] = React.useState(false);
   const bulka = "bun";
-
+  console.log(isAuth)
   const filling = React.useMemo(
     () => ingredients.filter((item) => item.type !== "bun"),
     [ingredients]
@@ -46,7 +49,11 @@ function BurgerConstructor() {
   }, [bun, filling]);
 
   const openModal = () => {
-    setModalOpen(true);
+    isAuth 
+    ?
+    setModalOpen(true)
+    :
+    navigate('/login')
   };
 
   const closeModal = () => {
@@ -131,8 +138,11 @@ function BurgerConstructor() {
           <CurrencyIcon type="primary" />
         </li>
         <li>
-          {(ingredients.length && bun.type !== 'initial') ? (<Button onClick={openModal} type="primary" htmlType="button" size="large">Оформить заказ</Button>)
-            : (<Button onClick={openModal} type="primary" disabled htmlType="button" size="large">Оформить заказ</Button>)}
+          {(ingredients.length && bun.type !== 'initial')
+            ?
+            (<Button onClick={openModal} type="primary" htmlType="button" size="large">Оформить заказ</Button>)
+            :
+            (<Button type="primary" disabled htmlType="button" size="large">Оформить заказ</Button>)}
         </li>
         {modalOpen && (
           <Modal onClose={closeModal}>

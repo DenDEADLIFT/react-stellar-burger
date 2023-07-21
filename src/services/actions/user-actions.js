@@ -46,7 +46,7 @@ export const isAuth = () => {
         }
     };
 };
-
+ 
 export function onRegister({ email, password, name }) {
     return function (dispatch) {
         dispatch({
