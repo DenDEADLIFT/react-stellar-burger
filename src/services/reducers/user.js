@@ -29,7 +29,7 @@ const initialState = {
 }
 
 export const userReducer = (state = initialState, action) => {
-console.log(state)
+
     switch (action.type) {
         case SET_AUTH_CHECKED: {
             return {

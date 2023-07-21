@@ -2,13 +2,11 @@ import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 import IngridientType from "./ingredient-type/ingredient-type.jsx";
-import { useSelector, useDispatch } from "react-redux";
-import { getServerdata } from "../../services/actions/data-actions";
+import { useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 
 function BurgerIngredients() {
   const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
-  const dispatch = useDispatch();
   const [bunRef, bunHighlight] = useInView({ threshold: 0.2 });
   const [sauceRef, sauceHighlight] = useInView({ threshold: 0.2 });
   const [maineRef, mainHighlight] = useInView({ threshold: 0.2 });
@@ -39,10 +37,6 @@ function BurgerIngredients() {
   React.useEffect(() => {
     scrollIngredients();
   }, [bunHighlight, sauceHighlight, mainHighlight]);
-
-  React.useEffect(() => {
-    dispatch(getServerdata());
-  }, [dispatch]);
 
   const Tabs = () => {
     return (

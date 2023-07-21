@@ -20,7 +20,6 @@ import {
 import React from "react";
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +34,6 @@ function BurgerConstructor() {
   const { bun, ingredients } = useSelector((state) => state.rootReducer.burgerConstructor);
   const [modalOpen, setModalOpen] = React.useState(false);
   const bulka = "bun";
-  console.log(isAuth)
   const filling = React.useMemo(
     () => ingredients.filter((item) => item.type !== "bun"),
     [ingredients]
@@ -145,8 +143,8 @@ function BurgerConstructor() {
             (<Button type="primary" disabled htmlType="button" size="large">Оформить заказ</Button>)}
         </li>
         {modalOpen && (
-          <Modal onClose={closeModal}>
-            <OrderDetails>{<CloseIcon onClick={closeModal} />}</OrderDetails>
+          <Modal onClose={closeModal} closeButton={closeModal}>
+            <OrderDetails />
           </Modal>
         )}
       </ul>
