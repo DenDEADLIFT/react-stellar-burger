@@ -1,7 +1,7 @@
 import { orderdata, getOrder } from '../../utils/datafromserver';
 
 export const ADD_ORDER = 'ADD_ORDER';
-export const DELETE_ORDER = 'ADD_ORDER';
+export const DELETE_ORDER = 'DELETE_ORDER';
 export const ORDERDATA_REQUEST = 'ORDERDATA_REQUEST';
 export const ORDERDATA_SUCCESS = 'ORDERDATA_SUCCESS';
 export const ORDERDATA_FAILED = 'ORDERDATA_FAILED';

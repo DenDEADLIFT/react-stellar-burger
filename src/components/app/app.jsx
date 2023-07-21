@@ -1,6 +1,5 @@
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from '../modal/modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Layout from '../../pages/layout/layout'
@@ -21,9 +20,6 @@ import { isAuth } from '../../services/actions/user-actions'
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { getServerdata } from "../../services/actions/data-actions";
 
-
-
-
 function App() {
 
   const dispatch = useDispatch();
@@ -31,6 +27,7 @@ function App() {
   const navigate = useNavigate();
   const background = location.state && location.state.background;
   const { ingredients } = useSelector(state => state.rootReducer.ingredients);
+
   const handleModalClose = () => {
     navigate(-1);
   };

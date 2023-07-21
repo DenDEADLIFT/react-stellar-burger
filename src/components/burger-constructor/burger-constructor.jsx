@@ -12,12 +12,9 @@ import {
   REMOVE_INGREDIENTS,
 } from "../../services/actions/constructor-actions";
 import {
-  DELETE_ORDER,
-} from "../../services/actions/order-actions";
-import {
   SET_USER,
 } from "../../services/actions/user-actions";
-import React from "react";
+import { useState, useMemo } from "react";
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";
 import { useSelector, useDispatch } from "react-redux";
@@ -25,41 +22,47 @@ import { useDrop } from "react-dnd";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import IngredientItem from "./ingredients-item/ingredientItem";
+import { isAuth } from '../../services/actions/user-actions'
+import { useEffect } from "react";
 
 function BurgerConstructor() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.rootReducer.user);
+  const { user } = useSelector((state) => state.rootReducer.user);
   const { bun, ingredients } = useSelector((state) => state.rootReducer.burgerConstructor);
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    dispatch(isAuth());
+  }, [dispatch]);
+
   const bulka = "bun";
-  const filling = React.useMemo(
+  const filling = useMemo(
     () => ingredients.filter((item) => item.type !== "bun"),
     [ingredients]
   );
 
-  const price = React.useMemo(() => {
+  const price = useMemo(() => {
     const fillingPrice = filling.reduce((sum, item) => {
       return sum + item.price;
     }, 0);
     return bun ? fillingPrice + bun.price * 2 : fillingPrice ? fillingPrice : 0;
   }, [bun, filling]);
 
-  const openModal = () => {
-    isAuth 
-    ?
-    setModalOpen(true)
-    :
-    navigate('/login')
-  };
-
   const closeModal = () => {
     setModalOpen(false);
-    dispatch({ type: SET_USER });
-    dispatch({ type: DELETE_ORDER });
+    dispatch({ type: SET_USER, user: user });
     dispatch({ type: REMOVE_BUN });
     dispatch({ type: REMOVE_INGREDIENTS });
+  };
+
+  const openModal = () => {
+    if (user) {
+      setModalOpen(true)
+    } else {
+      navigate('/login');
+    }
   };
 
   const itemDelete = (i) => {

@@ -18,7 +18,7 @@ const initialState = {
 }
 
 export const orderReducer = (state = initialState, action) => {
-
+console.log(action)
     switch (action.type) {
         case ORDERDATA_REQUEST: {
             return {
@@ -51,8 +51,8 @@ export const orderReducer = (state = initialState, action) => {
         }
         case DELETE_ORDER: {
             return {
-                ...state,
                 orderItems: null,
+                actual: null,
             };
         }
         case GET_ORDER_REQUEST: {
