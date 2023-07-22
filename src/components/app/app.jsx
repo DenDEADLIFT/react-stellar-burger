@@ -39,7 +39,7 @@ function App() {
 
   return (ingredients.length !== 0 &&
     <>
-      <Routes location={background && location}>
+      <Routes location={background || location}>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
           <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
