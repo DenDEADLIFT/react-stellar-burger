@@ -11,10 +11,10 @@ function IngredientDetails({ data }) {
         <div className={style.ingridientdetails_container}>
             <div className={style.ingridientdetails_header_container}>
                 <h2 className={`${style.ingridientdetails_header} text text_type_main-large`}>
-                    Детали ингридиента
+                    Детали ингредиента
                 </h2>
             </div>
-            <img src={ingredient.image_large} alt="ингридиент" />
+            <img src={ingredient.image_large} alt="ингредиент" />
             <p className={`${style.ingridientdetails_name} text text_type_main-medium pt-4`}>{ingredient.name}</p>
             <ul className={style.ingridientdetails_details}>
                 <li className={style.ingridientdetails_detail}>

@@ -105,7 +105,7 @@ function BurgerConstructor() {
               text={`${bun.name} (верх)`}
               price={bun.price}
               thumbnail={bun.image}
-              handleClose={() => itemDelete(bun)}
+              isLocked="true"
             />
           )}
         </div>
@@ -128,7 +128,7 @@ function BurgerConstructor() {
               text={`${bun.name} (низ)`}
               price={bun.price}
               thumbnail={bun.image}
-              handleClose={() => itemDelete(bun)}
+              isLocked="true"
             />
           )}
         </div>

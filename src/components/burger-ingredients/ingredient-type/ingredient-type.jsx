@@ -1,6 +1,5 @@
 import Ingredients from "../ingredients/ingredients.jsx";
 import style from "../ingredient-type/ingredient-type.module.css";
-import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 
 function IngridientType({ type, data }) {

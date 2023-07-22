@@ -26,6 +26,7 @@
 }
 
 .constructor_box {
+    margin-left: -5px;
     height: 466px;
     overflow-y: scroll;
     display: flex;
