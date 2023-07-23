@@ -1,18 +1,16 @@
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import IngridientType from "./ingredient-type/ingredient-type.jsx";
-import { useSelector, useDispatch } from "react-redux";
-import { getServerdata } from "../../services/actions/data-actions";
+import { useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 
 function BurgerIngredients() {
-  const { ingredients } = useSelector((state) => state.ingredients);
-  const dispatch = useDispatch();
+  const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
   const [bunRef, bunHighlight] = useInView({ threshold: 0.2 });
   const [sauceRef, sauceHighlight] = useInView({ threshold: 0.2 });
   const [maineRef, mainHighlight] = useInView({ threshold: 0.2 });
-  const [current, setCurrent] = React.useState("bun");
+  const [current, setCurrent] = useState("bun");
   const bun = "bun";
   const sauce = "sauce";
   const main = "main";
@@ -36,17 +34,13 @@ function BurgerIngredients() {
     tab && itemsToScroll[tab].scrollIntoView({ behavior: "smooth" });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     scrollIngredients();
   }, [bunHighlight, sauceHighlight, mainHighlight]);
 
-  React.useEffect(() => {
-    dispatch(getServerdata());
-  }, [dispatch]);
-
   const Tabs = () => {
     return (
-      <div style={{ display: "flex" }}>
+      <div className={styles.burger_ingredients_menu}>
         <Tab value="bun" active={current === bun} onClick={selectTabs}>
           Булки
         </Tab>

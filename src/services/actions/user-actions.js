@@ -46,7 +46,7 @@ export const isAuth = () => {
         }
     };
 };
-
+ 
 export function onRegister({ email, password, name }) {
     return function (dispatch) {
         dispatch({
@@ -110,7 +110,7 @@ export const onLogin = ({ email, password }) => {
             })
     }
 };
-
+ 
 export const onLogout = () => {
     return function (dispatch) {
         dispatch({

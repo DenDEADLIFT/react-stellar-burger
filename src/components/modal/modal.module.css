@@ -17,3 +17,10 @@
     justify-content: center;
     z-index: 1;
 }
+
+.close_icon {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    cursor: pointer;
+}

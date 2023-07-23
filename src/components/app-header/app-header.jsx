@@ -25,7 +25,9 @@ function AppHeader() {
                         </NavLink>
                     </div>
                 </div>
-                <Logo />
+                <NavLink to='/'>
+                    <Logo />
+                </NavLink>
                 <div className={'pl-5 pr-5 pb-4 pt-4'}>
                     <NavLink to='/profile' className={`${styles.navigation_link} pl-5 pr-5 pb-5 pt-5`}>
                         <ProfileIcon type="secondary" />

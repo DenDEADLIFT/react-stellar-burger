@@ -20,7 +20,7 @@ const initialState = {
 };
 
 export const constructorReducer = (state = initialState, action) => {
-  
+
   switch (action.type) {
     case SAUCE_TO_CONSTRUCTOR: {
       return {

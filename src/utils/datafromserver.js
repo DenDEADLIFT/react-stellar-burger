@@ -22,11 +22,22 @@ export const orderdata = (items) => {
     return fetch(`${BASE_URL}/orders`, {
         method: 'POST',
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem('accessToken'),
         },
         body: JSON.stringify({
             'ingredients': items,
         })
+    })
+        .then(checkResponse)
+}
+
+export const getOrder = async (orderNum) => {
+    return fetch(`${BASE_URL}/orders/${orderNum}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+        },
     })
         .then(checkResponse)
 }
@@ -141,7 +152,6 @@ export const resetPasswordRequest = ({ password, token }) => {
 }
 
 export const updateUser = async ({ email, name, password }) => {
-    console.log(name)
     return fetch(`${BASE_URL}/auth/user`, {
         method: 'PATCH',
         headers: {

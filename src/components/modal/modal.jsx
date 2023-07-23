@@ -3,10 +3,11 @@ import style from '../modal/modal.module.css';
 import ModalOverlay from '../modal-overlay/modal-overlay.jsx';
 import React from 'react';
 import PropTypes from "prop-types";
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const modalRoot = document.getElementById("react-modals");
 
-function Modal({ children, onClose }) {
+function Modal({ children, onClose, closeButton }) {
 
     React.useEffect(() => {
 
@@ -26,6 +27,9 @@ function Modal({ children, onClose }) {
             <div className={style.modal_position}>
                 <ModalOverlay onClose={onClose} />
                 <div className={style.open_modal}>
+                    <div className={style.close_icon}>
+                        {<CloseIcon onClick={closeButton} />}
+                    </div>
                     {children}
                 </div>
             </div>
@@ -37,6 +41,7 @@ function Modal({ children, onClose }) {
 Modal.propTypes = {
     children: PropTypes.object.isRequired,
     onClose: PropTypes.func.isRequired,
+    closeButton: PropTypes.func.isRequired,
 };
 
 export default Modal; 

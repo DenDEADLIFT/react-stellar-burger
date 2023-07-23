@@ -10,7 +10,7 @@ const ProfilePageForm = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { name, email } = useSelector((state) => state.user.user)
+    const { name, email } = useSelector((state) => state.rootReducer.user.user)
     const [userName, setUserName] = useState(name)
     const [userEmail, setUserEmail] = useState(email)
     const [password, setPassword] = useState('')
@@ -37,7 +37,7 @@ const ProfilePageForm = () => {
         setUserName('')
         setUserEmail('')
     }
-    console.log(userName)
+
     return (
         <div className={styles.form_container}>
             <form

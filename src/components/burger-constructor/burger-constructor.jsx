@@ -12,49 +12,57 @@ import {
   REMOVE_INGREDIENTS,
 } from "../../services/actions/constructor-actions";
 import {
-  DELETE_ORDER,
-} from "../../services/actions/order-actions";
-import {
   SET_USER,
 } from "../../services/actions/user-actions";
-import React from "react";
+import { useState, useMemo } from "react";
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import IngredientItem from "./ingredients-item/ingredientItem";
+import { isAuth } from '../../services/actions/user-actions'
+import { useEffect } from "react";
 
 function BurgerConstructor() {
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.rootReducer.user);
+  const { bun, ingredients } = useSelector((state) => state.rootReducer.burgerConstructor);
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
-  const [modalOpen, setModalOpen] = React.useState(false);
+  useEffect(() => {
+    dispatch(isAuth());
+  }, [dispatch]);
+
   const bulka = "bun";
-
-  const filling = React.useMemo(
+  const filling = useMemo(
     () => ingredients.filter((item) => item.type !== "bun"),
     [ingredients]
   );
 
-  const price = React.useMemo(() => {
+  const price = useMemo(() => {
     const fillingPrice = filling.reduce((sum, item) => {
       return sum + item.price;
     }, 0);
     return bun ? fillingPrice + bun.price * 2 : fillingPrice ? fillingPrice : 0;
   }, [bun, filling]);
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
   const closeModal = () => {
     setModalOpen(false);
-    dispatch({ type: SET_USER });
-    dispatch({ type: DELETE_ORDER });
+    dispatch({ type: SET_USER, user: user });
     dispatch({ type: REMOVE_BUN });
     dispatch({ type: REMOVE_INGREDIENTS });
+  };
+
+  const openModal = () => {
+    if (user) {
+      setModalOpen(true)
+    } else {
+      navigate('/login');
+    }
   };
 
   const itemDelete = (i) => {
@@ -77,9 +85,7 @@ function BurgerConstructor() {
     }),
     drop({ item }) {
       const element = { ...item };
-
       element.key = uuidv4();
-
       item.type !== "bun"
         ? dispatch({ type: SAUCE_TO_CONSTRUCTOR, ingredients: element })
         : dispatch({ type: BUN_TO_CONSTRUCTOR, bun: element });
@@ -89,7 +95,7 @@ function BurgerConstructor() {
   return (
     <div className={`${styles.burger_constructor}`}>
       <div
-        style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+        className={styles.burger_constructor_container}
         ref={dropRef}
       >
         <div className={styles.item_box}>
@@ -99,7 +105,7 @@ function BurgerConstructor() {
               text={`${bun.name} (верх)`}
               price={bun.price}
               thumbnail={bun.image}
-              handleClose={() => itemDelete(bun)}
+              isLocked="true"
             />
           )}
         </div>
@@ -107,7 +113,7 @@ function BurgerConstructor() {
           {ingredients.map((item, index) => {
             return (
               <IngredientItem
-                key={uuidv4()}
+                key={item.key}
                 item={item}
                 index={index}
                 handleClose={() => itemDelete(item)}
@@ -122,7 +128,7 @@ function BurgerConstructor() {
               text={`${bun.name} (низ)`}
               price={bun.price}
               thumbnail={bun.image}
-              handleClose={() => itemDelete(bun)}
+              isLocked="true"
             />
           )}
         </div>
@@ -133,12 +139,15 @@ function BurgerConstructor() {
           <CurrencyIcon type="primary" />
         </li>
         <li>
-          {(ingredients.length && bun.type !== 'initial') ? (<Button onClick={openModal} type="primary" htmlType="button" size="large">Оформить заказ</Button>)
-            : (<Button onClick={openModal} type="primary" disabled htmlType="button" size="large">Оформить заказ</Button>)}
+          {(ingredients.length && bun.type !== 'initial')
+            ?
+            (<Button onClick={openModal} type="primary" htmlType="button" size="large">Оформить заказ</Button>)
+            :
+            (<Button type="primary" disabled htmlType="button" size="large">Оформить заказ</Button>)}
         </li>
         {modalOpen && (
-          <Modal onClose={closeModal}>
-            <OrderDetails>{<CloseIcon onClick={closeModal} />}</OrderDetails>
+          <Modal onClose={closeModal} closeButton={closeModal}>
+            <OrderDetails />
           </Modal>
         )}
       </ul>
