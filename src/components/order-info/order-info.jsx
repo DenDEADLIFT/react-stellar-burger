@@ -10,7 +10,7 @@ const OrderInfo = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const { id } = useParams();
-    const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
+    const { ingredients } = useSelector((state) => state.ingredients);
 
     useEffect(() => {
         if (location.pathname.startsWith('/profile')) {
@@ -20,7 +20,7 @@ const OrderInfo = () => {
         }
     }, [location.pathname]);
 
-    const orders = useSelector((state) => state.rootReducer.order.getOrders.orders);
+    const orders = useSelector((state) => state.order.getOrders.orders);
     const order = orders && orders.length > 0 ? orders[0] : null;
 
     // Объект-счетчик для подсчета количества повторяющихся ингредиентов

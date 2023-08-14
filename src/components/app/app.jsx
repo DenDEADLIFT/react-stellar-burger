@@ -19,14 +19,15 @@ import { useEffect } from "react";
 import { isAuth } from '../../services/actions/user-actions'
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { getServerdata } from "../../services/actions/data-actions";
+import { FC } from 'react';
 
-function App() {
+const App = () => {
 
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;
-  const { ingredients } = useSelector(state => state.rootReducer.ingredients);
+  const { ingredients } = useSelector(state => state.ingredients);
 
   const handleModalClose = () => {
     navigate(-1);

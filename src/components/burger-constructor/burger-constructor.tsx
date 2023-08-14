@@ -14,7 +14,7 @@ import {
 import {
   SET_USER,
 } from "../../services/actions/user-actions";
-import { useState, useMemo } from "react";
+import { useState, useMemo, FC, useEffect } from "react";
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";
 import { useSelector, useDispatch } from "react-redux";
@@ -23,14 +23,13 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import IngredientItem from "./ingredients-item/ingredientItem";
 import { isAuth } from '../../services/actions/user-actions'
-import { useEffect } from "react";
 
-function BurgerConstructor() {
+const BurgerConstructor: FC = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.rootReducer.user);
-  const { bun, ingredients } = useSelector((state) => state.rootReducer.burgerConstructor);
+  const { user } = useSelector((state) => state.user);
+  const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {

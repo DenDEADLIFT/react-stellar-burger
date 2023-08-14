@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 
 function BurgerIngredients() {
-  const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
+  const { ingredients } = useSelector((state) => state.ingredients);
   const [bunRef, bunHighlight] = useInView({ threshold: 0.2 });
   const [sauceRef, sauceHighlight] = useInView({ threshold: 0.2 });
   const [maineRef, mainHighlight] = useInView({ threshold: 0.2 });

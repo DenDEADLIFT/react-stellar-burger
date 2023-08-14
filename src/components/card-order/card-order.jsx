@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 const CardOrder = ({ data }) => {
 
     const location = useLocation();
-    const { ingredients } = useSelector((state) => state.rootReducer.ingredients);
+    const { ingredients } = useSelector((state) => state.ingredients);
     const toLocation = location.pathname === '/profile/orders' ? `/profile/orders/${data.number}` : `/feed/${data.number}`;
 
     return (

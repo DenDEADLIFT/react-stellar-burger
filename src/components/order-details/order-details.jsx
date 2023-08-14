@@ -8,8 +8,8 @@ import Spinner from '../../pages/spinner/spinner'
 
 function OrderDetails() {
 
-    const { bun, ingredients } = useSelector(state => state.rootReducer.burgerConstructor);
-    const { actual } = useSelector(state => state.rootReducer.order);
+    const { bun, ingredients } = useSelector(state => state.burgerConstructor);
+    const { actual } = useSelector(state => state.order);
     const dispatch = useDispatch();
     const ingridientsId = React.useMemo(
         () => ingredients.map((i) => i._id),

@@ -11,7 +11,7 @@ const IngredientItem = ({ item, index, handleClose }) => {
   const { DragIcon, ConstructorElement } = library;
   const dispatch = useDispatch();
 
-  const others = useSelector((s) => s.rootReducer.burgerConstructor.ingredients);
+  const others = useSelector((s) => s.burgerConstructor.ingredients);
 
   const [, dragRef] = useDrag({
     type: "sort",

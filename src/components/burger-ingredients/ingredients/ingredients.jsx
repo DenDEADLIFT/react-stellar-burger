@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 function Ingridients({ item }) {
 
-  const { bun, ingredients } = useSelector((state) => state.rootReducer.burgerConstructor);
+  const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
   const location = useLocation();
 
   const itemToConstructor = useMemo(() => {

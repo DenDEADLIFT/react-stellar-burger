@@ -1,4 +1,4 @@
-import {configureStore} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { ingredientsReducer } from './ingredients';
 import { constructorReducer } from './burgerConstructor';
 import { orderReducer } from './order';
@@ -6,7 +6,7 @@ import { userReducer } from './user';
 import { passwordReducer } from './password';
 import { ordersAllReducer } from './orders-all';
 import { ordersReducer } from './orders';
-import {socketMiddleware} from "../middleware/socket-middleware";
+import { socketMiddleware } from "../middleware/socket-middleware";
 import { combineReducers } from 'redux';
 import {
     ORDERS_ALL_CONNECT,
@@ -41,19 +41,15 @@ const OrdersMiddleware = socketMiddleware({
     onMessage: ORDERS_WS_MESSAGE
 });
 
-export const rootReducer = combineReducers({
-    ingredients: ingredientsReducer,
-    burgerConstructor: constructorReducer,
-    order: orderReducer,
-    user: userReducer,
-    password: passwordReducer,
-    ordersAll: ordersAllReducer,
-    orders: ordersReducer,
-})
-
 export const store = configureStore({
     reducer: {
-        rootReducer: rootReducer,
+        ingredients: ingredientsReducer,
+        burgerConstructor: constructorReducer,
+        order: orderReducer,
+        user: userReducer,
+        password: passwordReducer,
+        ordersAll: ordersAllReducer,
+        orders: ordersReducer,
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat(OrdersAllMiddleware, OrdersMiddleware)

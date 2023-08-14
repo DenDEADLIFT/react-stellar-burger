@@ -14,7 +14,7 @@ function Orders() {
     const dispatch = useDispatch();
     const accessToken = localStorage.getItem('accessToken');
     const accessTokenWithoutBearer = accessToken.replace("Bearer ", "");
-    const orders = useSelector((state) => state.rootReducer.orders.data.orders);
+    const orders = useSelector((state) => state.orders.data.orders);
 
     useEffect(() => {
         if (location.pathname.startsWith('/profile/orders')) {

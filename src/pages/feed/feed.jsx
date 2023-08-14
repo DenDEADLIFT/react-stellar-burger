@@ -21,8 +21,8 @@ function Feed() {
         }
     }, [dispatch, location]);
 
-    const { total, totalToday } = useSelector(state => state.rootReducer.ordersAll.data);
-    const { ordersAll } = useSelector((state) => state.rootReducer.ordersAll);
+    const { total, totalToday } = useSelector(state => state.ordersAll.data);
+    const { ordersAll } = useSelector((state) => state.ordersAll);
 
     return (ordersAll.length !== 0 &&
         <div className={styles.box}>

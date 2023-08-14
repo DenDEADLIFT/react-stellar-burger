@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 function OrdersStatus({ total, totalToday }) {
 
-    const { ordersAll } = useSelector((state) => state.rootReducer.ordersAll);
+    const { ordersAll } = useSelector((state) => state.ordersAll);
     const doneStatus = ordersAll.filter((i) => i.status === "done").slice(0, 20);
     const pendingStatus = ordersAll.filter((i) => i.status === "pending").slice(0, 20);
 
