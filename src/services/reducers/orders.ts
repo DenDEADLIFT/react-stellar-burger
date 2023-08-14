@@ -1,48 +1,47 @@
-import {WebsocketStatus} from "../../utils/live-table";
+import { WebsocketStatus } from "../../utils/live-table";
 import {
-    ORDERS_ALL_WS_CLOSE,
-    ORDERS_ALL_WS_CONNECTING,
-    ORDERS_ALL_WS_ERROR,
-    ORDERS_ALL_WS_MESSAGE,
-    ORDERS_ALL_WS_OPEN
-} from "../actions/orders-all";
+    ORDERS_WS_CLOSE,
+    ORDERS_WS_CONNECTING,
+    ORDERS_WS_ERROR,
+    ORDERS_WS_MESSAGE,
+    ORDERS_WS_OPEN,
+    TOrdersActions,
+} from "../actions/orders";
+import { TOrdersState } from '../../components/types/orders-all'
 
-const initialState = {
+const initialState: TOrdersState = {
     status: WebsocketStatus.OFFLINE,
-    ordersAll: [],
-    connectingError: '',
     data: [],
+    connectingError: '',
 };
 
-export const ordersAllReducer = (state = initialState, action) => {
-    //console.log(action)
-    switch (action.type)
-    {
-        case ORDERS_ALL_WS_CONNECTING:
+export const ordersReducer = (state = initialState, action: TOrdersActions): TOrdersState => {
+    console.log(state)
+    switch (action.type) {
+        case ORDERS_WS_CONNECTING:
             return {
                 ...state,
                 status: WebsocketStatus.CONNECTING
             };
-        case ORDERS_ALL_WS_OPEN:
+        case ORDERS_WS_OPEN:
             return {
                 ...state,
                 status: WebsocketStatus.ONLINE,
                 connectingError: ''
             };
-        case ORDERS_ALL_WS_CLOSE:
+        case ORDERS_WS_CLOSE:
             return {
                 ...state,
                 status: WebsocketStatus.OFFLINE,
             };
-        case ORDERS_ALL_WS_ERROR:
+        case ORDERS_WS_ERROR:
             return {
                 ...state,
                 connectingError: action.payload
             };
-        case ORDERS_ALL_WS_MESSAGE:
+        case ORDERS_WS_MESSAGE:
             return {
                 ...state,
-                ordersAll: action.payload.orders,
                 data: action.payload,
             }
         default:

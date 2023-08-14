@@ -1,0 +1,15 @@
+export type TIngredient = {
+    calories?: number,
+    carbohydrates?: number,
+    fat?: number,
+    image: string,
+    image_mobile?: string,
+    image_large?: string,
+    key?: string,
+    name: string,
+    price: number,
+    proteins?: number,
+    type: string,
+    __v?: number,
+    _id?: string,
+}

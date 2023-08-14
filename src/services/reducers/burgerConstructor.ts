@@ -5,11 +5,18 @@ import {
   REMOVE_INGREDIENTS,
   REMOVE_BUN,
   SORTING_INGREDIENTS,
+  TConstructorActions,
 } from "../actions/constructor-actions";
 
 import image from "../../images/done.svg";
+import { TIngredient } from '../../components/types/ingredient'
 
-const initialState = {
+type TConstructorState = {
+  ingredients: ReadonlyArray<TIngredient>;
+  bun: TIngredient;
+}
+
+const initialState: TConstructorState = {
   ingredients: [],
   bun: {
     image: image,
@@ -19,8 +26,8 @@ const initialState = {
   },
 };
 
-export const constructorReducer = (state = initialState, action) => {
-
+export const constructorReducer = (state = initialState, action: TConstructorActions): TConstructorState => {
+  
   switch (action.type) {
     case SAUCE_TO_CONSTRUCTOR: {
       return {

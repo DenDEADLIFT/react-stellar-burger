@@ -5,9 +5,19 @@ import {
     FORGOT_PASSWORD_CONFIRMED,
     FORGOT_PASSWORD_ERROR,
     FORGOT_PASSWORD_REQUEST,
+    TPasswordActions,
 } from '../actions/password-actions'
 
-const initialState = {
+type TInitialState = {
+    passwordForgotRequest: boolean,
+    passwordForgot: boolean,
+    passwordForgotError: string | null | undefined,
+    resetPasswordRequest: boolean,
+    resetPasswordConfirmed: boolean,
+    resetPasswordError: string | null | undefined,
+}
+
+const initialState: TInitialState = {
     passwordForgotRequest: false,
     passwordForgot: false,
     passwordForgotError: null,
@@ -16,8 +26,8 @@ const initialState = {
     resetPasswordError: null,
 }
 
-export const passwordReducer = (state = initialState, action) => {
-
+export const passwordReducer = (state = initialState, action: TPasswordActions): TInitialState => {
+console.log(action)
     switch (action.type) {
         case RESET_PASSWORD_REQUEST: {
             return {
@@ -28,7 +38,7 @@ export const passwordReducer = (state = initialState, action) => {
         case RESET_PASSWORD_CONFIRMED: {
             return {
                 ...state,
-                resetPasswordConfirmed: action,
+                resetPasswordConfirmed: true,
             };
         }
         case RESET_PASSWORD_ERROR: {

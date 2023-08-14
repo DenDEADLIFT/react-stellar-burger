@@ -2,15 +2,24 @@ import {
   SERVERDATA_REQUEST,
   SERVERDATA_SUCCESS,
   SERVERDATA_FAILED,
+  TServerdataActions,
 } from '../actions/data-actions'
-
 import {
   SELECTED_INGREDIENT,
   REMOVE_SELECTED_INGREDIENT,
+  TIngredientsActions,
 } from '../actions/ingredients-actions'
+import { TIngredient } from '../../components/types/ingredient'
 
+type TIngredientsState = {
+  ingredients: ReadonlyArray<TIngredient>;
+  ingredientsRequest: boolean,
+  ingredientsFailed: boolean,
+  ingredientItem: ReadonlyArray<TIngredient>,
+  modalOpened: boolean,
+}
 
-const initialState = {
+const initialState: TIngredientsState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
@@ -18,8 +27,8 @@ const initialState = {
   modalOpened: false,
 }
 
-export const ingredientsReducer = (state = initialState, action) => {
-
+export const ingredientsReducer = (state = initialState, action: TServerdataActions | TIngredientsActions): TIngredientsState => {
+  
   switch (action.type) {
     case SERVERDATA_REQUEST: {
       return {
