@@ -16,7 +16,7 @@ const initialState: TOrdersState = {
 };
 
 export const ordersReducer = (state = initialState, action: TOrdersActions): TOrdersState => {
-    console.log(state)
+
     switch (action.type) {
         case ORDERS_WS_CONNECTING:
             return {

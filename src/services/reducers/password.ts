@@ -27,7 +27,7 @@ const initialState: TInitialState = {
 }
 
 export const passwordReducer = (state = initialState, action: TPasswordActions): TInitialState => {
-console.log(action)
+
     switch (action.type) {
         case RESET_PASSWORD_REQUEST: {
             return {

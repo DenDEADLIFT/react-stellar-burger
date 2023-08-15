@@ -1,6 +1,8 @@
+import { TUser } from '../components/types/user'
+
 export const BASE_URL = `https://norma.nomoreparties.space/api`;
 
-export const checkResponse = (resolve) => {
+export const checkResponse = (resolve: any) => {
     if (resolve.ok) {
         return resolve.json()
     } else {
@@ -18,13 +20,19 @@ export const serverdata = () => {
         .then(checkResponse)
 }
 
-export const orderdata = (items) => {
+const headers = new Headers();
+headers.append("Content-Type", "application/json");
+
+const accessToken = localStorage.getItem('accessToken');
+if (accessToken) {
+  headers.append("Authorization", accessToken);
+}
+
+export const orderdata = (items: []) => {
+    
     return fetch(`${BASE_URL}/orders`, {
         method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem('accessToken'),
-        },
+        headers,
         body: JSON.stringify({
             'ingredients': items,
         })
@@ -32,7 +40,7 @@ export const orderdata = (items) => {
         .then(checkResponse)
 }
 
-export const getOrder = async (orderNum) => {
+export const getOrder = async (orderNum: number) => {
     return fetch(`${BASE_URL}/orders/${orderNum}`, {
         method: 'GET',
         headers: {
@@ -42,7 +50,7 @@ export const getOrder = async (orderNum) => {
         .then(checkResponse)
 }
 
-export const registerUser = ({ email, password, name }) => {
+export const registerUser = ({ email, password, name }: TUser) => {
     return fetch(`${BASE_URL}/auth/register`, {
         method: 'POST',
         headers: {
@@ -67,11 +75,11 @@ export const refreshToken = () => {
         .then(checkResponse);
 }
 
-export const onRefreshToken = async (url, options) => {
+export const onRefreshToken = async (url: string, options: any) => {
     try {
         const res = await fetch(url, options);
         return await checkResponse(res);
-    } catch (error) {
+    } catch (error: any) {
         if (error.message === "jwt expired") {
             const refreshData = await refreshToken();
             if (!refreshData.success) {
@@ -96,7 +104,7 @@ export const userData = () => {
     })
 }
 
-export const login = ({ email, password }) => {
+export const login = ({ email, password }: TUser) => {
     return fetch(`${BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
@@ -112,12 +120,10 @@ export const login = ({ email, password }) => {
 }
 
 export const logout = () => {
+    console.log(123)
     return fetch(`${BASE_URL}/auth/logout`, {
         method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            authorization: localStorage.getItem('accessToken')
-        },
+        headers,
         body: JSON.stringify({
             token: localStorage.getItem("refreshToken"),
         }),
@@ -125,7 +131,7 @@ export const logout = () => {
         .then(checkResponse)
 }
 
-export const forgotPassword = (email) => {
+export const forgotPassword = (email: string) => {
     return fetch(`${BASE_URL}/password-reset`, {
         method: 'POST',
         headers: {
@@ -138,7 +144,7 @@ export const forgotPassword = (email) => {
         .then(checkResponse)
 }
 
-export const resetPasswordRequest = ({ password, token }) => {
+export const resetPasswordRequest = ({ password, token }: {password: string, token: string}) => {
     return fetch(`${BASE_URL}/password-reset/reset`, {
         method: 'POST',
         headers: {
@@ -151,13 +157,10 @@ export const resetPasswordRequest = ({ password, token }) => {
         .then(checkResponse)
 }
 
-export const updateUser = async ({ email, name, password }) => {
+export const updateUser = async ({ email, name, password }: TUser) => {
     return fetch(`${BASE_URL}/auth/user`, {
         method: 'PATCH',
-        headers: {
-            "Content-Type": "application/json;charset=utf-8",
-            authorization: localStorage.getItem('accessToken'),
-        },
+        headers,
         body: JSON.stringify({
             email: email,
             name: name,

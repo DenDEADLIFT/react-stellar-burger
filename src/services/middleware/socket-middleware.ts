@@ -1,6 +1,12 @@
-export const socketMiddleware = (wsActions) => {
-    return store => {
-        let socket = null;
+import { TWsActions } from '../../components/types/socket'
+import { MiddlewareAPI } from "redux"
+import { CustomMiddleware } from '../../components/types/socket'
+
+
+
+export const socketMiddleware = (wsActions: TWsActions): CustomMiddleware => {
+    return (store: MiddlewareAPI) => {
+        let socket: WebSocket | null = null;
 
         return next => action => {
             const { dispatch } = store;

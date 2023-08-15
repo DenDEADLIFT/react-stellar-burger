@@ -7,7 +7,6 @@ import { passwordReducer } from './password';
 import { ordersAllReducer } from './orders-all';
 import { ordersReducer } from './orders';
 import { socketMiddleware } from "../middleware/socket-middleware";
-import { combineReducers } from 'redux';
 import {
     ORDERS_ALL_CONNECT,
     ORDERS_ALL_DISCONNECT, ORDERS_ALL_WS_CLOSE,
@@ -20,8 +19,9 @@ import {
     ORDERS_WS_CONNECTING, ORDERS_WS_ERROR, ORDERS_WS_MESSAGE,
     ORDERS_WS_OPEN
 } from "../actions/orders";
+import { CustomMiddleware } from '../../components/types/socket'
 
-const OrdersAllMiddleware = socketMiddleware({
+const OrdersAllMiddleware: CustomMiddleware = socketMiddleware({
     wsConnect: ORDERS_ALL_CONNECT,
     wsDisconnect: ORDERS_ALL_DISCONNECT,
     wsConnecting: ORDERS_ALL_WS_CONNECTING,
@@ -31,7 +31,7 @@ const OrdersAllMiddleware = socketMiddleware({
     onMessage: ORDERS_ALL_WS_MESSAGE
 });
 
-const OrdersMiddleware = socketMiddleware({
+const OrdersMiddleware: CustomMiddleware = socketMiddleware({
     wsConnect: ORDERS_CONNECT,
     wsDisconnect: ORDERS_DISCONNECT,
     wsConnecting: ORDERS_WS_CONNECTING,

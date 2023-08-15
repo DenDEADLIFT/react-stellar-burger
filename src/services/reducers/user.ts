@@ -13,9 +13,25 @@ import {
     LOGOUT_USER,
     LOGOUT_REQUEST,
     LOGOUT_ERROR,
+    TUserActions,
 } from '../actions/user-actions'
+import { TUser } from '../../components/types/user'
 
-const initialState = {
+type TInitialState = {
+    isAuth: boolean,
+    user: TUser | null,
+    updateUser: boolean,
+    updateUserErr: boolean,
+    regRequest: boolean,
+    regFailed: boolean,
+    loginRequest: boolean,
+    loginFailed: boolean,
+    logoutRequest: boolean,
+    logoutFailed: boolean,
+}
+
+
+const initialState: TInitialState = {
     isAuth: false,
     user: null,
     updateUser: false,
@@ -28,8 +44,8 @@ const initialState = {
     logoutFailed: false,
 }
 
-export const userReducer = (state = initialState, action) => {
-
+export const userReducer = (state = initialState, action: TUserActions): TInitialState => {
+//console.log(state)
     switch (action.type) {
         case SET_AUTH_CHECKED: {
             return {

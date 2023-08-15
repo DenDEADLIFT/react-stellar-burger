@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { userUpdate } from '../../../services/actions/user-actions'
+import {TUser} from '../../types/user'
 
 const ProfilePageForm = () => {
 
@@ -15,7 +16,7 @@ const ProfilePageForm = () => {
     const [userEmail, setUserEmail] = useState(email)
     const [password, setPassword] = useState('')
 
-    const userData = {
+    const userData: TUser = {
         email: userEmail,
         name: userName,
         password: password,
