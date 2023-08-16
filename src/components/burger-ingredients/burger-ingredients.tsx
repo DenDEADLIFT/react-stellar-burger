@@ -1,21 +1,28 @@
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, FC } from "react";
 import IngridientType from "./ingredient-type/ingredient-type.jsx";
-import { useSelector } from "react-redux";
+import { useSelector } from "../types/hooks";
 import { useInView } from "react-intersection-observer";
 
-function BurgerIngredients() {
+const BurgerIngredients: FC = () => {
   const { ingredients } = useSelector((state) => state.ingredients);
   const [bunRef, bunHighlight] = useInView({ threshold: 0.2 });
   const [sauceRef, sauceHighlight] = useInView({ threshold: 0.2 });
   const [maineRef, mainHighlight] = useInView({ threshold: 0.2 });
   const [current, setCurrent] = useState("bun");
-  const bun = "bun";
-  const sauce = "sauce";
-  const main = "main";
+  const bun: string = "bun";
+  const sauce: string = "sauce";
+  const main: string = "main";
 
-  const itemsToScroll = {
+  interface IItemsToScroll {
+    [key: string]: HTMLElement | null;
+    bun: HTMLElement | null;
+    sauce: HTMLElement | null;
+    main: HTMLElement | null;
+  }
+
+  const itemsToScroll: IItemsToScroll = {
     bun: document.querySelector("#bun"),
     sauce: document.querySelector("#sauce"),
     main: document.querySelector("#main"),
@@ -29,9 +36,9 @@ function BurgerIngredients() {
         : setCurrent(main);
   };
 
-  const selectTabs = (tab) => {
+  const selectTabs = (tab: string) => {
     setCurrent(tab);
-    tab && itemsToScroll[tab].scrollIntoView({ behavior: "smooth" });
+    tab && itemsToScroll[tab]?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -54,13 +61,13 @@ function BurgerIngredients() {
     );
   };
 
-  const ings = React.useMemo(() => {
+  const ings = useMemo(() => {
     return {
       buns: ingredients.filter((item) => item.type === bun),
       sauces: ingredients.filter((item) => item.type === sauce),
       mains: ingredients.filter((item) => item.type === main)
     }
-  })
+  }, [])
 
   return (
     <div className={`${styles.burger_ingredients} pt-5`}>
@@ -71,23 +78,20 @@ function BurgerIngredients() {
       </h1>
       <div className={`${styles.tabs_box} pb-5`}>{Tabs()}</div>
       <div className={`${styles.ingredients_box} custom-scroll`}>
-        <div ref={bunRef} id="bun">
+        <div ref={bunRef} id="bun" className={"pt-5 pb-5 pb-1"}>
           <IngridientType
-            className={"pt-5 pb-5 pb-1"}
             type={"Булки"}
             data={ings.buns}
           />
         </div>
-        <div ref={sauceRef} id="sauce">
+        <div ref={sauceRef} id="sauce" className={"pt-5 pb-5 pb-1"}>
           <IngridientType
-            className={"pt-5 pb-5 pb-1"}
             type={"Соусы"}
             data={ings.sauces}
           />
         </div>
-        <div ref={maineRef} id="main">
+        <div ref={maineRef} id="main" className={"pt-5 pb-5 pb-1"}>
           <IngridientType
-            className={"pt-5 pb-5 pb-1"}
             type={"Начинки"}
             data={ings.mains}
           />
