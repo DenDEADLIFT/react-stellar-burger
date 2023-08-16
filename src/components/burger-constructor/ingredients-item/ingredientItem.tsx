@@ -7,8 +7,6 @@ import { useRef, FC } from "react";
 import { SORTING_INGREDIENTS } from "../../../services/actions/constructor-actions";
 import { IBurgerIngredientProps } from '../../types/ingredient'
 
-
-
 const IngredientItem: FC<IBurgerIngredientProps> = ({ item, index, handleClose }) => {
 
   const { DragIcon, ConstructorElement } = library;
