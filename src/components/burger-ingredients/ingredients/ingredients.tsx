@@ -3,27 +3,27 @@ import {
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "../ingredients/ingredients.module.css";
-import { useLocation, Link } from 'react-router-dom';
-import PropTypes from "prop-types";
+import { useLocation, Link, Location } from 'react-router-dom';
 import { useMemo } from "react";
 import { useDrag } from "react-dnd";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../types/hooks";
+import { TIngredient } from '../../types/ingredient'
 
-function Ingridients({ item }) {
-
+const Ingridients = ({ item }: {item: TIngredient}) => {
   const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
-  const location = useLocation();
+  const location: Location = useLocation();
 
   const itemToConstructor = useMemo(() => {
     return ingredients.filter((i) => i._id === item._id);
   }, [ingredients]);
 
-  const ingredientCounter = useMemo(() => {
+  const ingredientCounter: number = useMemo(() => {
     if (bun !== null && item._id === bun._id) {
       return 2;
-    } else if (ingredients !== []) {
+    } else if (ingredients) {
       return itemToConstructor.length;
     }
+    return 0; 
   }, [bun, item._id, ingredients, itemToConstructor]);
 
   const [, dragRef] = useDrag({
@@ -41,7 +41,7 @@ function Ingridients({ item }) {
         to={`/ingredients/${item._id}`}
         state={{ background: location }}
         className={style.link}
-      >
+      >{
         <ul
           className={style.ingridients_container}
           draggable="true"
@@ -66,13 +66,9 @@ function Ingridients({ item }) {
             )}
           </li>
         </ul>
-      </Link>
+      }</Link>
     </>
   );
 }
-
-Ingridients.propTypes = {
-  item: PropTypes.object.isRequired,
-};
 
 export default Ingridients;

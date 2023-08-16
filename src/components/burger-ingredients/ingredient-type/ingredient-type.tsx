@@ -1,12 +1,7 @@
 import Ingredients from "../ingredients/ingredients";
 import style from "../ingredient-type/ingredient-type.module.css";
 import { FC } from 'react'
-import { TIngredient } from '../../types/ingredient'
-
-interface IIngridientType {
-  type: string,
-  data: TIngredient[],
-}
+import { IIngridientType, TIngredient } from '../../types/ingredient'
 
 const IngridientType: FC<IIngridientType> = ({ type, data }) => {
 

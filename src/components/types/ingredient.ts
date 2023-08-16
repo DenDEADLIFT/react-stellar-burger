@@ -18,4 +18,9 @@ export interface IBurgerIngredientProps {
     item: TIngredient;
     index: number,
     handleClose: (item?: TIngredient) => void;
-  }
+}
+
+export interface IIngridientType {
+    type: string,
+    data: TIngredient[],
+}

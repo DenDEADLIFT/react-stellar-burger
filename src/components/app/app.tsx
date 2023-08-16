@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, Location } from 'react-router-dom';
 import { useSelector, useDispatch } from "../types/hooks";
 import Modal from '../modal/modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
@@ -22,7 +22,7 @@ import { getServerdata } from "../../services/actions/data-actions";
 const App = () => {
 
   const dispatch = useDispatch();
-  const location = useLocation();
+  const location: Location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;
   const { ingredients } = useSelector((state: any) => state.ingredients);
