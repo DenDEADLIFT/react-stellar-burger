@@ -1,7 +1,7 @@
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useEffect, useMemo, FC } from "react";
-import IngridientType from "./ingredient-type/ingredient-type.jsx";
+import IngridientType from "./ingredient-type/ingredient-type";
 import { useSelector } from "../types/hooks";
 import { useInView } from "react-intersection-observer";
 
