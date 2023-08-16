@@ -2,7 +2,7 @@ import styles from './orders.module.css'
 import ProfilePage from '../../components/profile-page/profile-page'
 import OrdersForm from '../../components/orders-form/orders-form'
 import { connect as connectOrders, disconnect as disconnectOrders } from "../../services/actions/orders";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../components/types/hooks";
 import { useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 

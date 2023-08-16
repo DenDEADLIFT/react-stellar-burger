@@ -17,12 +17,13 @@ import {
 import { useState, useMemo, FC, useEffect } from "react";
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../types/hooks";
 import { useDrop } from "react-dnd";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import IngredientItem from "./ingredients-item/ingredientItem";
 import { isAuth } from '../../services/actions/user-actions'
+import { TIngredient } from '../types/ingredient'
 
 const BurgerConstructor: FC = () => {
 
@@ -64,7 +65,7 @@ const BurgerConstructor: FC = () => {
     }
   };
 
-  const itemDelete = (i) => {
+  const itemDelete = (i: TIngredient) => {
     if (i.type !== bulka) {
       return dispatch({
         type: REMOVE_INGREDIENT_FROM_CONSTRUCTOR,
@@ -82,7 +83,7 @@ const BurgerConstructor: FC = () => {
     collect: (monitor) => ({
       isHover: monitor.isOver(),
     }),
-    drop({ item }) {
+    drop({ item }: {item: TIngredient}) {
       const element = { ...item };
       element.key = uuidv4();
       item.type !== "bun"
@@ -104,7 +105,7 @@ const BurgerConstructor: FC = () => {
               text={`${bun.name} (верх)`}
               price={bun.price}
               thumbnail={bun.image}
-              isLocked="true"
+              isLocked={true}
             />
           )}
         </div>
@@ -127,7 +128,7 @@ const BurgerConstructor: FC = () => {
               text={`${bun.name} (низ)`}
               price={bun.price}
               thumbnail={bun.image}
-              isLocked="true"
+              isLocked={true}
             />
           )}
         </div>
