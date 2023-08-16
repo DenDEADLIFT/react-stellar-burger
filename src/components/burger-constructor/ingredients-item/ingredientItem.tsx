@@ -1,12 +1,15 @@
 import Style from "./item.module.css";
 import * as library from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../types/hooks";
 import { useDrag, useDrop } from "react-dnd";
-import React from "react";
+import { useRef, FC } from "react";
 import { SORTING_INGREDIENTS } from "../../../services/actions/constructor-actions";
+import { IBurgerIngredientProps } from '../../types/ingredient'
 
-const IngredientItem = ({ item, index, handleClose }) => {
+
+
+const IngredientItem: FC<IBurgerIngredientProps> = ({ item, index, handleClose }) => {
 
   const { DragIcon, ConstructorElement } = library;
   const dispatch = useDispatch();
@@ -20,7 +23,7 @@ const IngredientItem = ({ item, index, handleClose }) => {
 
   const [, dropRef] = useDrop({
     accept: "sort",
-    drop(item) {
+    drop(item: {index: number}) {
       const sort = [...others];
       const movable = sort.splice(item.index, 1)[0];
       sort.splice(index, 0, movable);
@@ -34,7 +37,7 @@ const IngredientItem = ({ item, index, handleClose }) => {
     }),
   });
 
-  const dndRef = React.useRef(null);
+  const dndRef = useRef(null);
   dragRef(dndRef);
   dropRef(dndRef);
 
@@ -55,12 +58,6 @@ const IngredientItem = ({ item, index, handleClose }) => {
 
     </li>
   );
-};
-
-IngredientItem.propTypes = {
-  item: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
-  handleClose: PropTypes.func.isRequired,
 };
 
 export default IngredientItem;
