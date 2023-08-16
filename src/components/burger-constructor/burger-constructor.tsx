@@ -37,14 +37,14 @@ const BurgerConstructor: FC = () => {
     dispatch(isAuth());
   }, [dispatch]);
 
-  const bulka = "bun";
-  const filling = useMemo(
+  const bulka: string = "bun";
+  const filling: TIngredient[] = useMemo(
     () => ingredients.filter((item) => item.type !== "bun"),
     [ingredients]
   );
 
-  const price = useMemo(() => {
-    const fillingPrice = filling.reduce((sum, item) => {
+  const price: number = useMemo(() => {
+    const fillingPrice: number = filling.reduce((sum, item) => {
       return sum + item.price;
     }, 0);
     return bun ? fillingPrice + bun.price * 2 : fillingPrice ? fillingPrice : 0;
@@ -64,7 +64,7 @@ const BurgerConstructor: FC = () => {
       navigate('/login');
     }
   };
-
+  
   const itemDelete = (i: TIngredient) => {
     if (i.type !== bulka) {
       return dispatch({
@@ -83,7 +83,7 @@ const BurgerConstructor: FC = () => {
     collect: (monitor) => ({
       isHover: monitor.isOver(),
     }),
-    drop({ item }: {item: TIngredient}) {
+    drop({ item }: { item: TIngredient }) {
       const element = { ...item };
       element.key = uuidv4();
       item.type !== "bun"
