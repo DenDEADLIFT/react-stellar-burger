@@ -1,5 +1,5 @@
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "../types/hooks";
 import Modal from '../modal/modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Layout from '../../pages/layout/layout'
@@ -14,12 +14,10 @@ import ResetPassword from '../../pages/reset-password/reset-password'
 import Orders from '../../pages/orders/orders'
 import IngredientPage from '../../pages/ingredient-page/ingredient-page'
 import OrderInfo from '../order-info/order-info'
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { isAuth } from '../../services/actions/user-actions'
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { getServerdata } from "../../services/actions/data-actions";
-import { FC } from 'react';
 
 const App = () => {
 
@@ -27,7 +25,7 @@ const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;
-  const { ingredients } = useSelector(state => state.ingredients);
+  const { ingredients } = useSelector((state: any) => state.ingredients);
 
   const handleModalClose = () => {
     navigate(-1);

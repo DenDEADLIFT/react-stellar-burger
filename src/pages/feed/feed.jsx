@@ -8,7 +8,7 @@ import { connect as connectOrdersAll, disconnect as disconnectOrdersAll } from "
 
 export const WSS_URL = `wss://norma.nomoreparties.space/`;
 
-function Feed() {
+const Feed = () => {
 
     const location = useLocation();
     const dispatch = useDispatch();
@@ -24,7 +24,7 @@ function Feed() {
     const { total, totalToday } = useSelector(state => state.ordersAll.data);
     const { ordersAll } = useSelector((state) => state.ordersAll);
 
-    return (ordersAll.length !== 0 &&
+    return (
         <div className={styles.box}>
             <p className={`text text_type_main-large text_color_primary ${styles.title}`}>Лента заказов</p>
             <div className={styles.content}>

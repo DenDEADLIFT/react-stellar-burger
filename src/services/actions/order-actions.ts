@@ -1,5 +1,5 @@
 import { orderdata, getOrder } from '../../utils/datafromserver';
-import { AppDispatch } from '../../components/types/dispatch';
+import { AppDispatch } from '../../components/types/hooks';
 import { TActualOrder } from '../../components/types/actual-order'
 import { TOrder } from '../../components/types/order'
 import { TIngredient } from '../../components/types/ingredient'

@@ -1,5 +1,4 @@
-import { ThunkDispatch } from 'redux-thunk';
-import { AppDispatch } from '../../components/types/dispatch';
+import { AppDispatch } from '../../components/types/hooks';
 import { serverdata } from '../../utils/datafromserver';
 import { TIngredient } from '../../components/types/ingredient'
 

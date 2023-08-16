@@ -1,5 +1,5 @@
 import { userData, registerUser, login, logout, updateUser } from '../../utils/datafromserver'
-import { AppDispatch } from '../../components/types/dispatch'
+import { AppDispatch } from '../../components/types/hooks'
 import { TUser } from '../../components/types/user'
 
 export const SET_AUTH_CHECKED: 'SET_AUTH_CHECKED' = 'SET_AUTH_CHECKED';

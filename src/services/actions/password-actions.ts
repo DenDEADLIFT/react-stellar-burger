@@ -1,5 +1,5 @@
 import { forgotPassword, resetPasswordRequest } from '../../utils/datafromserver'
-import { AppDispatch } from '../../components/types/dispatch'
+import { AppDispatch } from '../../components/types/hooks'
 
 export const RESET_PASSWORD_REQUEST: 'RESET_PASSWORD_REQUEST' = 'RESET_PASSWORD_REQUEST';
 export const RESET_PASSWORD_CONFIRMED: 'RESET_PASSWORD_CONFIRMED' = 'RESET_PASSWORD_CONFIRMED';
