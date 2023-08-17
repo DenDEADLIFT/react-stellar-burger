@@ -1,10 +1,11 @@
 import { TOrder } from '../../components/types/order'
 
 export type TDataToOrders = {
-    orders: ReadonlyArray<TOrder>,
+    orders: ReadonlyArray<TOrder> | undefined,
     success: boolean,
     total?: number,
     totalToday?: number,
+    data: any,
 }
 
 export type TOrdersAllState = {
