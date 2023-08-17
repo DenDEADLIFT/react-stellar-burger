@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export interface IModalProps {
-    children: ReactNode;
+    children?: ReactNode;
     onClose: () => void;
     closeButton?: () => void;
 }
