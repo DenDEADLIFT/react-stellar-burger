@@ -1,15 +1,16 @@
 import styles from './card-order.module.css'
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector } from "react-redux";
-import { useLocation, Link } from 'react-router-dom';
-import PropTypes from "prop-types";
+import { useSelector } from "../types/hooks";
+import { useLocation, Link, Location } from 'react-router-dom';
+import { TIngredient } from '../types/ingredient'
+import { TOrder } from '../types/order'
 
-const CardOrder = ({ data }) => {
+const CardOrder = ({ data }: {data: TOrder}) => {
 
-    const location = useLocation();
+    const location: Location = useLocation();
     const { ingredients } = useSelector((state) => state.ingredients);
-    const toLocation = location.pathname === '/profile/orders' ? `/profile/orders/${data.number}` : `/feed/${data.number}`;
-
+    const toLocation: string = location.pathname === '/profile/orders' ? `/profile/orders/${data.number}` : `/feed/${data.number}`;
+    
     return (
         <Link
             key={data._id}
@@ -33,8 +34,8 @@ const CardOrder = ({ data }) => {
                 </div>
                 <div className={styles.ingridients_box}>
                     <div className={styles.ingredients}>
-                        {data && data.ingredients && data.ingredients.map((i, key) => {
-                            const ingredient = ingredients.find((item) => item._id === i);
+                        {data && data.ingredients && data.ingredients.map((i: string, key: number) => {
+                            const ingredient: TIngredient | undefined = ingredients.find((item) => item._id === i);
                             return (
                                 <div className={styles.ingredient_item} key={key}>
                                     {ingredient && <img src={ingredient.image} className={styles.ingredient_item_image} alt={"ингредиент"} />}
@@ -44,10 +45,10 @@ const CardOrder = ({ data }) => {
                     </div>
                     <div className={styles.ingridients_prise_box}>
                         <p className="text text_type_digits-default">{
-                            data && data.ingredients && data.ingredients.map((i) => {
-                                const ingredient = ingredients.find((item) => item._id === i);
+                            data && data.ingredients && data.ingredients.map((i: string) => {
+                                const ingredient: TIngredient | undefined = ingredients.find((item) => item._id === i);
                                 return ingredient ? ingredient.price : 0;
-                            }).reduce((partialSum, a) => partialSum + a, 0)
+                            }).reduce((partialSum: number, a: number) => partialSum + a, 0)
                         }</p>
                         <CurrencyIcon type="primary" />
                     </div>
@@ -56,9 +57,5 @@ const CardOrder = ({ data }) => {
         </Link>
     )
 }
-
-CardOrder.propTypes = {
-    data: PropTypes.object.isRequired,
-};
 
 export default CardOrder

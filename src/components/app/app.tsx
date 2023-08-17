@@ -24,7 +24,7 @@ const App = () => {
   const dispatch = useDispatch();
   const location: Location = useLocation();
   const navigate = useNavigate();
-  const background = location.state && location.state.background;
+  const background: string = location.state && location.state.background;
   const { ingredients } = useSelector((state: any) => state.ingredients);
 
   const handleModalClose = () => {
