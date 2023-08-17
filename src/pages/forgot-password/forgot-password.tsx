@@ -1,6 +1,6 @@
 import ForgotPasswordForm from '../../components/forms/forgot-password-form/forgot-password-form'
 
-function ForgotPassword() {
+const ForgotPassword = () => {
 
     return (
         <>
