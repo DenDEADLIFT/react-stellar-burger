@@ -1,9 +1,9 @@
 import ResetPasswordForm from '../../components/forms/reset-password/reset-password'
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, Location } from "react-router-dom";
 
-function ResetPassword() {
+const ResetPassword = () => {
 
-    const location = useLocation()
+    const location: Location = useLocation()
 
     return (location.state === 'forgot'
         ?

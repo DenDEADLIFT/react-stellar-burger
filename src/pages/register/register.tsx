@@ -1,6 +1,6 @@
 import RegisterForm from '../../components/forms/register-form/register-form'
 
-function Register() {
+const Register = () => {
 
     return (
         <>

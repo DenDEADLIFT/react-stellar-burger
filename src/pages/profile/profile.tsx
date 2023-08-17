@@ -2,7 +2,7 @@ import styles from './profile.module.css'
 import ProfilePage from '../../components/profile-page/profile-page'
 import ProfilePageForm from '../../components/forms/profile-page-form/profile-page-form'
 
-function Profile() {
+const Profile = () => {
 
     return (
         <div className={styles.content_box}>
