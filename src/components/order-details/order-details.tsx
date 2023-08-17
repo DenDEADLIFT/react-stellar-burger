@@ -1,32 +1,32 @@
-import React, { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from '../order-details/order-details.module.css';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../types/hooks";
 import { getOrderdata } from '../../services/actions/order-actions';
 import { ADD_ORDER, DELETE_ORDER } from '../../services/actions/order-actions';
 import Spinner from '../../pages/spinner/spinner'
+import { TIngredient } from '../types/ingredient'
 
-function OrderDetails() {
+const OrderDetails = () => {
 
     const { bun, ingredients } = useSelector(state => state.burgerConstructor);
     const { actual } = useSelector(state => state.order);
     const dispatch = useDispatch();
-    const ingridientsId = React.useMemo(
-        () => ingredients.map((i) => i._id),
-        [ingredients]
-    );
-
+    const ingredientsId: string[] = useMemo(() => {
+        return ingredients.map(i => i?._id!);
+    }, [ingredients]);
+console.log(actual)
     useEffect(() => {
         if (actual) {
             dispatch({ type: DELETE_ORDER })
         } else {
-            const items = [bun._id, ...ingridientsId, bun._id];
-            const ingredientsToOrder = [...ingredients, bun];
+            const items: Array<string> = [bun?._id!, ...ingredientsId, bun?._id!];
+            const ingredientsToOrder: TIngredient[] = [...ingredients, bun];
             dispatch(getOrderdata(items));
             dispatch({ type: ADD_ORDER, orderItems: ingredientsToOrder });
         }
-    }, [ingridientsId, ingredients, bun, dispatch])
-
+    }, [ingredientsId, ingredients, bun, dispatch])
+    
     return (
         <ul className={style.orderdetails_box}>
             <li className={style.orderdetails_title_box}>

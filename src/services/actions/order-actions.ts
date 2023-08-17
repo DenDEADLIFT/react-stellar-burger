@@ -61,7 +61,7 @@ export type TOrderActions =
     | IGetOrderSuccessAction
     | IGetOrderFiledAction
 
-export function getOrderdata(arr: []) {
+export function getOrderdata(arr: string[]) {
     return function (dispatch: AppDispatch) {
         dispatch({ type: ORDERDATA_REQUEST })
         orderdata(arr)

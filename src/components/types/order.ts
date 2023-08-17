@@ -15,6 +15,7 @@ export type TOrder = {
     status: string,
     updatedAt: string,
     _id: string,
+    order?: any,
 }
 
 export type TGetOrders = {

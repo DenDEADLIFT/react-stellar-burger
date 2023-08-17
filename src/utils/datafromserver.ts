@@ -28,7 +28,7 @@ if (accessToken) {
   headers.append("Authorization", accessToken);
 }
 
-export const orderdata = (items: []) => {
+export const orderdata = (items: string[]) => {
     
     return fetch(`${BASE_URL}/orders`, {
         method: 'POST',
