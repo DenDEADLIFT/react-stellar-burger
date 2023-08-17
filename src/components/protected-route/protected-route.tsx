@@ -1,7 +1,7 @@
 import { useSelector } from "../types/hooks";
 import { Navigate, useLocation } from "react-router-dom";
 
-const Protected = ({ onlyUnAuth = false, component }: { onlyUnAuth: boolean, component: any }) => {
+const Protected = ({ onlyUnAuth = false, component }: { onlyUnAuth?: boolean, component: any }) => {
   // isAuthChecked это флаг, показывающий что проверка токена произведена
   // при этом результат этой проверки не имеет значения, важно только,
   // что сам факт проверки имел место.
