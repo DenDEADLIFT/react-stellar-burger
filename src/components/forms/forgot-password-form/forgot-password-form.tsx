@@ -1,8 +1,8 @@
 import styles from './forgot-password-form.module.css'
 import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import React from "react";
+import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../types/hooks';
 import { Link } from 'react-router-dom';
 import { passwordForgot } from '../../../services/actions/password-actions'
 
@@ -11,14 +11,14 @@ const ForgotPasswordForm = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [email, setEmail] = React.useState('')
+    const [email, setEmail] = useState<string>('')
 
-    const forgotPassword = (e) => {
+    const forgotPassword = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         navigate('/reset-password', { state: 'forgot' });
         dispatch(passwordForgot(email))
     }
-
+    
     return (
         <div
         >
@@ -31,7 +31,6 @@ const ForgotPasswordForm = () => {
                     onChange={e => setEmail(e.target.value)}
                     value={email}
                     name={'email'}
-                    type={'email'}
                     size={'default'}
                     extraClass="ml-1"
                     placeholder={'Укажите e-mail'}
