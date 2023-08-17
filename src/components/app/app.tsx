@@ -36,7 +36,7 @@ const App = () => {
     dispatch(isAuth());
   }, [dispatch]);
 
-  return (ingredients.length !== 0 &&
+  return (ingredients.length &&
     <>
       <Routes location={background || location}>
         <Route path="/" element={<Layout />}>
