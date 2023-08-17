@@ -3,9 +3,14 @@ import CardOrder from '../card-order/card-order'
 import { TOrder } from "../types/order";
 
 
-const OrdersForm = ({ data }: {data: TOrder[]}) => {
+const OrdersForm = ({ data }: { data: ReadonlyArray<TOrder> | undefined }) => {
+
+  if (!data || data.length === 0) {
+    return null; // or any other fallback JSX element or nothing
+  }
   
-  return (data.length !== 0 &&
+  
+  return (
     <div className={`${styles.content} custom-scroll`}>
       {data.map((i: TOrder, key: number) => <CardOrder data={i} key={key} />)
       }

@@ -1,16 +1,16 @@
 import styles from './feed.module.css'
 import OrdersForm from '../../components/orders-form/orders-form'
 import OrdersStatus from '../../components/orders-status/orders-status'
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../components/types/hooks";
 import { useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, Location } from 'react-router-dom';
 import { connect as connectOrdersAll, disconnect as disconnectOrdersAll } from "../../services/actions/orders-all";
 
 export const WSS_URL = `wss://norma.nomoreparties.space/`;
 
 const Feed = () => {
 
-    const location = useLocation();
+    const location: Location = useLocation();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -20,8 +20,9 @@ const Feed = () => {
             dispatch(disconnectOrdersAll())
         }
     }, [dispatch, location]);
-
-    const { total, totalToday } = useSelector(state => state.ordersAll.data);
+    const data = useSelector(state => state.ordersAll.data);
+    const total: number | undefined = Array.isArray(data) ? undefined : data.total;
+    const totalToday: number | undefined = Array.isArray(data) ? undefined : data.totalToday;
     const { ordersAll } = useSelector((state) => state.ordersAll);
 
     return (

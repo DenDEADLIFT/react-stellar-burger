@@ -2,13 +2,17 @@ import { useSelector } from "../types/hooks";
 import styles from './orders-status.module.css'
 import { TOrder } from '../types/order'
 
-const OrdersStatus = ({ total, totalToday }: { total: number, totalToday: number }) => {
+const OrdersStatus = ({ total, totalToday }: { total: number | undefined, totalToday: number | undefined }) => {
 
     const { ordersAll } = useSelector((state) => state.ordersAll);
     const doneStatus: TOrder[] = ordersAll ? ordersAll.filter(i => i.status === 'done').slice(0, 20) : [];
     const pendingStatus: TOrder[] = ordersAll ? ordersAll.filter(i => i.status === 'pending').slice(0, 20) : [];
 
-    return (ordersAll && ordersAll.length !== 0 &&
+    if (!ordersAll || ordersAll.length === 0) {
+        return null; // or any other fallback JSX element or nothing
+      }
+
+    return (
         <div className={styles.box}>
             <div className={styles.orders_status_boxes}>
                 <div className={styles.orders_status_box}>

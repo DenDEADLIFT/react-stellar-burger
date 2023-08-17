@@ -3,8 +3,8 @@ import { TOrder } from '../../components/types/order'
 export type TDataToOrders = {
     orders: ReadonlyArray<TOrder>,
     success: boolean,
-    total: number,
-    totalToday: number,
+    total?: number,
+    totalToday?: number,
 }
 
 export type TOrdersAllState = {
