@@ -1,9 +1,9 @@
 import styles from './register-form.module.css'
 import { Button, Input, PasswordInput, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../types/hooks';
 import { onRegister } from '../../../services/actions/user-actions'
 
 const RegisterForm = () => {
@@ -11,11 +11,11 @@ const RegisterForm = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [name, setName] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
 
-    const register = (e) => {
+    const register = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(onRegister({ email, password, name }))
         navigate('/login', { replace: true });
@@ -37,7 +37,7 @@ const RegisterForm = () => {
                     type={'text'}
                     placeholder={'Имя'}
                 />
-                <EmailInput
+                <Input
                     size={'default'}
                     extraClass="ml-1"
                     onChange={e => setEmail(e.target.value)}

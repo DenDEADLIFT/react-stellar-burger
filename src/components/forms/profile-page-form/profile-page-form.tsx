@@ -1,5 +1,5 @@
 import styles from './profile_page_form.module.css'
-import { PasswordInput, Input, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState, FormEvent, MouseEvent } from "react";
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
