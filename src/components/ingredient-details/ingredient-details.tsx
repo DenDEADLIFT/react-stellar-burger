@@ -1,12 +1,12 @@
 import style from '../ingredient-details/ingredient-details.module.css';
-import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
+import { TIngredient } from '../types/ingredient'
 
-function IngredientDetails({ data }) {
+const IngredientDetails = ({ data }: {data: TIngredient[]}) => {
 
-    const { id } = useParams()
-    const ingredient = data.find((i) => i._id === id)
-   
+    const { id } = useParams<string>()
+    const ingredient: TIngredient = data.find((i) => i._id === id) as TIngredient
+
     return (
         <div className={style.ingridientdetails_container}>
             <div className={style.ingridientdetails_header_container}>
@@ -38,9 +38,5 @@ function IngredientDetails({ data }) {
         </div>
     )
 }
-
-IngredientDetails.propTypes = {
-    data: PropTypes.array.isRequired,
-};
 
 export default IngredientDetails; 
