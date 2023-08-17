@@ -9,7 +9,7 @@ export type TDataToOrders = {
 
 export type TOrdersAllState = {
     status: string,
-    ordersAll: ReadonlyArray<TOrder>,
+    ordersAll?: ReadonlyArray<TOrder>,
     connectingError: string,
     data: TDataToOrders | [],
 }

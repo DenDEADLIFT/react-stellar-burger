@@ -1,20 +1,20 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../types/hooks";
 import styles from './orders-status.module.css'
-import PropTypes from "prop-types";
+import { TOrder } from '../types/order'
 
-function OrdersStatus({ total, totalToday }) {
+const OrdersStatus = ({ total, totalToday }: { total: number, totalToday: number }) => {
 
     const { ordersAll } = useSelector((state) => state.ordersAll);
-    const doneStatus = ordersAll.filter((i) => i.status === "done").slice(0, 20);
-    const pendingStatus = ordersAll.filter((i) => i.status === "pending").slice(0, 20);
+    const doneStatus: TOrder[] = ordersAll ? ordersAll.filter(i => i.status === 'done').slice(0, 20) : [];
+    const pendingStatus: TOrder[] = ordersAll ? ordersAll.filter(i => i.status === 'pending').slice(0, 20) : [];
 
-    return (ordersAll.length !== 0 &&
+    return (ordersAll && ordersAll.length !== 0 &&
         <div className={styles.box}>
             <div className={styles.orders_status_boxes}>
                 <div className={styles.orders_status_box}>
                     <p className={'text text_type_main-medium text_color_primary'}>Готовы:</p>
                     <div className={styles.orders_numbers}>
-                        {doneStatus && doneStatus.map((i, key) => {
+                        {doneStatus && doneStatus.map((i: TOrder, key: number) => {
                             return <p className={`text text_type_digits-default ${styles.orders_numbers_complete}`} key={key}>{i.number}</p>
                         })}
                     </div>
@@ -22,8 +22,8 @@ function OrdersStatus({ total, totalToday }) {
                 <div className={styles.orders_status_box}>
                     <p className={'text text_type_main-medium text_color_primary'}>В работе:</p>
                     <div className={styles.orders_numbers}>
-                        {pendingStatus && pendingStatus.map((i, key) => {
-                            return <p className={`text text_type_digits-default`}>{i.number}</p>
+                        {pendingStatus && pendingStatus.map((i: TOrder, key: number) => {
+                            return <p className={`text text_type_digits-default`} key={key}>{i.number}</p>
                         })}
                     </div>
                 </div>
@@ -35,10 +35,5 @@ function OrdersStatus({ total, totalToday }) {
         </div>
     );
 }
-
-OrdersStatus.propTypes = {
-    total: PropTypes.number.isRequired,
-    totalToday: PropTypes.number.isRequired,
-  };
 
 export default OrdersStatus;
