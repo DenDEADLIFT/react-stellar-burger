@@ -1,16 +1,12 @@
 import IngredientDetails from '../../components/ingredient-details/ingredient-details'
-import PropTypes from "prop-types";
+import { TIngredient } from "../../components/types/ingredient";
 
-function IngredientPage({ data }) {
-
+function IngredientPage({ data }: {data: TIngredient[]}) {
+    
     return (
         <IngredientDetails data={data} />
     )
 
 }
-
-IngredientPage.propTypes = {
-    data: PropTypes.array.isRequired,
-};
 
 export default IngredientPage;
