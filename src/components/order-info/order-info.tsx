@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from '../types/hooks';
 import { useEffect } from "react";
 import { useParams, useLocation, Location } from 'react-router-dom';
 import { getOrders } from '../../services/actions/order-actions'
-import { TOrder, TGetOrders } from '../types/order'
+import { TGetOrders } from '../types/order'
 import { TIngredient } from '../types/ingredient'
 
 const OrderInfo = () => {

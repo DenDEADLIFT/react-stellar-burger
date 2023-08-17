@@ -1,20 +1,16 @@
 import styles from './orders-form.module.css'
 import CardOrder from '../card-order/card-order'
-import PropTypes from "prop-types";
+import { TOrder } from "../types/order";
 
 
-const OrdersForm = ({ data }) => {
-
+const OrdersForm = ({ data }: {data: TOrder[]}) => {
+  
   return (data.length !== 0 &&
     <div className={`${styles.content} custom-scroll`}>
-      {data.map((i, key) => <CardOrder data={i} key={key} />)
+      {data.map((i: TOrder, key: number) => <CardOrder data={i} key={key} />)
       }
     </div>
   )
 }
-
-OrdersForm.propTypes = {
-  data: PropTypes.array.isRequired,
-};
 
 export default OrdersForm
