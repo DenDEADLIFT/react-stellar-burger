@@ -15,8 +15,8 @@ import {
   SET_USER,
 } from "../../services/actions/user-actions";
 import { useState, useMemo, FC, useEffect } from "react";
-import Modal from "../modal/modal.jsx";
-import OrderDetails from "../order-details/order-details.jsx";
+import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
 import { useSelector, useDispatch } from "../types/hooks";
 import { useDrop } from "react-dnd";
 import { useNavigate } from "react-router-dom";
