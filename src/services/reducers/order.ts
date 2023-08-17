@@ -18,7 +18,7 @@ type TIngredientsState = {
     request: boolean,
     failed: boolean,
     orderItems: ReadonlyArray<TIngredient> | null,
-    getOrders: ReadonlyArray<TGetOrders>,
+    getOrders: TGetOrders[],
 }
 
 const initialState: TIngredientsState = {

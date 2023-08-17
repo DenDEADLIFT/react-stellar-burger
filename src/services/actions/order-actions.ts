@@ -44,7 +44,7 @@ export interface IGetOrderRequestAction {
 
 export interface IGetOrderSuccessAction {
     readonly type: typeof GET_ORDER_SUCCESS;
-    readonly getOrders: ReadonlyArray<TGetOrders>;
+    readonly getOrders: TGetOrders[];
 }
 
 export interface IGetOrderFiledAction {
@@ -84,7 +84,7 @@ export function getOrderdata(arr: string[]) {
     }
 }
 
-export function getOrders(orderNum: number) {
+export function getOrders(orderNum: string | undefined) {
     return function (dispatch: AppDispatch) {
         dispatch({ type: GET_ORDER_REQUEST })
         getOrder(orderNum)

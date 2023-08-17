@@ -1,5 +1,4 @@
 import { TDataToOrders } from '../../components/types/orders-all'
-import { TOrder } from '../../components/types/order'
 
 export const ORDERS_ALL_CONNECT: 'ORDERS_ALL_CONNECT' = 'ORDERS_ALL_CONNECT';
 export const ORDERS_ALL_DISCONNECT: 'ORDERS_ALL_DISCONNECT' = 'ORDERS_ALL_DISCONNECT';

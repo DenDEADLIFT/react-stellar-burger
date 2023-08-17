@@ -15,7 +15,7 @@ const OrderDetails = () => {
     const ingredientsId: string[] = useMemo(() => {
         return ingredients.map(i => i?._id!);
     }, [ingredients]);
-console.log(actual)
+
     useEffect(() => {
         if (actual) {
             dispatch({ type: DELETE_ORDER })

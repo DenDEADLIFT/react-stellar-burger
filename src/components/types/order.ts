@@ -19,6 +19,12 @@ export type TOrder = {
 }
 
 export type TGetOrders = {
-    orders: ReadonlyArray<TOrder>,
+    orders: TOrder[],
     success: boolean,
+    ingredients?: any,
+    number?: number,
+    name?: string,
+    status?: string,
+    updatedAt?: any,
+    length?: any,
 }

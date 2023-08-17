@@ -40,7 +40,7 @@ export const orderdata = (items: string[]) => {
         .then(checkResponse)
 }
 
-export const getOrder = async (orderNum: number) => {
+export const getOrder = async (orderNum: string | undefined) => {
     return fetch(`${BASE_URL}/orders/${orderNum}`, {
         method: 'GET',
         headers: {

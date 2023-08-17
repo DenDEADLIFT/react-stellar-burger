@@ -1,15 +1,17 @@
 import styles from './order-info.module.css';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../types/hooks';
 import { useEffect } from "react";
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Location } from 'react-router-dom';
 import { getOrders } from '../../services/actions/order-actions'
+import { TOrder, TGetOrders } from '../types/order'
+import { TIngredient } from '../types/ingredient'
 
 const OrderInfo = () => {
 
-    const location = useLocation();
+    const location: Location = useLocation();
     const dispatch = useDispatch();
-    const { id } = useParams();
+    const { id } = useParams<string>();
     const { ingredients } = useSelector((state) => state.ingredients);
 
     useEffect(() => {
@@ -20,20 +22,20 @@ const OrderInfo = () => {
         }
     }, [location.pathname]);
 
-    const orders = useSelector((state) => state.order.getOrders.orders);
+    const { orders } = useSelector((state) => state.order.getOrders) as { orders?: TGetOrders[] };
     const order = orders && orders.length > 0 ? orders[0] : null;
 
     // Объект-счетчик для подсчета количества повторяющихся ингредиентов
-    const countMap = order?.ingredients.reduce((acc, curr) => {
+    const countMap: { [key: string]: number } = order?.ingredients.reduce((acc: { [key: string]: number }, curr: string) => {
         acc[curr] = (acc[curr] || 0) + 1;
         return acc;
     }, {});
 
     // Подсчет суммы всех ингредиентов
-    const totalPrice = order?.ingredients.reduce((sum, ingredientId) => {
-        const ingredient = ingredients.find((item) => item._id === ingredientId);
-        const count = countMap[ingredientId];
-        const price = ingredient ? ingredient.price : 0;
+    const totalPrice: number = order?.ingredients.reduce((sum: number, ingredientId: string) => {
+        const ingredient: TIngredient | undefined = ingredients.find((item) => item._id === ingredientId);
+        const count: number = countMap[ingredientId];
+        const price: number = ingredient ? ingredient.price : 0;
         return sum + count * price;
     }, 0);
 
@@ -53,24 +55,25 @@ const OrderInfo = () => {
                 <p className={`text text_type_main-medium text_color_primary mt-15 ${styles.order_text}`}>Состав:</p>
                 <div className={`${styles.ingredients} mt-6 pr-4 custom-scroll`}>
                     {order && order.length !== 0 &&
-                        order.ingredients.filter((ingredientId, index, arr) => {
+                        order.ingredients.filter((ingredientId: string, index: number, arr: string[]) => {
                             return arr.indexOf(ingredientId) === index;
-                        }).map((ingredientId, key) => {
-                            const ingredient = ingredients.find((item) => item._id === ingredientId);
-                            const count = countMap[ingredientId];
+                        }).map((ingredientId: string, key: number) => {
+                            const ingredient: TIngredient | undefined = ingredients.find((item) => item._id === ingredientId);
+                            const count: number = countMap[ingredientId];
+
                             return (
                                 <div key={key}>
                                     <div className={styles.ingredient_item} >
                                         <img
-                                            src={ingredient.image}
+                                            src={`${ingredient !== undefined && ingredient.image}`}
                                             className={styles.ingredient_item_image}
                                             alt="ингредиент"
                                         />
                                         <p className={`text text_type_main-small text_color_primary ml-4 ${styles.ingredient_item_title}`}>
-                                            {ingredient.name}
+                                            {`${ingredient !== undefined && ingredient.name}`}
                                         </p>
                                         <p className={`text text_type_main-small text_color_primary ml-4 ${styles.ingredient_item_price}`}>
-                                            {count} X {count * ingredient.price}
+                                            {count} X {`${ingredient !== undefined && (count * ingredient.price)}`}
                                         </p>
                                         <CurrencyIcon type="primary" />
                                     </div>
