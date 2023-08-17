@@ -1,17 +1,17 @@
 import styles from './profile-page.module.css'
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../types/hooks';
 import { useNavigate } from "react-router-dom";
 import { onLogout } from '../../services/actions/user-actions'
 
-const activeLink = ({ isActive }) => ({ color: isActive ? '#F2F2F3' : '#8585AD' });
+const activeLink = ({ isActive }: {isActive: any}) => ({ color: isActive ? '#F2F2F3' : '#8585AD' });
 
 const ProfilePage = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const logout = () => {
+    const logout = (): void => {
         dispatch(onLogout());
         navigate("/login", { replace: true });
     }
