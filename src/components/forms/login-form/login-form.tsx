@@ -1,9 +1,9 @@
 import styles from './login-form.module.css'
 import { Button, PasswordInput, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import React from "react";
+import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../types/hooks';
 import { onLogin } from '../../../services/actions/user-actions'
 
 const LoginForm = () => {
@@ -11,10 +11,10 @@ const LoginForm = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
 
-    const login = (e) => {
+    const login = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(onLogin({ email, password }))
         navigate(-1);
@@ -34,17 +34,16 @@ const LoginForm = () => {
                     onChange={e => setEmail(e.target.value)}
                     value={email}
                     name={'email'}
-                    type={'email'}
                     placeholder={'E-mail'}
                 />
-                    <PasswordInput
-                        onClick={e => setPassword('')}
-                        onChange={e => setPassword(e.target.value)}
-                        value={password}
-                        name={'password'}
-                        placeholder={'Пароль'}
-                        extraClass="mb-2"
-                    />
+                <PasswordInput
+                    onClick={e => setPassword('')}
+                    onChange={e => setPassword(e.target.value)}
+                    value={password}
+                    name={'password'}
+                    placeholder={'Пароль'}
+                    extraClass="mb-2"
+                />
                 <Button
                     type="primary"
                     size="large"
