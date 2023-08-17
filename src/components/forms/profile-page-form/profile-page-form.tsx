@@ -1,20 +1,20 @@
 import styles from './profile_page_form.module.css'
 import { PasswordInput, Input, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useState } from "react";
+import { useState, FormEvent, MouseEvent } from "react";
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector } from "../../types/hooks";
 import { userUpdate } from '../../../services/actions/user-actions'
-import {TUser} from '../../types/user'
+import { TUser } from '../../types/user'
 
 const ProfilePageForm = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { name, email } = useSelector((state) => state.user.user)
-    const [userName, setUserName] = useState(name)
-    const [userEmail, setUserEmail] = useState(email)
-    const [password, setPassword] = useState('')
+    const { name, email } = useSelector((state) => state.user.user || {})
+    const [userName, setUserName] = useState<string | undefined>(name)
+    const [userEmail, setUserEmail] = useState<string | undefined>(email)
+    const [password, setPassword] = useState<string>('')
 
     const userData: TUser = {
         email: userEmail,
@@ -27,13 +27,13 @@ const ProfilePageForm = () => {
         userEmail !== '' ||
         password;
 
-    const userSave = (e) => {
+    const userSave = (e: FormEvent<HTMLFormElement>) => {
         dispatch(userUpdate(userData))
         e.preventDefault();
         navigate('/profile', { replace: true });
     }
 
-    const Cancel = (e) => {
+    const Cancel = (e: MouseEvent) => {
         e.preventDefault();
         setUserName('')
         setUserEmail('')
@@ -49,19 +49,18 @@ const ProfilePageForm = () => {
                     size={'default'}
                     extraClass="ml-1"
                     onChange={e => setUserName(e.target.value)}
-                    value={userName}
+                    value={userName || ''}
                     name={'name'}
                     type={'text'}
                     placeholder={'Имя'}
                     icon="EditIcon"
                 />
-                <EmailInput
+                <Input
                     size={'default'}
                     extraClass="ml-1"
                     onChange={e => setUserEmail(e.target.value)}
-                    value={userEmail}
+                    value={userEmail || ''}
                     name={'email'}
-                    type={'email'}
                     placeholder={'Логин'}
                     icon="EditIcon"
                 />
@@ -71,7 +70,6 @@ const ProfilePageForm = () => {
                     name={'password'}
                     placeholder={'Пароль'}
                     extraClass="mb-2"
-                    type={'password'}
                 />
 
                 {isChanged && <div className={styles.buttons_container}>
@@ -79,7 +77,6 @@ const ProfilePageForm = () => {
                         to='/register'
                         className={`text text_type_main-default ${styles.link}`}
                         type="secondary"
-                        size="medium"
                         onClick={Cancel}
                     >
                         Отмена
