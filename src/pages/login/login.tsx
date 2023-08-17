@@ -1,6 +1,6 @@
 import LoginForm from '../../components/forms/login-form/login-form'
 
-function Login() {
+const Login = () => {
 
     return (
         <>
