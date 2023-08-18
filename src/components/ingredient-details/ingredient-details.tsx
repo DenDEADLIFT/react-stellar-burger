@@ -1,11 +1,16 @@
 import style from '../ingredient-details/ingredient-details.module.css';
 import { useParams } from "react-router-dom";
 import { TIngredient } from '../types/ingredient'
+import Spinner from '../../pages/spinner/spinner'
 
-const IngredientDetails = ({ data }: {data: TIngredient[]}) => {
+const IngredientDetails = ({ data }: { data: TIngredient[] }) => {
 
     const { id } = useParams<string>()
-    const ingredient: TIngredient = data.find((i) => i._id === id) as TIngredient
+    const ingredient: TIngredient | undefined = data.find((i) => i._id === id);
+
+    if (!ingredient) {
+        return <Spinner />;
+    }
 
     return (
         <div className={style.ingridientdetails_container}>
