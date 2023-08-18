@@ -2,7 +2,7 @@ import { TUser } from '../components/types/user'
 
 export const BASE_URL = `https://norma.nomoreparties.space/api`;
 
-export const checkResponse = (resolve: any) => {
+export const checkResponse = (resolve: Response) => {
     if (resolve.ok) {
         return resolve.json()
     } else {

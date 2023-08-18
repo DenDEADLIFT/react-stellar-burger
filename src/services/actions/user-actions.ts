@@ -59,7 +59,7 @@ export interface IRegisterRequestAction {
 
 export interface IRegisterUserAction {
   readonly type: typeof REGISTER_USER;
-  readonly user: { email: any; name: any; password?: any; };
+  readonly user: { email: string; name: string; password?: string; };
   readonly regRequest?: boolean;
   readonly isAuth?: boolean;
 }
