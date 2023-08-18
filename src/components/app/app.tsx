@@ -20,7 +20,7 @@ import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { getServerdata } from "../../services/actions/data-actions";
 import { TIngredient } from '../types/ingredient'
 import Spinner from '../../pages/spinner/spinner'
-
+ 
 const App = () => {
 
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import Style from "./item.module.css";
 import * as library from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
+import Spinner from '../../../pages/spinner/spinner'
 import { useDispatch, useSelector } from "../../types/hooks";
 import { useDrag, useDrop } from "react-dnd";
 import { useRef, FC } from "react";
@@ -39,7 +39,7 @@ const IngredientItem: FC<IBurgerIngredientProps> = ({ item, index, handleClose }
   dragRef(dndRef);
   dropRef(dndRef);
 
-  return (
+  return (!others.length ? <Spinner /> :
     <li ref={dndRef} className={Style.item}>
       <div className={Style.drag}>
         <DragIcon type="primary" />

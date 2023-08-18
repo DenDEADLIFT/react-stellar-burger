@@ -6,6 +6,7 @@ import { useParams, useLocation, Location } from 'react-router-dom';
 import { getOrders } from '../../services/actions/order-actions'
 import { TGetOrders } from '../types/order'
 import { TIngredient } from '../types/ingredient'
+import Spinner from '../../pages/spinner/spinner'
 
 const OrderInfo = () => {
 
@@ -39,8 +40,7 @@ const OrderInfo = () => {
         return sum + count * price;
     }, 0);
 
-    return (
-        order &&
+    return (!order ? <Spinner /> :
         <div>
             <div className={styles.container}>
                 <p className={`text text_type_main-default text_color_primary ${styles.order_id}`}>

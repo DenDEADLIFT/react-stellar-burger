@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, FC } from "react";
 import IngridientType from "./ingredient-type/ingredient-type";
 import { useSelector } from "../types/hooks";
 import { useInView } from "react-intersection-observer";
+import Spinner from '../../pages/spinner/spinner'
 
 const BurgerIngredients: FC = () => {
   const { ingredients } = useSelector((state) => state.ingredients);
@@ -69,7 +70,7 @@ const BurgerIngredients: FC = () => {
     }
   }, [])
 
-  return (
+  return (!ingredients.length ? <Spinner /> :
     <div className={`${styles.burger_ingredients} pt-5`}>
       <h1
         className={`${styles.burger_ingredients_title} text text_type_main-large pt-5 pb-5`}

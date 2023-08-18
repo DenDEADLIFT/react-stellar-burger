@@ -4,6 +4,7 @@ import { useSelector } from "../types/hooks";
 import { useLocation, Link, Location } from 'react-router-dom';
 import { TIngredient } from '../types/ingredient'
 import { TOrder } from '../types/order'
+import Spinner from '../../pages/spinner/spinner'
 
 const CardOrder = ({ data }: {data: TOrder}) => {
 
@@ -11,7 +12,7 @@ const CardOrder = ({ data }: {data: TOrder}) => {
     const { ingredients } = useSelector((state) => state.ingredients);
     const toLocation: string = location.pathname === '/profile/orders' ? `/profile/orders/${data.number}` : `/feed/${data.number}`;
     
-    return (
+    return (!ingredients.length ? <Spinner /> :
         <Link
             key={data._id}
             to={toLocation}

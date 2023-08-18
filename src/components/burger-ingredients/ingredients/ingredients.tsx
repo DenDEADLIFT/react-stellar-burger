@@ -8,6 +8,7 @@ import { useMemo } from "react";
 import { useDrag } from "react-dnd";
 import { useSelector } from "../../types/hooks";
 import { TIngredient } from '../../types/ingredient'
+import Spinner from '../../../pages/spinner/spinner'
  
 const Ingridients = ({ item }: {item: TIngredient}) => {
   const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
@@ -34,7 +35,7 @@ const Ingridients = ({ item }: {item: TIngredient}) => {
     }),
   });
 
-  return (
+  return (!ingredients.length ? <Spinner /> :
     <>
       <Link
         key={item._id}

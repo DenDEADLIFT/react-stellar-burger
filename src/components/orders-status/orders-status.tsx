@@ -1,6 +1,7 @@
 import { useSelector } from "../types/hooks";
 import styles from './orders-status.module.css'
 import { TOrder } from '../types/order'
+import Spinner from '../../pages/spinner/spinner'
 
 const OrdersStatus = ({ total, totalToday }: { total: number | undefined, totalToday: number | undefined }) => {
 
@@ -12,7 +13,7 @@ const OrdersStatus = ({ total, totalToday }: { total: number | undefined, totalT
         return null; // or any other fallback JSX element or nothing
       }
 
-    return (
+    return (!ordersAll ? <Spinner /> :
         <div className={styles.box}>
             <div className={styles.orders_status_boxes}>
                 <div className={styles.orders_status_box}>

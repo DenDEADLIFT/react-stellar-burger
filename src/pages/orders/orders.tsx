@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "../../components/types/hooks";
 import { useEffect } from "react";
 import { useLocation, Location } from 'react-router-dom';
 import { TOrder } from '../../components/types/order'
+import Spinner from '../../pages/spinner/spinner'
 
 export const WSS_URL = `wss://norma.nomoreparties.space/`;
 
@@ -26,7 +27,7 @@ const Orders = () => {
         }
     }, [dispatch, location, accessTokenWithoutBearer]);
     
-    return (
+    return (!data ? <Spinner /> :
         <div className={styles.content_box}>
             <div className={styles.links}>
                 <ProfilePage />

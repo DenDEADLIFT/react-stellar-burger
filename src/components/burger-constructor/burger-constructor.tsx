@@ -24,6 +24,7 @@ import { v4 as uuidv4 } from "uuid";
 import IngredientItem from "./ingredients-item/ingredientItem";
 import { isAuth } from '../../services/actions/user-actions'
 import { TIngredient } from '../types/ingredient'
+import Spinner from '../../pages/spinner/spinner'
 
 const BurgerConstructor: FC = () => {
 
@@ -92,7 +93,7 @@ const BurgerConstructor: FC = () => {
     },
   });
 
-  return (
+  return (!ingredients.length ? <Spinner /> :
     <div className={`${styles.burger_constructor}`}>
       <div
         className={styles.burger_constructor_container}

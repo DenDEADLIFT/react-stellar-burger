@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "../../components/types/hooks";
 import { useEffect } from "react";
 import { useLocation, Location } from 'react-router-dom';
 import { connect as connectOrdersAll, disconnect as disconnectOrdersAll } from "../../services/actions/orders-all";
+import Spinner from '../../pages/spinner/spinner'
 
 export const WSS_URL = `wss://norma.nomoreparties.space/`;
 
@@ -25,7 +26,7 @@ const Feed = () => {
     const totalToday: number | undefined = Array.isArray(data) ? undefined : data.totalToday;
     const { ordersAll } = useSelector((state) => state.ordersAll);
 
-    return (
+    return (!data ? <Spinner /> :
         <div className={styles.box}>
             <p className={`text text_type_main-large text_color_primary ${styles.title}`}>Лента заказов</p>
             <div className={styles.content}>
