@@ -22,5 +22,5 @@ export interface IBurgerIngredientProps {
 
 export interface IIngridientType {
     type: string,
-    data: TIngredient[],
+    data: readonly TIngredient[],
 }

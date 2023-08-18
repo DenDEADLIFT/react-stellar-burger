@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { TIngredient } from '../types/ingredient'
 import Spinner from '../../pages/spinner/spinner'
 
-const IngredientDetails = ({ data }: { data: TIngredient[] }) => {
+const IngredientDetails = ({ data }: { data: readonly TIngredient[] }) => {
 
     const { id } = useParams<string>()
     const ingredient: TIngredient | undefined = data.find((i) => i._id === id);

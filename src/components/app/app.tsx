@@ -18,6 +18,8 @@ import { useEffect } from "react";
 import { isAuth } from '../../services/actions/user-actions'
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import { getServerdata } from "../../services/actions/data-actions";
+import { TIngredient } from '../types/ingredient'
+import Spinner from '../../pages/spinner/spinner'
 
 const App = () => {
 
@@ -26,7 +28,7 @@ const App = () => {
   const navigate = useNavigate();
   const locationState = location.state as { background?: Location };
   const background = locationState && locationState.background;
-  const { ingredients } = useSelector((state: any) => state.ingredients);
+  const ingredients: readonly TIngredient[] = useSelector((state) => state.ingredients.ingredients);
 
   const handleModalClose = () => {
     navigate(-1);
@@ -37,7 +39,7 @@ const App = () => {
     dispatch(isAuth());
   }, [dispatch]);
 
-  return (ingredients.length &&
+  return (!ingredients.length ? <Spinner /> :
     <>
       <Routes location={background || location}>
         <Route path="/" element={<Layout />}>
@@ -55,7 +57,7 @@ const App = () => {
           <Route path="*" element={<NotFound404 />} />
         </Route>
       </Routes>
-      {ingredients.length !== 0 &&
+      {ingredients.length &&
         background && (
           <Routes>
             <Route
@@ -69,7 +71,7 @@ const App = () => {
           </Routes>
         )
       }
-      {ingredients.length !== 0 &&
+      {ingredients.length &&
         background && (
           <Routes>
             <Route
