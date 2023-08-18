@@ -23,9 +23,9 @@ const OrderInfo = () => {
         }
     }, [location.pathname]);
 
-    const { orders } = useSelector((state) => state.order.getOrders) as { orders?: TGetOrders[] };
-    const order = orders && orders.length > 0 ? orders[0] : null;
-
+    const { orders }: any = useSelector((state) => state.order.getOrders);
+    const order = (orders && orders.length > 0) && orders[0];
+    
     // Объект-счетчик для подсчета количества повторяющихся ингредиентов
     const countMap: { [key: string]: number } = order?.ingredients.reduce((acc: { [key: string]: number }, curr: string) => {
         acc[curr] = (acc[curr] || 0) + 1;
@@ -33,13 +33,12 @@ const OrderInfo = () => {
     }, {});
 
     // Подсчет суммы всех ингредиентов
-    const totalPrice: number = order?.ingredients.reduce((sum: number, ingredientId: string) => {
+    const totalPrice: number | undefined = order?.ingredients.reduce((sum: number, ingredientId: string) => {
         const ingredient: TIngredient | undefined = ingredients.find((item) => item._id === ingredientId);
         const count: number = countMap[ingredientId];
         const price: number = ingredient ? ingredient.price : 0;
         return sum + count * price;
     }, 0);
-
     return (!order ? <Spinner /> :
         <div>
             <div className={styles.container}>

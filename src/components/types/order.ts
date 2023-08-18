@@ -10,21 +10,18 @@ export type TOrder = {
     ingredients: string[],
     name: string,
     number: number,
-    owner: TOwner,
+    owner?: TOwner,
     price: number,
     status: string,
     updatedAt: string,
     _id: string,
-    order?: any,
+    __v?: number,
+    order: {
+        number?: string,
+    },
 }
 
 export type TGetOrders = {
-    orders: TOrder[],
-    success: boolean,
-    ingredients?: any,
-    number?: number,
-    name?: string,
-    status?: string,
-    updatedAt?: any,
-    length?: any,
+    orders: [],
+    success?: boolean,
 }

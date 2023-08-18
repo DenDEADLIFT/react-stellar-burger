@@ -26,7 +26,7 @@ const OrderDetails = () => {
             dispatch({ type: ADD_ORDER, orderItems: ingredientsToOrder });
         }
     }, [ingredientsId, ingredients, bun, dispatch])
-    
+
     return (!ingredients ? <Spinner /> :
         <ul className={style.orderdetails_box}>
             <li className={style.orderdetails_title_box}>

@@ -35,6 +35,6 @@ const Protected = ({ onlyUnAuth = false, component }: { onlyUnAuth?: boolean, co
 };
 
 export const OnlyAuth = Protected;
-export const OnlyUnAuth = ({ component }: {component: any}) => (
+export const OnlyUnAuth = ({ component }: {component: React.ReactElement}) => (
   <Protected onlyUnAuth={true} component={component} />
 );
