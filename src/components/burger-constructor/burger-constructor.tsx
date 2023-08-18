@@ -93,7 +93,7 @@ const BurgerConstructor: FC = () => {
     },
   });
 
-  return (!ingredients.length ? <Spinner /> :
+  return (!ingredients ? <Spinner /> :
     <div className={`${styles.burger_constructor}`}>
       <div
         className={styles.burger_constructor_container}

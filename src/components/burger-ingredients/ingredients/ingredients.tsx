@@ -35,7 +35,7 @@ const Ingridients = ({ item }: {item: TIngredient}) => {
     }),
   });
 
-  return (!ingredients.length ? <Spinner /> :
+  return (!ingredients ? <Spinner /> :
     <>
       <Link
         key={item._id}

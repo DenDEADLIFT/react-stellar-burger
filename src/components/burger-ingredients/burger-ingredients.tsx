@@ -70,7 +70,7 @@ const BurgerIngredients: FC = () => {
     }
   }, [])
 
-  return (!ingredients.length ? <Spinner /> :
+  return (!ingredients ? <Spinner /> :
     <div className={`${styles.burger_ingredients} pt-5`}>
       <h1
         className={`${styles.burger_ingredients_title} text text_type_main-large pt-5 pb-5`}
