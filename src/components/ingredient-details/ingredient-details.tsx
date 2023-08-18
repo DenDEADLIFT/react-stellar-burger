@@ -8,11 +8,7 @@ const IngredientDetails = ({ data }: { data: readonly TIngredient[] }) => {
     const { id } = useParams<string>()
     const ingredient: TIngredient | undefined = data.find((i) => i._id === id);
 
-    if (!ingredient) {
-        return <Spinner />;
-    }
-
-    return (
+    return (!ingredient ? <Spinner /> :
         <div className={style.ingridientdetails_container}>
             <div className={style.ingridientdetails_header_container}>
                 <h2 className={`${style.ingridientdetails_header} text text_type_main-large`}>
