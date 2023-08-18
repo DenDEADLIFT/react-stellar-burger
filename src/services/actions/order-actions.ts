@@ -44,7 +44,7 @@ export interface IGetOrderRequestAction {
 
 export interface IGetOrderSuccessAction {
     readonly type: typeof GET_ORDER_SUCCESS;
-    readonly getOrders: TGetOrders[];
+    readonly getOrders: TGetOrders;
 }
 
 export interface IGetOrderFiledAction {

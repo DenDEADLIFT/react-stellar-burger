@@ -23,11 +23,11 @@ const OrderInfo = () => {
         }
     }, [location.pathname]);
 
-    const { orders }: any = useSelector((state) => state.order.getOrders);
-    const order = (orders && orders.length > 0) && orders[0];
-    
+    const orders = useSelector((state) => state.order.getOrders.orders);
+    const order = orders  && orders[0];
+    console.log(order)
     // Объект-счетчик для подсчета количества повторяющихся ингредиентов
-    const countMap: { [key: string]: number } = order?.ingredients.reduce((acc: { [key: string]: number }, curr: string) => {
+    const countMap: { [key: string]: number } | undefined = order?.ingredients.reduce((acc: { [key: string]: number }, curr: string) => {
         acc[curr] = (acc[curr] || 0) + 1;
         return acc;
     }, {});
@@ -35,7 +35,7 @@ const OrderInfo = () => {
     // Подсчет суммы всех ингредиентов
     const totalPrice: number | undefined = order?.ingredients.reduce((sum: number, ingredientId: string) => {
         const ingredient: TIngredient | undefined = ingredients.find((item) => item._id === ingredientId);
-        const count: number = countMap[ingredientId];
+        const count: number = countMap ? countMap[ingredientId] : 0;
         const price: number = ingredient ? ingredient.price : 0;
         return sum + count * price;
     }, 0);
@@ -53,12 +53,12 @@ const OrderInfo = () => {
                 </p>
                 <p className={`text text_type_main-medium text_color_primary mt-15 ${styles.order_text}`}>Состав:</p>
                 <div className={`${styles.ingredients} mt-6 pr-4 custom-scroll`}>
-                    {order && order.length !== 0 &&
+                    {order &&
                         order.ingredients.filter((ingredientId: string, index: number, arr: string[]) => {
                             return arr.indexOf(ingredientId) === index;
                         }).map((ingredientId: string, key: number) => {
                             const ingredient: TIngredient | undefined = ingredients.find((item) => item._id === ingredientId);
-                            const count: number = countMap[ingredientId];
+                            const count: number = countMap ? countMap[ingredientId] : 0;
 
                             return (
                                 <div key={key}>

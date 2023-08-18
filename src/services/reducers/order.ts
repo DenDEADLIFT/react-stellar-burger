@@ -18,7 +18,7 @@ type TIngredientsState = {
     request: boolean,
     failed: boolean,
     orderItems: ReadonlyArray<TIngredient> | null,
-    getOrders: TGetOrders[],
+    getOrders: TGetOrders,
 }
 
 const initialState: TIngredientsState = {
@@ -26,7 +26,7 @@ const initialState: TIngredientsState = {
     request: false,
     failed: false,
     orderItems: null,
-    getOrders: [],
+    getOrders: {},
 }
 
 export const orderReducer = (state = initialState, action: TOrderActions): TIngredientsState => {
@@ -67,7 +67,7 @@ export const orderReducer = (state = initialState, action: TOrderActions): TIngr
                 actual: null,
                 request: false,
                 failed: false,
-                getOrders: [],
+                getOrders: {},
             };
         }
         case GET_ORDER_REQUEST: {

@@ -22,6 +22,6 @@ export type TOrder = {
 }
 
 export type TGetOrders = {
-    orders: [],
-    success?: boolean,
+    orders?: TOrder[] | undefined, 
+    success?: boolean | undefined
 }
