@@ -9,3 +9,4 @@ npm i uuid
 npm i react-router-dom
 npm i react-router-dom@latest
 npm install @reduxjs/toolkit
+npm install @types/node-fetch

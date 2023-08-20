@@ -1,10 +1,11 @@
 {
-  "homepage": "https://dendeadlift.github.io/react-stellar-burger/",
+  "homepage": "https://dendeadlift.github.io",
   "name": "react-burger-starter",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@types/node-fetch": "^2.6.4",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.14.0",
     "clsx": "^1.2.1",
     "core-js": "^3.31.0",
